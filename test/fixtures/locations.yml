@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  branch_name: MyString
+  string,: MyString
+  address: MyString
+  string,: MyString
+  phone_number: MyString
+  integer,: MyString
+  volunteer_coordinator_name: MyString
+  string,: MyString
+  volunteer_coordinator_phone: MyString
+  integer,: MyString
+  organization_id: MyString
+  integer: MyString
+
+two:
+  branch_name: MyString
+  string,: MyString
+  address: MyString
+  string,: MyString
+  phone_number: MyString
+  integer,: MyString
+  volunteer_coordinator_name: MyString
+  string,: MyString
+  volunteer_coordinator_phone: MyString
+  integer,: MyString
+  organization_id: MyString
+  integer: MyString

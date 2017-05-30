@@ -10,6 +10,65 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+ActiveRecord::Schema.define(version: 20170530015223) do
+
+  create_table "locations", force: :cascade do |t|
+    t.string   "branch_name"
+    t.string   "address"
+    t.integer  "phone_number"
+    t.string   "volunteer_coordinator_name"
+    t.integer  "volunteer_coordinator_phone"
+    t.integer  "organization_id"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  create_table "locations_volunteers", force: :cascade do |t|
+    t.integer "location_id"
+    t.integer "volunteer_id"
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.integer  "volunteer_id"
+    t.integer  "resident_id"
+    t.integer  "match_score"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "organizations", force: :cascade do |t|
+    t.string   "name"
+    t.string   "location"
+    t.string   "email"
+    t.integer  "phone_number"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string   "question"
+    t.integer  "survey_id"
+    t.string   "question_type"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "responses", force: :cascade do |t|
+    t.string   "response"
+    t.integer  "question_id"
+    t.integer  "resident_id"
+    t.integer  "volunteer_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "surveys", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "location_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
 ActiveRecord::Schema.define(version: 20170530015208) do
 
   create_table "users", force: :cascade do |t|
@@ -37,6 +96,7 @@ ActiveRecord::Schema.define(version: 20170530015208) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
+
   end
 
 end

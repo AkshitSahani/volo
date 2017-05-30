@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  response: MyString
+  string,: MyString
+  question_id: MyString
+  integer,: MyString
+  resident_id: MyString
+  integer,: MyString
+  volunteer_id: MyString
+  integer: MyString
+
+two:
+  response: MyString
+  string,: MyString
+  question_id: MyString
+  integer,: MyString
+  resident_id: MyString
+  integer,: MyString
+  volunteer_id: MyString
+  integer: MyString

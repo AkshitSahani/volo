@@ -9,6 +9,9 @@ Richard & Stephen: Backbone of Rails App
   - cocoon (nested attributes)
 
 David & Sahani & Justin:
-  - 
   -
   -
+  -
+
+volo.volunteer@gmail.com
+vv2017

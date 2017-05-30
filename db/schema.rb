@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170530015223) do
+ActiveRecord::Schema.define(version: 20170530193759) do
 
   create_table "locations", force: :cascade do |t|
     t.string   "branch_name"
@@ -37,12 +37,11 @@ ActiveRecord::Schema.define(version: 20170530015223) do
   end
 
   create_table "organizations", force: :cascade do |t|
-    t.string   "name"
     t.string   "location"
-    t.string   "email"
     t.integer  "phone_number"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "user_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -51,6 +50,14 @@ ActiveRecord::Schema.define(version: 20170530015223) do
     t.string   "question_type"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+  end
+
+  create_table "residents", force: :cascade do |t|
+    t.integer  "age"
+    t.integer  "location_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
   end
 
   create_table "responses", force: :cascade do |t|
@@ -68,8 +75,6 @@ ActiveRecord::Schema.define(version: 20170530015223) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
-
-ActiveRecord::Schema.define(version: 20170530015208) do
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -91,12 +96,21 @@ ActiveRecord::Schema.define(version: 20170530015208) do
     t.datetime "locked_at"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.string   "name"
+    t.string   "user_type"
+    t.string   "first_name"
+    t.string   "last_name"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
+  end
 
+  create_table "volunteers", force: :cascade do |t|
+    t.integer  "age"
+    t.integer  "phone_number"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "user_id"
   end
 
 end

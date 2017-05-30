@@ -18,6 +18,18 @@ Rails.application.configure do
   # Apache or NGINX already handles this.
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp-relay.sendinblue.com",
+    :port                 => 587,
+    :user_name            => ENV['SENDINBLUE_USERNAME'],
+    :password             => ENV['SENDINBLUE_PASSWORD'],
+    :authentication       => 'login',
+    # :domain               => 'heroku.com'
+    :enable_starttls_auto => true
+  }
+
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
@@ -56,6 +68,8 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "volo_#{Rails.env}"
   config.action_mailer.perform_caching = false
+
+  config.action_mailer.default_url_options = { host: 'volo-volunteer.herokuapp.com', port: }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

@@ -26,7 +26,6 @@ Rails.application.configure do
     :user_name            => ENV['SENDINBLUE_USERNAME'],
     :password             => ENV['SENDINBLUE_PASSWORD'],
     :authentication       => 'login',
-    # :domain               => 'heroku.com'
     :enable_starttls_auto => true
   }
 

@@ -1,0 +1,18 @@
+<h2>Sign up as a resident</h2>
+
+<%= form_for(@resident, url: residents_path(@resident)) do |f| %>
+
+  <div class="field">
+    <%= f.label :age %><br />
+    <%= f.number_field :age, in: 1...120, step: 1 %>
+  </div>
+
+  <div class="field">
+    <%= f.label(:location_id,"What location do you reside at?")%><br />
+    <%= f.select(:location_id, @locations, {:prompt => "Select a Location"}, { :class => 'browser-default dropdown' }) %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>

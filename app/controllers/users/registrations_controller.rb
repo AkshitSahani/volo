@@ -10,7 +10,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    redirect_to new_resident_path
   end
 
   # GET /resource/edit
@@ -37,10 +36,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
 
   def after_sign_up_path_for(user)
-    new_resident_path
+    new_resident_url
+  end
+
+  def after_inactive_sign_up_path_for(user)
+    new_resident_url
   end
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -54,7 +57,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # The path used after sign up for inactive accounts.
-  # def after_inactive_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+
 end

@@ -1,0 +1,5 @@
+  <% @surveys.each do |survey| %>
+  <div>
+    <%= link_to survey.name, survey_path(survey) %>
+  </div>
+  <% end %>

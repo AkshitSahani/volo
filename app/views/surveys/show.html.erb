@@ -1,0 +1,9 @@
+<%= form_tag "/responses/" do %>
+  <% @survey.questions.each do |q| %>
+    <div class="field">
+        <%= label_tag "#{q.question}" %>
+        <%= text_field_tag "#{q.id}" %>
+      <% end %>
+    </div>
+    <%= submit_tag "Submit Survey" %>
+  <% end %>

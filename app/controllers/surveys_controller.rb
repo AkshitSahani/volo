@@ -1,4 +1,6 @@
 class SurveysController < ApplicationController
+  before_action :load_survey, only: [:show, :edit, :update, :destroy]
+
   def index
     @surveys = Survey.all
   end
@@ -17,15 +19,13 @@ class SurveysController < ApplicationController
   end
 
   def show
-    @survey = Survey.find(params[:id])
+    @response = Response.new
   end
 
   def edit
-    @survey = Survey.find(params[:id])
   end
 
   def update
-    @survey = Survey.find(params[:id])
     if @survey.update_attributes(survey_params)
       redirect_to root_url #Change this once you decide user flows.
     else
@@ -34,12 +34,19 @@ class SurveysController < ApplicationController
   end
 
   def destroy
-    @survey = Survey.find(params[:id])
     @survey.destroy
   end
 
   private
   def survey_params
     params.require(:survey).permit(:name, :location_id, questions_attributes: [:survey_id, :question, :question_type, :_destroy])
+  end
+
+  def response_params
+    params.require(:response).permit(:response, :question_id, :resident_id, :volunteer_id)
+  end
+
+  def load_survey
+    @survey = Survey.find(params[:id])
   end
 end

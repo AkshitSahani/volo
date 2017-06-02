@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   resources :surveys
   resources :residents
   resources :volunteers
+  resources :responses
 
 end

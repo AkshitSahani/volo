@@ -10,11 +10,16 @@ class OrganizationsController < ApplicationController
   end
 
   def create
-    @organization = Organization.new(organization_params)
+    @organization = Organization.new(
+      location: organization_params[:location],
+      phone_number: organization_params[:phone_number],
+      user_id: session[:user_id]
+    )
 
     if @organization.save
       redirect_to organization_path(@organization)
     else
+      flash.now[:alert] = @organization.errors.full_messages
       render :new
     end
   end

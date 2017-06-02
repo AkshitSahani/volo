@@ -59,11 +59,23 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
 
   def after_sign_up_path_for(user)
-    new_resident_url
+    if params[:user][:account_type] == "Organization"
+      new_organization_url
+    elsif params[:user][:account_type] == "Resident"
+      new_resident_url
+    elsif params[:user][:account_type] == "Volunteer"
+      new_volunteer_url
+    end
   end
 
   def after_inactive_sign_up_path_for(user)
-    new_resident_url
+    if params[:user][:account_type] == "Organization"
+      new_organization_url
+    elsif params[:user][:account_type] == "Resident"
+      new_resident_url
+    elsif params[:user][:account_type] == "Volunteer"
+      new_volunteer_url
+    end
   end
 
   # If you have extra params to permit, append them to the sanitizer.

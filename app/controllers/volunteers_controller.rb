@@ -10,11 +10,16 @@ class VolunteersController < ApplicationController
   end
 
   def create
-    @volunteer = Volunteer.new(volunteer_params)
+    @volunteer = Volunteer.new(
+      age: volunteer_params[:age],
+      phone_number: volunteer_params[:phone_number],
+      user_id: session[:user_id]
+    )
 
     if @volunteer.save
       redirect_to volunteer_path(@volunteer)
     else
+      flash.now[:alert] = @volunteer.errors.full_messages
       render :new
     end
   end

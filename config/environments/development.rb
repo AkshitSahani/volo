@@ -32,20 +32,19 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
-  host = 'locolhost:3000'
+  host = 'localhost:3000'
   config.action_mailer.default_url_options = { host: host, protocol: 'https' }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :address              => "smtp-relay.sendinblue.com",
     :port                 => 587,
-    :user_name            => 'volo.volunteer@gmail.com',
-    :password             => 'jzVJCTQpqUnLYsmI',
+    :user_name            => 'volo.lead@gmail.com',
+    :password             => '1kRxpzJQrC0vTh7Z',
     :authentication       => 'login',
-    # :domain               => 'heroku.com',
     :enable_starttls_auto => true
   }
-  
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -59,6 +58,8 @@ Rails.application.configure do
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true
+  config.assets.enabled = true
+  config.assets.paths << "#{Rails.root}/app/assets/fonts/roboto" 
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true

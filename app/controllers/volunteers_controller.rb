@@ -15,7 +15,6 @@ class VolunteersController < ApplicationController
       phone_number: volunteer_params[:phone_number],
       user_id: session[:user_id]
     )
-
     if @volunteer.save
       redirect_to volunteer_path(@volunteer)
     else

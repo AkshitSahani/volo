@@ -1,9 +1,46 @@
-<%= form_tag "/responses/" do %>
-  <% @survey.questions.each do |q| %>
-    <div class="field">
-        <%= label_tag "#{q.question}" %>
-        <%= text_field_tag "#{q.id}" %>
+<%= form_tag create_responses_path do %>
+  <% @responses.each do |response| %>
+    <% question = @question_set[@q_counter] %>
+
+    <%= fields_for 'responses[]', response do |r| %>
+      <% if question[0].question_type == "Open Response" %>
+        <%= r.hidden_field :volunteer_id, value: 5 %>
+        <div class="input-field">
+          <%= r.label :question_id, question[0].question %><br>
+          <%= r.hidden_field :question_id, value: question[0].id %>
+        </div>
+        <div class="input-field">
+          <%= r.text_field :response %>
+        </div>
+
+      <% elsif question[0].question_type == "Multiple Choice" %>
+        <%= r.hidden_field :volunteer_id, value: 5 %>
+        <div class="input-field">
+          <%= r.label :question_id, question[0].question %><br>
+          <%= r.hidden_field :question_id, value: question[0].id %>
+        </div>
+        <div class="input-field">
+          <br><br>
+          <%= r.collection_select :response, question[1], :answer, :id, {:multiple => true }%>
+        </div>
+
+      <% else %>
+        <%= r.hidden_field :volunteer_id, value: 5 %>
+        <div class="input-field">
+          <%= r.label :question_id, question[0].question %><br>
+          <%= r.hidden_field :question_id, value: question[0].id %>
+        </div>
+        <div class="input-field">
+          <br><br>
+          <%= r.collection_select :response, question[1], :answer, :id %>
+        </div>
       <% end %>
-    </div>
-    <%= submit_tag "Submit Survey" %>
+    <% end %>
+    <% @q_counter += 1 %>
   <% end %>
+
+  <button class="btn" type="submit" name="action">
+    Submit
+  </button>
+
+<% end %>

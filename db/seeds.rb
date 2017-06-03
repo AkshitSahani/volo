@@ -11,8 +11,11 @@ Organization.delete_all
 Location.delete_all
 Volunteer.delete_all
 Resident.delete_all
+Survey.delete_all
+Question.delete_all
+AnswerSet.delete_all
 
-20.times do User.create!(
+50.times do User.create!(
     user_type: ['Resident','Volunteer','Organization'].sample,
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -57,4 +60,70 @@ resident_counter = 11
   phone_number: "1234567890"
   )
   resident_counter += 1
+end
+
+survey_counter = 1
+20.times do
+  Survey.create!(
+    name: "The humble beginnings of a great survey ##{survey_counter}",
+    location_id: rand(1..10)
+  )
+  survey_counter += 1
+end
+
+open_question_set = ["Why do you want to volunteer?", "Why do you want to volunteer at Schelegel Villages?", "Tell us more about yourself"]
+20.times do
+  Question.create!(
+    question: open_question_set.sample,
+    survey_id: rand(1..20),
+    question_type: "Open Response",
+    ranking: 20
+  )
+end
+
+20.times do
+  Question.create!(
+    question: "What languages do you speak?",
+    survey_id: rand(1..20),
+    question_type: "Multiple Choice",
+    ranking: rand(1..100)
+  )
+end
+
+20.times do
+  Question.create!(
+    question: "How old are you?",
+    survey_id: rand(1..20),
+    question_type: "Drop-Down",
+    ranking: rand(1..100)
+  )
+end
+
+question_counter = 21
+language_options = ["English", "French", "Spanish"]
+
+20.times do
+  option_counter = 0
+  3.times do
+    AnswerSet.create!(
+      question_id: question_counter,
+      answer: language_options[option_counter]
+    )
+    option_counter += 1
+  end
+  question_counter += 1
+end
+
+age_options = (1...100).to_a
+
+20.times do
+  option_counter = 0
+  100.times do
+    AnswerSet.create!(
+      question_id: question_counter,
+      answer: age_options[option_counter]
+    )
+    option_counter += 1
+  end
+  question_counter += 1
 end

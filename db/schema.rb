@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170531234004) do
+ActiveRecord::Schema.define(version: 20170603032640) do
+
+  create_table "answer_sets", force: :cascade do |t|
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "question_id"
+    t.string   "answer"
+  end
 
   create_table "locations", force: :cascade do |t|
     t.string   "branch_name"
@@ -38,10 +45,10 @@ ActiveRecord::Schema.define(version: 20170531234004) do
 
   create_table "organizations", force: :cascade do |t|
     t.string   "location"
-    t.integer  "phone_number"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "user_id"
+    t.string   "phone_number"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -50,14 +57,16 @@ ActiveRecord::Schema.define(version: 20170531234004) do
     t.string   "question_type"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "ranking"
   end
 
   create_table "residents", force: :cascade do |t|
     t.integer  "age"
     t.integer  "location_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "user_id"
+    t.string   "phone_number"
   end
 
   create_table "responses", force: :cascade do |t|
@@ -108,10 +117,10 @@ ActiveRecord::Schema.define(version: 20170531234004) do
 
   create_table "volunteers", force: :cascade do |t|
     t.integer  "age"
-    t.integer  "phone_number"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "user_id"
+    t.string   "phone_number"
   end
 
 end

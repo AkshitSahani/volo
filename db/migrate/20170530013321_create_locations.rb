@@ -5,7 +5,7 @@ class CreateLocations < ActiveRecord::Migration[5.0]
       t.string :address
       t.integer :phone_number
       t.string :volunteer_coordinator_name
-      t.integer :volunteer_coordinator_phone
+      t.string :volunteer_coordinator_phone
       t.integer :organization_id
 
       t.timestamps

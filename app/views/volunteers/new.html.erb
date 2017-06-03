@@ -1,2 +1,18 @@
 <h1>Sign up as a Volunteer</h1>
-<!-- Fill in with whatever volunteer sign up stuff you want here. -->
+
+<%= form_for(@volunteer, url: volunteers_path(@volunteer)) do |f| %>
+
+  <div class="field">
+    <%= f.label :age %><br />
+    <%= f.number_field :age, in: 1...120, step: 1 %>
+  </div>
+
+  <div class="field">
+    <%= f.label(:phone_number)%><br />
+    <%= f.telephone_field(:phone_number) %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>

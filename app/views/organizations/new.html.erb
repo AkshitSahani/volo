@@ -1,2 +1,18 @@
 <h1>Sign up as an Organization</h1>
-<!-- Fill in whatever organization-related signup stuff you want -->
+
+<%= form_for(@organization, url: organizations_path(@organization)) do |f| %>
+
+  <div class="field">
+    <%= f.label :location %><br />
+    <%= f.text_field :location %>
+  </div>
+
+  <div class="field">
+    <%= f.label(:phone_number)%><br />
+    <%= f.telephone_field(:phone_number) %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>

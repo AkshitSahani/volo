@@ -1,6 +1,26 @@
 <div class="nested-fields">
-  <%= f.label "Question" %>
-  <%= f.text_field :question %>
+  <div class="field">
+    <%= f.label :question_type, "What type of question would you like to ask?" %>
+    <%= f.select(:question_type, @question_types, {:prompt => "Select A Question Type"}, {:class => 'browser-default dropdown'})  %>
+  </div>
+
+  <div class="field">
+    <%= f.label :question, "What question would you like to ask?" %>
+    <%= f.text_field :question %>
+  </div>
+
+  <div class="range-field">
+    <%= f.label :ranking, "How important is this for matching?" %>
+    <%= f.range_field :ranking, min: 0, max: 100 %>
+  </div>
+
+  <div class="add-question-fields">
+    <%= f.fields_for :answer_sets do |answer_set| %>
+      <%= render 'answer_set_fields', f: answer_set %>
+    <% end %>
+    <%= link_to_add_association "Add answer", f, :answer_sets %>
+  </div>
+
   <div style="text-align:right">
     <%= link_to_remove_association "Remove Question", f %>
   </div>

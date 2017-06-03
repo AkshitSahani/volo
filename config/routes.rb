@@ -5,8 +5,11 @@ Rails.application.routes.draw do
   resources :organizations
   resources :locations
   resources :surveys
+    get '/surveys/:id/preview_rank', to: 'surveys#preview_rank', as: 'preview_rank'
+    post '/surveys/:id/rank_survey', to: 'surveys#rank_survey', as: 'rank_survey'
   resources :residents
   resources :volunteers
   resources :responses
+
 
 end

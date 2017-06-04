@@ -1,5 +1,5 @@
 class OrganizationsController < ApplicationController
-  before_action :load_organization, only: [:show, :edit, :update, :destroy]
+  before_action :load_organization, only: [:show, :edit, :update, :destroy, :view_surveys, :assign_locations]
 
   def index
     @organizations = Organization.all
@@ -43,6 +43,25 @@ class OrganizationsController < ApplicationController
   def destroy
     @organization.destroy
     redirect_to organizations_path
+  end
+
+  def view_surveys
+    locations = @organization.locations
+    @surveys = []
+    locations.each do |l|
+      @surveys << l.surveys
+    end
+  end
+
+  def assign_locations
+    @location = Location.new
+    @survey = params[:survey_id]
+  end
+
+  def assign
+    @survey = Survey.find(params[:survey_id])
+    @survey.location = Location.find(params[:location][:branch_name])
+    redirect_to organization_path(params[:id])
   end
 
   private

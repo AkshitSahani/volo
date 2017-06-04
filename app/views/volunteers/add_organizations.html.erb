@@ -1,7 +1,7 @@
 <%= form_for(@organization, url: add_locations_path, method: "get") do |f| %>
   <div class="input-field">
     <%= f.label :name, "Name of Organization" %>
-    <%= f.collection_select(:name, @organizations, :id, :name) %>
+    <%= f.collection_select(:name, @uniq_organizations, :id, :name) %>
   </div>
   <div class="action">
     <%= f.submit "Submit Survey" %>

@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "home#index"
   resources :organizations
+    get '/organizations/:id/surveys', to: 'organizations#view_surveys', as: 'view_surveys'
+    get '/organizations/:id/surveys/:survey_id/assign_locations', to: 'organizations#assign_locations', as: 'assign_locations'
+    post '/organizations/:id/surveys/:survey_id/assign', to: 'organizations#assign', as: 'assign'
   resources :locations
   resources :surveys
     get '/surveys/:id/preview', to: 'surveys#preview', as: 'preview'

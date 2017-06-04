@@ -67,8 +67,9 @@ class VolunteersController < ApplicationController
       @v_organizations << location.organization
     end
 
+    @v_organizations = @v_organizations.uniq
     @organizations = Organization.all
-    @organizations = @organizations - @v_organizations
+    @uniq_organizations = @organizations - @v_organizations
 
     @organization = Organization.new
   end

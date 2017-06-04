@@ -28,7 +28,8 @@ end
 10.times do Organization.create!(
   location: Faker::Address.street_address,
   phone_number: "1234567890",
-  user_id: rand(1..10)
+  user_id: rand(1..10),
+  name: Faker::Company.name
   )
 end
 
@@ -44,22 +45,28 @@ end
 
 volunteer_counter = 1
 10.times do
-  Volunteer.create!(
+  v = Volunteer.create!(
   age: rand(20..60),
   user_id: volunteer_counter,
   phone_number: "1234567890"
   )
+  location_counter = 1
+  10.times do
+    v.locations << Location.find(location_counter)
+    location_counter += 1
+  end
   volunteer_counter += 1
 end
 
 resident_counter = 11
 10.times do
-  Resident.create!(
+  r = Resident.create!(
   age: rand(60..110),
   user_id: resident_counter,
   phone_number: "1234567890"
   )
   resident_counter += 1
+  r.location = Location.find(rand(1..10))
 end
 
 survey_counter = 1
@@ -72,13 +79,37 @@ survey_counter = 1
 end
 
 open_question_set = ["Why do you want to volunteer?", "Why do you want to volunteer at Schelegel Villages?", "Tell us more about yourself"]
+open_response_set = ["I love volunteering.", "I want to help out in my community.", "I want to give back."]
+
+question_counter = 1
+survey_counter = 1
 20.times do
   Question.create!(
     question: open_question_set.sample,
-    survey_id: rand(1..20),
+    survey_id: survey_counter,
     question_type: "Open Response",
     ranking: 20
   )
+  volunteer_counter = 1
+  10.times do
+    Response.create!(
+      question_id: question_counter,
+      volunteer_id: volunteer_counter,
+      response: open_response_set.sample
+    )
+    volunteer_counter += 1
+  end
+  resident_counter = 1
+  10.times do
+    Response.create!(
+      question_id: question_counter,
+      resident_id: resident_counter,
+      response: "N/A"
+    )
+    resident_counter += 1
+  end
+  question_counter += 1
+  survey_counter += 1
 end
 
 20.times do
@@ -111,6 +142,24 @@ language_options = ["English", "French", "Spanish"]
     )
     option_counter += 1
   end
+  volunteer_counter = 1
+  10.times do
+    Response.create!(
+      question_id: question_counter,
+      volunteer_id: volunteer_counter,
+      response: Question.find(question_counter).answer_sets.sample.id
+    )
+  volunteer_counter += 1
+  end
+  resident_counter = 1
+  10.times do
+    Response.create!(
+      question_id: question_counter,
+      resident_id: resident_counter,
+      response: Question.find(question_counter).answer_sets.sample.id
+    )
+    resident_counter += 1
+  end
   question_counter += 1
 end
 
@@ -124,6 +173,24 @@ age_options = (1...100).to_a
       answer: age_options[option_counter]
     )
     option_counter += 1
+  end
+  volunteer_counter = 1
+  10.times do
+    Response.create!(
+    question_id: question_counter,
+    response: Question.find(question_counter).answer_sets.sample.id,
+    volunteer_id: volunteer_counter
+    )
+    volunteer_counter += 1
+  end
+  resident_counter = 1
+  10.times do
+    Response.create!(
+    question_id: question_counter,
+    response: Question.find(question_counter).answer_sets.sample.id,
+    volunteer_id: resident_counter
+    )
+    resident_counter += 1
   end
   question_counter += 1
 end

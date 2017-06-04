@@ -1,0 +1,25 @@
+<h1>My organizations</h1>
+<ol>
+<% @v_organizations.each do |org| %>
+  <li><%= org.name %></li>
+  <% @shared_locations = org.locations & @v_locations %>
+  <ul>
+  <% @shared_locations.each do |loc| %>
+    <li><%= loc.branch_name %></li>
+    <ul>
+      <% loc.surveys.each do |survey| %>
+        <li> <%= survey.name %> |
+          <% if @surveys.include? survey %>
+            <span> Completed </span>
+          <% else %>
+            <span> Begin </span>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+  </ul>
+<% end %>
+</ol>
+
+<%= link_to "Add Organizations", add_organizations_path %>

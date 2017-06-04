@@ -1,0 +1,13 @@
+<%= form_tag(match_path(1), method: :get) do %>
+<div class="input-field">
+  <%= label_tag :location %>
+  <%= select_tag :location, options_from_collection_for_select(Location.all, :id, :branch_name) %>
+</div>
+  <%= label_tag :survey %>
+  <%= select_tag :survey, options_from_collection_for_select(Survey.all, :id, :name) %>
+  <%= label_tag :match_type %>
+  <%= select_tag :match_type, options_for_select(["Resident -> Volunteer"],["Volunteer -> Resident"]) %>
+  <%= label_tag :user %>
+  <%= select_tag :user, options_from_collection_for_select(Resident.all, :id, :user_id) %>
+  <%= submit_tag %>
+<% end %>

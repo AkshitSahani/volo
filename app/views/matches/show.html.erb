@@ -1,0 +1,7 @@
+<% @scores.each do |score| %>
+  <h5><%= score %></h5><br>
+<% end %>
+
+<% @match_rankings.each do |volunteer, score| %>
+<%= volunteer.id %> : <%= score %><br>
+<% end %>

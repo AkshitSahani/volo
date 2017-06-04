@@ -14,7 +14,7 @@ class SurveysController < ApplicationController
   def create
     @survey = Survey.new(survey_params)
     if @survey.save
-      redirect_to preview_rank(@survey) #Change this once you decide user flows.
+      redirect_to preview_path(@survey) #Change this once you decide user flows.
     else
       render :new
     end

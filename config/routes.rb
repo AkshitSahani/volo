@@ -17,6 +17,5 @@ Rails.application.routes.draw do
     get '/volunteers/:id/add_locations', to: 'volunteers#add_locations', as: 'add_locations'
     post '/volunteers/:id/associate_locations', to: 'volunteers#associate_locations', as: 'associate_locations'
   resources :responses
-
-
+  resources :matches
 end

@@ -205,19 +205,19 @@ residents.each do |r|
     if q.question_type == "Open Response"
       Response.create!(
         question_id: q.id,
-        volunteer_id: r.id,
+        resident_id: r.id,
         response: "N/A"
       )
     elsif q.question_type == "Multiple Choice"
       Response.create!(
         question_id: q.id,
-        volunteer_id: r.id,
+        resident_id: r.id,
         response: "#{q.answer_sets.to_a.shuffle!.pop.answer}, #{q.answer_sets.to_a.shuffle!.pop.answer}"
       )
     elsif q.question_type == "Drop-Down"
       Response.create!(
         question_id: q.id,
-        volunteer_id: r.id,
+        resident_id: r.id,
         response: q.answer_sets.sample.answer
       )
     end

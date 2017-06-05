@@ -1,11 +1,43 @@
 <% content_for :top_content do %>
   <div class="jumbotron">
     <div class="alert-container">
-      <h1>Welcome!</h1>
-      <p>Register to get started.</p>
-      <p>
-        <%= link_to 'Register', new_user_registration_path, class: "waves-effect waves-light btn" %>
-      </p>
+    </div>
+    <div class="row">
+      <div class="col s12 head">
+        <div class="title-container">
+          <h5 class="title">Perfect Match Between</h5>
+          <h3 class="title">Volunteers & Resident</h3>
+          <p>
+            <%= link_to 'Register', new_user_registration_path, class: "waves-effect waves-light btn round" %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row types">
+      <div class="col s4">
+        <%= image_tag("volunteer")%>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas lacus mi, finibus eget eros eget, consequat vestibulum risus. Quisque vestibulum neque sed maximus consequat. Duis placerat eleifend urna non venenatis. Sed sit amet tempor quam.</p>
+      </div>
+      <div class="col s4">
+        <%= image_tag("residents")%>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas lacus mi, finibus eget eros eget, consequat vestibulum risus. Quisque vestibulum neque sed maximus consequat. Duis placerat eleifend urna non venenatis. Sed sit amet tempor quam.</p>
+      </div>
+      <div class="col s4">
+        <%= image_tag("organization")%>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas lacus mi, finibus eget eros eget, consequat vestibulum risus. Quisque vestibulum neque sed maximus consequat. Duis placerat eleifend urna non venenatis. Sed sit amet tempor quam.</p>
+      </div>
+    </div>
+    <div class="container-2" id="contain">
+      <h3>Volunteer</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas lacus mi, finibus eget eros eget, consequat vestibulum risus. Quisque vestibulum neque sed maximus consequat. Duis placerat eleifend urna non venenatis. Sed sit amet tempor quam.</p>
+    </div>
+    <div class="container-3" id="contain">
+      <h3>Organizations</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas lacus mi, finibus eget eros eget, consequat vestibulum risus. Quisque vestibulum neque sed maximus consequat. Duis placerat eleifend urna non venenatis. Sed sit amet tempor quam.</p>
+    </div>
+    <div class="container-4" id="contain">
+      <h3>Residents</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas lacus mi, finibus eget eros eget, consequat vestibulum risus. Quisque vestibulum neque sed maximus consequat. Duis placerat eleifend urna non venenatis. Sed sit amet tempor quam.</p>
     </div>
   </div>
 <% end %>

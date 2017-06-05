@@ -17,3 +17,107 @@
 
 @import "materialize";
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
+/* BASE styles */
+*,
+*::before,
+*::after
+{
+  box-sizing: inherit;
+}
+
+.volo {
+  background-color: #00c188;
+}
+
+
+/* HOMEPAGE  */
+
+.title {
+  color: white
+}
+
+.head {
+  background-image: url("talk.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 50rem;
+}
+
+.title-container {
+  position: relative;
+  top: 30%;
+  left: 15%;
+}
+
+.round {
+  border-radius: 200px;
+  height: 40px;
+  background-color: white;
+  color: #00c188;
+  .round:hover {
+    background-color: #00c188;
+    color: white;
+  }
+
+}
+
+.types {
+  text-align: center;
+  display: inline-block;
+  margin: 3% 10%;
+}
+
+.desc {
+  width: 20%;
+  display: inline-block;
+  margin: auto 3%;
+}
+
+#contain {
+  padding: 3% 15%;
+}
+
+.container-2 {
+  background-image: url("volunteer-back.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 30rem;
+  h3 {
+    display: inline;
+    position: relative;
+    top: 20%;
+  }
+  p {
+    display: inline;
+  }
+}
+
+.container-3 {
+  background-image: url("organization-back.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 30rem;
+  h3 {
+    display: inline;
+    position: relative;
+    top: 20%;
+  }
+  p {
+    display: inline;
+  }
+}
+
+.container-4 {
+  background-image: url("residents-back.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 30rem;
+  h3 {
+    display: inline;
+    position: relative;
+    top: 20%;
+  }
+  p {
+    display: inline;
+  }
+}

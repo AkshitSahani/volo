@@ -11,9 +11,12 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_self
- *= require 'colorRules.scss'
- *= require 'inputRules.scss'
  */
 
-@import "materialize";
-@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+ @import "colorRules";
+ @import "inputRules";
+ @import 'materialize';
+ @import 'home';
+
+// @import "materialize";
+// @import "https://fonts.googleapis.com/icon?family=Material+Icons";

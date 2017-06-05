@@ -13,14 +13,14 @@ nav {
     }
   }
 
-  color: $navbar-font-color;
+  // color: $navbar-font-color;
   @extend .z-depth-1;
-  background-color: $primary-color;
+  background-color: white;
   width: 100%;
   height: $navbar-height-mobile;
   line-height: $navbar-line-height-mobile;
 
-  a { color: $navbar-font-color; }
+  a { color: $voloGreen; }
 
   i,
   [class^="mdi-"], [class*="mdi-"],

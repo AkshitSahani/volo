@@ -50,9 +50,9 @@
     </div>
 
     <%= yield :top_content%>
+    <h1><%= yield :header %></h1>
 
     <div class="container">
-        <h1><%= yield :header %></h1>
       <%= yield %>
     </div>
     <p class="notice"><%= notice %></p>

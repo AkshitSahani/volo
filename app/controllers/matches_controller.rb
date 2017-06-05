@@ -23,51 +23,67 @@ class MatchesController < ApplicationController
           else
             v_answers = v.responses.where(question_id: q.id).first.response
           end
-          if r.responses.where(question_id: q.id).first.response.split(", ").count > 1
-            r_answers = r.responses.where(question_id: q.id).first.response.split(", ")
-            match_potential = r_answers.count
-          else
-            r_answers = r.responses.where(question_id: q.id).first.response
-            match_potential = r_answers.count
+          if !(r.responses.where(question_id: q.id).empty?)
+            if r.responses.where(question_id: q.id).first.response.split(", ").count > 1
+              r_answers = r.responses.where(question_id: q.id).first.response.split(", ")
+              match_potential = r_answers.count
+            else
+              r_answers = r.responses.where(question_id: q.id).first.response
+              match_potential = r_answers.count
+            end
           end
-            match_score = 0
-              v_answers.each do |a_v|
-                r_answers.each do |a_r|
-                  match_score += 1 if a_v == a_r
-                end
-              end
+          match_score = 0
+          r_answers.each do |r_a|
+            i = 0
+            while i < v_answers.count
+              match_score += 1 if r_a == v_answers[i]
+              i+=1
+            end
+          end
+
             scores << [v, q, match_score, match_potential]
           elsif q.question_type == "Drop-Down"
-            v_answers = v.responses.where(question_id: q.id)
-            r_answers = r.responses.where(question_id: q.id)
-            match_score = 0
-            match_score = 1 if v_answers == r_answers
-            scores << [v, q, match_score, match_potential]
+            if (!(v.responses.where(question_id: q.id).empty?)) && (!(r.responses.where(question_id: q.id).empty?))
+              v_answers = v.responses.where(question_id: q.id)[0]
+              r_answers = r.responses.where(question_id: q.id)[0]
+              match_potential = 1
+              if v_answers == r_answers
+                match_score = 1
+                scores << [v, q, match_score, match_potential]
+              end
+            end
           end
         end
       end
       @scores = scores
 
-      match_rankings = []
+      # match_rankings = []
+      v_hash = {}
       volunteers.each do |v|
-        v_array = []
         scores.each do |array|
-          v_array << array if array.include?(v)
-        end
-        v_score = []
-        v_array.each do |v_a|
-          if v_a[3] != 0
-            num = (v_a[2]/v_a[3]).to_f
-            den = v_a[1].ranking.to_f
-            den_1 = surv.questions.sum(:ranking).to_f
-            v_s = num * (den / den_1)
-            v_score << v_s
-            byebug
+          v_hash[v] = []
+          if array.include?(v)
+            v_hash[v] << array
           end
         end
-        v_score = v_score.sum
-        match_rankings << [v, v_score]
       end
-      @match_rankings = match_rankings
+
+      v_score = {}
+        v_hash.keys.each do |key|
+          v_points = 0
+          v_hash[key].each do |v_a|
+            if v_a[3] != 0
+              num = (v_a[2].to_f)/(v_a[3].to_f)
+              den = ((v_a[1].ranking)/10.0)
+              # den_1 = surv.questions.sum(:ranking).to_f
+              v_points += (num * den)
+              # byebug
+            end
+          end
+          v_score[key] = v_points
+         # v_score = v_score.sum
+         # match_rankings << [v, v_score]
+        end
+      @match_rankings = v_score
   end
 end

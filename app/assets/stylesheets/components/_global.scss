@@ -342,7 +342,8 @@ ul.staggered-list li {
 // Footer
 .page-footer {
   padding-top: 20px;
-  background-color: $footer-bg-color;
+  margin-top: 50px;
+  background-color: $footerGrey;
 
   .footer-copyright {
     overflow: hidden;

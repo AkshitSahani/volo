@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20170606005106) do
     t.string   "address"
     t.integer  "phone_number"
     t.string   "volunteer_coordinator_name"
-    t.string   "volunteer_coordinator_phone"
+    t.integer  "volunteer_coordinator_phone"
     t.integer  "organization_id"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false

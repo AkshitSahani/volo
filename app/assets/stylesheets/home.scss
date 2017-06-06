@@ -6,6 +6,14 @@ html {
   background: $bodyGrey;
 }
 
+body {
+  margin-top: 54px;
+}
+
+footer .container {
+  background: $footerGrey;
+}
+
 .formContainer {
   width: 60%;
   margin-left: auto;

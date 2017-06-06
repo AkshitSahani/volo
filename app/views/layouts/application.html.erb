@@ -12,10 +12,10 @@
 
     <nav>
       <div>
-        <div class="volo">
-          <%= link_to 'Volo', root_path%>
-        </div>
         <div>
+          <%= link_to 'Volo', root_path , class: "voloHeaderLogo"%>
+        </div>
+        <div class="navLinks">
           <ul>
             <li><%= link_to 'Home', root_path %></li>
           </ul>
@@ -50,9 +50,9 @@
     </div>
 
     <%= yield :top_content%>
+    <h1><%= yield :header %></h1>
 
     <div class="container">
-        <h1><%= yield :header %></h1>
       <%= yield %>
     </div>
     <p class="notice"><%= notice %></p>

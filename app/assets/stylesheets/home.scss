@@ -1,3 +1,25 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+html {
+  background: $bodyGrey;
+}
+
+.formContainer {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 50px 0px;
+}
+
+.voloHeaderLogo {
+    position: absolute;
+    left: 150px;
+}
+
+.navLinks {
+    position: absolute;
+    right: 115px;
+    width: 230px;
+}

@@ -1,0 +1,9 @@
+<h5><%= Survey.find(@survey).name %></h5>
+
+<p>Assign Locations</p>
+
+<%= form_for @location, url: assign_path do |f| %>
+  <%= f.label :branch_name, "Location" %>
+  <%= f.collection_select :branch_name, @organization.locations, :id, :branch_name, multiple: true %>
+  <%= f.submit %>
+<% end %>

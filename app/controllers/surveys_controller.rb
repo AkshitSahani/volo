@@ -1,6 +1,8 @@
 class SurveysController < ApplicationController
-  before_action :load_survey, only: [:show, :edit, :update, :destroy]
+  before_action :load_survey, only: [:show, :edit, :update, :destroy, :show, :preview]
   before_action :load_question_types, only: [:new, :create]
+  before_action :question_set, only: [:show, :preview]
+
   def index
     @surveys = Survey.all
   end
@@ -12,14 +14,26 @@ class SurveysController < ApplicationController
   def create
     @survey = Survey.new(survey_params)
     if @survey.save
-      redirect_to preview_rank_path(@survey) #Change this once you decide user flows.
+      redirect_to preview_path(@survey) #Change this once you decide user flows.
     else
       render :new
     end
   end
 
   def show
-    @response = Response.new
+    num_questions = @survey.questions.count
+    @responses = []
+    num_questions.times do
+      @responses << Response.new
+    end
+    @q_counter = 0
+  end
+
+  def create_responses
+    params["responses"].each do |response|
+      Response.create(response_params(response))
+    end
+    redirect_to root_path #update this based on who is responding to the survey
   end
 
   def edit
@@ -37,31 +51,22 @@ class SurveysController < ApplicationController
     @survey.destroy
   end
 
-  def preview_rank
-    #Generate array containing all survey information
-    @survey = Survey.find(params[:id])
-    @question_set = []
-    @survey.questions.each do |q|
-      question = [q.id, q.question_type, q.question, q.ranking]
-      answers = []
-      q.answer_sets.each do |a|
-        answers << [a.answer,a.id]
-      end
-      @question_set << [question,answers]
-    end
-  end
-
-  def rank_survey
-    #Rank survey questions
-
+  def preview
   end
 
 private
-  def rank_params
-    params.require(:question).permit(
-      :question_id,
-      :ranking
-    )
+
+  def question_set
+    @question_set = []
+    @survey.questions.each do |q|
+      question = q
+      answers = []
+      q.answer_sets.each do |a|
+        answers << a
+      end
+      @question_set << [question,answers]
+    end
+    @question_set
   end
 
   def survey_params
@@ -71,8 +76,8 @@ private
     )
   end
 
-  def response_params
-    params.require(:response).permit(:response, :question_id, :resident_id, :volunteer_id)
+  def response_params(r_params)
+    r_params.permit(:question_id, :response, :volunteer_id, :resident_id)
   end
 
   def load_survey

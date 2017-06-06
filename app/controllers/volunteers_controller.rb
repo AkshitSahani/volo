@@ -11,7 +11,7 @@ class VolunteersController < ApplicationController
 
   def create
     @volunteer = Volunteer.new(
-      age: volunteer_params[:age],
+      birthdate: volunteer_params[:birthdate].to_date,
       phone_number: volunteer_params[:phone_number],
       user_id: session[:user_id]
     )
@@ -24,7 +24,7 @@ class VolunteersController < ApplicationController
   end
 
   def show
-    #code
+    
   end
 
   def edit
@@ -90,7 +90,7 @@ class VolunteersController < ApplicationController
   private
 
   def volunteer_params
-    params.require(:volunteer).permit(:age, :phone_number, :user_id)
+    params.require(:volunteer).permit(:birthdate, :phone_number, :user_id)
   end
 
   def load_volunteer

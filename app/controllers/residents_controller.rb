@@ -13,7 +13,7 @@ class ResidentsController < ApplicationController
 
   def create
     @resident = Resident.new(
-      age: resident_params[:age],
+      birthdate: resident_params[:birthdate].to_date,
       location_id: resident_params[:location_id],
       user_id: session[:user_id]
       )
@@ -49,7 +49,7 @@ class ResidentsController < ApplicationController
   private
 
   def resident_params
-    params.require(:resident).permit(:age, :location_id, :user_id)
+    params.require(:resident).permit(:birthdate, :location_id, :user_id)
   end
 
   def load_resident
@@ -60,5 +60,5 @@ class ResidentsController < ApplicationController
     @resident = Resident.new
     @locations = [['SV',1],['RS',2]]
   end
-      
+
 end

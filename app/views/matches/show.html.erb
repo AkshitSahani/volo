@@ -1,13 +1,19 @@
-<% @participants.each do |pa| %>
-  <%= User.find(pa.user_id).first_name%> <%= User.find(pa.user_id).last_name%>
+<% if @participants %>
+  <% @participants.each do |pa| %>
+    <%= User.find(pa.user_id).first_name%> <%= User.find(pa.user_id).last_name%>
+  <% end %>
 <% end %>
+
 <br><br><br>
+
 <% if @scores %>
   <% @scores.each do |score| %>
     <h5><%= score %></h5><br>
   <% end %>
 <% end %>
+
 <br><br><br>
+
 <% if @match_rankings %>
   <% @match_rankings.each do |volunteer, score| %>
   <%= volunteer.id %> : <%= score %><br>

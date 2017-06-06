@@ -37,20 +37,28 @@
 /* HOMEPAGE  */
 
 .title {
-  color: white
+  color: white;
+  margin: 0;
+}
+
+.title-small {
+  color: white;
+  margin: 0;
 }
 
 .head {
   background-image: url("talk.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
-  height: 50rem;
+  height: 40rem;
 }
 
 .title-container {
   position: relative;
   top: 30%;
   left: 15%;
+  width: 45%;
+  margin: none;
 }
 
 .round {
@@ -77,8 +85,22 @@
   margin: auto 3%;
 }
 
-#contain {
-  padding: 3% 15%;
+#contain-left {
+  padding: 3% 32% 3% 0%;
+  margin-top: 7rem;
+}
+
+#contain-right {
+  padding: 3% 0% 3% 32%;
+  margin-top: 7rem;
+}
+
+.main {
+  width: 25%;
+}
+
+.volunteer-white {
+  color: white;
 }
 
 .container-2 {
@@ -94,6 +116,11 @@
   p {
     display: inline;
   }
+}
+
+.image-heart, .image-organization, .image-residents {
+  margin-top: 7rem;
+  margin-left: 7rem;
 }
 
 .container-3 {

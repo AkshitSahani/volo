@@ -1,0 +1,28 @@
+<h1><%=@org.name%></h1>
+<h2>Locations</h2>
+<ol>
+<% @org_locations.each do |loc| %>
+  <h5><li><%= loc.branch_name %> |
+  <% if @v_locations.find(loc) %>
+    <%= link_to "Remove Location", "#" %>
+      </li></h5>
+      <ul>
+        <% @org_surveys.each do |surv| %>
+          <li>
+            <% if surv.location = loc %>
+              <%= surv.name %> |
+              <% if @surveys.include?(surv) %>
+                <%= link_to "Edit Response", "#" %>,
+                <%= link_to "Delete Survey", "#" %>
+              <% else %>
+                <%= link_to "Take Survey", "#" %>
+              <% end %>
+            <% end %>
+          </li>
+        <% end %>
+  <% else %>
+    <%= link_to "#", "Add Location" %>
+    </li></h5>
+  <% end %>
+<% end %>
+</ol>

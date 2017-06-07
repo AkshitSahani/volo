@@ -1,5 +1,6 @@
 class VolunteersController < ApplicationController
-  before_action :load_volunteer, only: [:show, :edit, :update, :destroy, :view_organizations, :add_organizations]
+  before_action :load_volunteer, only: [:show, :edit, :update, :destroy, :view_org, :add_organizations]
+  before_action :volunteer_organizations, only: [:show]
 
   def index
     @volunteers = Volunteer.all
@@ -24,7 +25,7 @@ class VolunteersController < ApplicationController
   end
 
   def show
-    
+    volunteer_organizations
   end
 
   def edit
@@ -44,12 +45,15 @@ class VolunteersController < ApplicationController
     redirect_to volunteers_path
   end
 
-  def view_organizations
-    @v_locations = @volunteer.locations
-
-    @v_organizations = []
-    @v_locations.each do |location|
-      @v_organizations << location.organization
+  def view_org
+    @org = Organization.find(params[:org_id])
+    @org_locations = @org.locations
+    @v_locations = @volunteer.locations.where(organization_id: @org)
+    @org_surveys = []
+    @org_locations.each do |loc|
+      loc.surveys.each do |surv|
+        @org_surveys << surv
+      end
     end
 
     responses = @volunteer.responses
@@ -61,17 +65,10 @@ class VolunteersController < ApplicationController
   end
 
   def add_organizations
-    @v_locations = @volunteer.locations
-    @v_organizations = []
-    @v_locations.each do |location|
-      @v_organizations << location.organization
-    end
-
-    @v_organizations = @v_organizations.uniq
-    @organizations = Organization.all
-    @uniq_organizations = @organizations - @v_organizations
-
+    volunteer_organizations
     @organization = Organization.new
+    @organizations = Organization.all
+    @uniq_organizations = (@organizations - @v_organizations).uniq
   end
 
   def add_locations
@@ -84,10 +81,19 @@ class VolunteersController < ApplicationController
     volunteer = Volunteer.find(params[:id])
     location = Location.find(params[:location][:branch_name])
     volunteer.locations << location
-    redirect_to view_organizations_path
+    redirect_to view_org_path(id: params[:id], org_id: params[:location][:organization])
   end
 
   private
+
+  def volunteer_organizations
+    @v_locations = @volunteer.locations
+    @v_organizations = []
+    @v_locations.each do |location|
+      @v_organizations << location.organization
+    end
+    @v_organizations = @v_organizations.uniq
+  end
 
   def volunteer_params
     params.require(:volunteer).permit(:birthdate, :phone_number, :user_id)
@@ -96,4 +102,5 @@ class VolunteersController < ApplicationController
   def load_volunteer
     @volunteer = Volunteer.find(params[:id])
   end
+
 end

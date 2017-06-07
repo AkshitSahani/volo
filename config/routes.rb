@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     post '/surveys/:id/create_responses', to: 'surveys#create_responses', as: 'create_responses'
   resources :residents
   resources :volunteers
-    get '/volunteers/:id/organizations', to: 'volunteers#view_organizations', as: 'view_organizations'
+    get '/volunteers/:id/organizations/:org_id', to: 'volunteers#view_org', as: 'view_org'
     get '/volunteers/:id/add_organizations', to: 'volunteers#add_organizations', as: 'add_organizations'
     get '/volunteers/:id/add_locations', to: 'volunteers#add_locations', as: 'add_locations'
     post '/volunteers/:id/associate_locations', to: 'volunteers#associate_locations', as: 'associate_locations'

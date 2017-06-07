@@ -1,5 +1,6 @@
 class Survey < ApplicationRecord
   belongs_to :location, optional: true #for testing only. Delete optional when deploying
+  belongs_to :organization, optional: true
   has_many :questions, inverse_of: :survey
   has_many :responses, through: :questions
 

@@ -9,6 +9,7 @@ class SurveysController < ApplicationController
 
   def new
     @survey = Survey.new
+    @organizations = Organization.all
   end
 
   def create
@@ -71,7 +72,7 @@ private
 
   def survey_params
     params.require(:survey).permit(
-    :name, :location_id,
+    :name, :location_id, :organization_id,
     questions_attributes: [:survey_id, :question, :question_type, :ranking, answer_sets_attributes: [:question_id, :answer, :_destroy]]
     )
   end

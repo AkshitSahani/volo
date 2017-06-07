@@ -1,4 +1,13 @@
-<h1>Volunteer Show Page</h1>
-<%= link_to "My Organizations", view_organizations_path %>
+<h3>This page should have a grid of the organizations that the volunteer has signed up for with a link to go to their "org hub"</h3>
+<h3>This should also show the total number of orgs, locations, and surveys associated with that volunteer. </h3>
 
+<h1>Volunteer Show Page</h1>
 <%= image_tag User.find(@volunteer.user).avatar %>
+
+<%= link_to "Add Organizations", add_organizations_path %>
+<h2>My Organizations</h2>
+<ol>
+<% @v_organizations.each do |org| %>
+  <li><%= org.name %> | <%= link_to "View", view_org_path(:id => params[:id], :org_id => org.id) %></li>
+  <% end %>
+</ol>

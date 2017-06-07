@@ -31,7 +31,7 @@ organization_counter = 1
   Organization.create!(
     location: Faker::Address.street_address,
     phone_number: "1234567890",
-    user_id: organization_counter,
+    user_id: (User.where(user_type: 'Organization').sample),
     name: Faker::Company.name
   )
   organization_counter += 1
@@ -53,11 +53,11 @@ end
 survey_counter = 1
 20.times do
   org = Organization.find(rand(1..10))
-  Survey.create!(
+  s = Survey.create!(
     name: "The humble beginnings of a great survey ##{survey_counter}",
     organization_id: org.id,
-    location_id: org.locations[rand(0..(org.locations.count-1))].id
   )
+  s.locations << Location.find(rand(1..(Location.all.count)))
   survey_counter += 1
 end
 
@@ -86,7 +86,7 @@ survey_counter = 1
   survey_counter += 1
 end
 
-survey_counter += 1
+survey_counter = 1
 20.times do
   Question.create!(
     question: "How old are you?",

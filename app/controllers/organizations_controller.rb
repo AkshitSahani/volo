@@ -56,7 +56,7 @@ class OrganizationsController < ApplicationController
 
   def assign
     @survey = Survey.find(params[:survey_id])
-    @survey.location = Location.find(params[:location][:branch_name])
+    @survey.locations << Location.find(params[:location][:branch_name])
     redirect_to organization_path(params[:id])
   end
 

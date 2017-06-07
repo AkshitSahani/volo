@@ -39,10 +39,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :avatar do %>
-      <%= f.file_field :avatar %>
-      <%= f.hidden_field :avatar_cache %>
-  <% end %>
+    <%= f.label :avatar, "Upload an avatar" %>
+    <%= f.file_field :avatar %>
   </div>
 
   <div class="actions">

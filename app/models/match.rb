@@ -21,12 +21,12 @@ class Match < ApplicationRecord
   def self.scores(participants, surv, subject)
     scores = []
     surv.questions.each do |q|
-      participants.each do |v|
+      participants.each do |par|
         if q.question_type == "Multiple Choice"
-          if v.responses.where(question_id: q.id).first.response.split(", ").count > 1
-            v_answers = v.responses.where(question_id: q.id).first.response.split(", ")
+          if par.responses.where(question_id: q.id).first.response.split(", ").count > 1
+            par_answers = par.responses.where(question_id: q.id).first.response.split(", ")
           else
-            v_answers = v.responses.where(question_id: q.id).first.response
+            par_answers = par.responses.where(question_id: q.id).first.response
           end
 
           if !(subject.responses.where(question_id: q.id).empty?)
@@ -42,23 +42,23 @@ class Match < ApplicationRecord
           match_score = 0
           subject_answers.each do |s_a|
             i = 0
-            while i < v_answers.count
-              match_score += 1 if s_a == v_answers[i]
+            while i < par_answers.count
+              match_score += 1 if s_a == par_answers[i]
               i+=1
             end
           end
 
-            scores << [v, q, match_score, match_potential]
+            scores << [par, q, match_score, match_potential]
         elsif q.question_type == "Drop-Down"
-          if (!(v.responses.where(question_id: q.id).empty?)) && (!(subject.responses.where(question_id: q.id).empty?))
-            v_answers = v.responses.where(question_id: q.id)[0]
-            subject_answers = subject.responses.where(question_id: q.id)[0]
+          if (!(par.responses.where(question_id: q.id).empty?)) && (!(subject.responses.where(question_id: q.id).empty?))
+            par_answers = par.responses.where(question_id: q.id)[0].response
+            subject_answers = subject.responses.where(question_id: q.id)[0].response
             match_potential = 1
             match_score = 0
-            if v_answers == subject_answers
+            if par_answers == subject_answers
               match_score = 1
             end
-            scores << [v, q, match_score, match_potential]
+            scores << [par, q, match_score, match_potential]
           end
         end
       end
@@ -67,30 +67,30 @@ class Match < ApplicationRecord
   end
 
   def self.match(participants, scores, surv)
-    v_hash = {}
-    participants.each do |v|
-      v_hash[v] = []
+    par_hash = {}
+    participants.each do |par|
+      par_hash[par] = []
       scores.each do |array|
-        if array.include?(v)
-          v_hash[v] << array
+        if array.include?(par)
+          par_hash[par] << array
         end
       end
     end
 
-    v_score = {}
-    v_hash.keys.each do |key|
-      v_points = 0
-      v_hash[key].each do |v_a|
-        if v_a[3] != 0
-          num = (v_a[2].to_f)/(v_a[3].to_f)
-          den = (v_a[1].ranking).to_f
+    par_score = {}
+    par_hash.keys.each do |key|
+      par_points = 0
+      par_hash[key].each do |par_a|
+        if par_a[3] != 0
+          num = (par_a[2].to_f)/(par_a[3].to_f)
+          den = (par_a[1].ranking).to_f
           den_1 = surv.questions.sum(:ranking).to_f
-          v_points += (num * (den/den_1))
+          par_points += (num * (den/den_1))
         end
       end
-      v_score[key] = v_points
+      par_score[key] = par_points
     end
-    v_score
+    par_score
   end
 
 end

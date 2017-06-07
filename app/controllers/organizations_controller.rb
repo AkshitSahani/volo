@@ -46,11 +46,7 @@ class OrganizationsController < ApplicationController
   end
 
   def view_surveys
-    locations = @organization.locations
-    @surveys = []
-    locations.each do |l|
-      @surveys << l.surveys
-    end
+    @surveys = @organization.surveys
   end
 
   def assign_locations

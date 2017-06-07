@@ -6,8 +6,8 @@
   <%= label_tag :survey %>
   <%= select_tag :survey, options_from_collection_for_select(Survey.all, :id, :name) %>
   <%= label_tag :match_type %>
-  <%= select_tag :match_type, options_for_select(["Resident -> Volunteer"],["Volunteer -> Resident"]) %>
+  <%= select_tag :match_type, options_for_select([["Resident -> Volunteer"], ["Volunteer -> Resident"]]) %>
   <%= label_tag :user %>
-  <%= select_tag :user, options_from_collection_for_select(Resident.all, :id, :user_id) %>
+  <%= select_tag :user, options_from_collection_for_select(Volunteer.all, :id, :user_id) %>
   <%= submit_tag %>
 <% end %>

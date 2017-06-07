@@ -3,6 +3,10 @@
     <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
+  <div class="field">
+    <%= f.label :organization_id, "Organization" %>
+    <%= f.collection_select :organization_id, @organizations, :id, :name %>
+  </div>
   <div class="add-question-fields">
     <%= f.fields_for :questions do |question| %>
       <%= render 'question_fields', f: question %>

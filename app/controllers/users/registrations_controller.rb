@@ -1,10 +1,11 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  # before_action :configure_sign_up_params, only: [:create]
-  # before_action :configure_account_update_params, only: [:update]
+  before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_account_update_params, only: [:update]
+  before_action :load_account_types, only: [:new, :create]
 
   # GET /resource/sign_up
   def new
-    @account_types = ['Organization', 'Volunteer', 'Resident']
+
     super
   end
 
@@ -80,8 +81,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-   devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :account_type])
+   devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :account_type, :avatar])
   end
+
+ def load_account_types
+   @account_types = ['Organization', 'Volunteer', 'Resident']
+ end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params

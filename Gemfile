@@ -25,6 +25,10 @@ gem 'faker'
 # devise gem
 gem 'devise'
 gem 'figaro'
+gem 'paperclip'
+gem 'aws-sdk', '~> 2.3'
+
+gem 'mini_magick'
 gem 'materialize-sass'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

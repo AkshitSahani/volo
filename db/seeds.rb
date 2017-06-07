@@ -52,9 +52,11 @@ end
 
 survey_counter = 1
 20.times do
+  org = Organization.find(rand(1..10))
   Survey.create!(
     name: "The humble beginnings of a great survey ##{survey_counter}",
-    location_id: rand(1..10)
+    organization_id: org.id,
+    location_id: org.locations[rand(0..(org.locations.count-1))].id
   )
   survey_counter += 1
 end
@@ -98,7 +100,7 @@ end
 volunteer_counter = 1
 10.times do
   v = Volunteer.create!(
-    age: rand(20..60),
+    birthdate: rand(Date.civil(1940, 1, 1)..Date.civil(1990, 12, 31)),
     user_id: volunteer_counter,
     phone_number: "1234567890"
   )
@@ -113,7 +115,7 @@ end
 resident_counter = 11
 10.times do
   Resident.create!(
-    age: rand(60..110),
+    birthdate: rand(Date.civil(1940, 1, 1)..Date.civil(1990, 12, 31)),
     user_id: resident_counter,
     phone_number: "1234567890",
     location_id: Location.find(rand(1..10)).id

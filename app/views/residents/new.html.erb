@@ -3,8 +3,8 @@
 <%= form_for(@resident, url: residents_path(@resident)) do |f| %>
 
   <div class="field">
-    <%= f.label :age %><br />
-    <%= f.number_field :age, in: 1...120, step: 1 %>
+    <%= f.label :birthdate, "Date of birth" %><br />
+    <%= f.date_field :birthdate, {class: "datepicker"} %>
   </div>
 
   <div class="field">

@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20170607145551) do
 
+
   create_table "answer_sets", force: :cascade do |t|
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -67,12 +68,12 @@ ActiveRecord::Schema.define(version: 20170607145551) do
   end
 
   create_table "residents", force: :cascade do |t|
-    t.integer  "age"
     t.integer  "location_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "user_id"
     t.string   "phone_number"
+    t.date     "birthdate"
   end
 
   create_table "responses", force: :cascade do |t|
@@ -115,6 +116,10 @@ ActiveRecord::Schema.define(version: 20170607145551) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "account_type"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -122,11 +127,11 @@ ActiveRecord::Schema.define(version: 20170607145551) do
   end
 
   create_table "volunteers", force: :cascade do |t|
-    t.integer  "age"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "user_id"
     t.string   "phone_number"
+    t.date     "birthdate"
   end
 
 end

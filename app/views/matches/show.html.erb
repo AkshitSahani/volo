@@ -1,6 +1,6 @@
 <% if @participants %>
   <% @participants.each do |pa| %>
-    <%= User.find(pa.user_id).first_name%> <%= User.find(pa.user_id).last_name%>
+    <%= User.find(pa.user_id).first_name%> <%= User.find(pa.user_id).last_name%><br>
   <% end %>
 <% end %>
 

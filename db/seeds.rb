@@ -55,8 +55,7 @@ survey_counter = 1
   org = Organization.find(rand(1..10))
   Survey.create!(
     name: "The humble beginnings of a great survey ##{survey_counter}",
-    organization_id: org.id,
-    location_id: org.locations[rand(0..(org.locations.count-1))].id
+    organization_id: org.id
   )
   survey_counter += 1
 end

@@ -12,9 +12,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     build_resource(sign_up_params)
-
     resource.save
     session[:user_id] = resource.id
+    session[:user_type] = resource.account_type
     yield resource if block_given?
     if resource.persisted?
       if resource.active_for_authentication?

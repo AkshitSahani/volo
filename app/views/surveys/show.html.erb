@@ -4,7 +4,7 @@
 
     <%= fields_for 'responses[]', response do |r| %>
       <% if question[0].question_type == "Open Response" %>
-        <%= r.hidden_field :volunteer_id, value: 5 %>
+        <%= r.hidden_field :volunteer_id, value: 1 %>
         <div class="input-field">
           <%= r.label :question_id, question[0].question %><br>
           <%= r.hidden_field :question_id, value: question[0].id %>
@@ -14,25 +14,25 @@
         </div>
 
       <% elsif question[0].question_type == "Multiple Choice" %>
-        <%= r.hidden_field :volunteer_id, value: 5 %>
+        <%= r.hidden_field :volunteer_id, value: 1 %>
         <div class="input-field">
           <%= r.label :question_id, question[0].question %><br>
           <%= r.hidden_field :question_id, value: question[0].id %>
         </div>
         <div class="input-field">
           <br><br>
-          <%= r.collection_select :response, question[1], :answer, :id, {:multiple => true }%>
+          <%= r.collection_select :response, question[1], :id, :answer, {:multiple => true }%>
         </div>
 
       <% else %>
-        <%= r.hidden_field :volunteer_id, value: 5 %>
+        <%= r.hidden_field :volunteer_id, value: 1 %>
         <div class="input-field">
           <%= r.label :question_id, question[0].question %><br>
           <%= r.hidden_field :question_id, value: question[0].id %>
         </div>
         <div class="input-field">
           <br><br>
-          <%= r.collection_select :response, question[1], :answer, :id %>
+          <%= r.collection_select :response, question[1], :id, :answer %>
         </div>
       <% end %>
     <% end %>

@@ -9,19 +9,19 @@
       <ul>
         <% @org_surveys.each do |surv| %>
           <li>
-            <% if surv.location = loc %>
+            <% if surv.locations.include?(loc) %>
               <%= surv.name %> |
               <% if @surveys.include?(surv) %>
                 <%= link_to "Edit Response", "#" %>,
                 <%= link_to "Delete Survey", "#" %>
               <% else %>
-                <%= link_to "Take Survey", "#" %>
+                <%= link_to "Take Survey", survey_path(surv) %>
               <% end %>
             <% end %>
           </li>
         <% end %>
   <% else %>
-    <%= link_to "#", "Add Location" %>
+    <%= link_to "Add Location", "#" %>
     </li></h5>
   <% end %>
 <% end %>

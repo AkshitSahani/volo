@@ -56,8 +56,8 @@ survey_counter = 1
   s = Survey.create!(
     name: "The humble beginnings of a great survey ##{survey_counter}",
     organization_id: org.id,
-  )
-  s.locations << Location.find(rand(1..(Location.all.count)))
+    s.locations << Location.find(rand(1..(Location.all.count)))
+   )
   survey_counter += 1
 end
 

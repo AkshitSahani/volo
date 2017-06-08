@@ -3,6 +3,48 @@ class LocationsController < ApplicationController
 
   def index
     @locations = Location.all
+
+    if request.xhr? && params['branch_name']
+      @location = Location.where(branch_name: params['branch_name'])[0]
+      # @surveys = @location.surveys
+      @surveys = Survey.all #also to test. Should actually be like 9.
+      respond_to do |format|
+        format.html
+        format.json { render json: @surveys }
+      end
+    elsif request.xhr? && params['match_type']
+      @location = Location.where(branch_name: params['branch'])[0]
+      @survey = Survey.find(params['survey_id'])
+      if params['match_type'] = 'Resident -> Volunteer'
+        # @participant = Volunteer.all
+        # @participants = []
+        # @participant.each do |par|
+        #   @participants << User.find(par.user_id)
+        # end
+        # @participants #all of this is to test since most of the below queries give empty arrays.
+
+        a = @location.volunteers
+        b = @survey.responses.where.not(volunteer_id: nil)
+
+        b.each do |vol|
+          @participants << vol if a.include?(vol)
+        end
+        @participants.map { |par| User.find(par.user_id) } #chose to use users so that we can display names
+      elsif params['match_type'] = 'Volunteer -> Resident'
+        @participants = Resident.all.each do |res| User.find(res.user_id) end
+        a = Resident.where(location_id: @location.id)
+        b = @survey.responses.where.not(resident_id: nil)
+
+        b.each do |res|
+          @participants << res if a.include?(res)
+        end
+        @participants.map { |par| User.find(par.user_id) }
+      end
+      respond_to do |format|
+        format.html
+        format.json { render json: @participants }
+      end
+    end
   end
 
   def new

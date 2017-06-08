@@ -1,0 +1,11 @@
+<%= form_for @organization do |f| %>
+  <div class="add-location-fields">
+    <%= f.fields_for :locations do |location| %>
+      <%= render 'location_fields', f: location %>
+    <% end %>
+    <%= link_to_add_association "Add location", f, :locations %>
+  </div>
+  <div class="action">
+    <%= f.submit "Submit Survey" %>
+  </div>
+<% end %>

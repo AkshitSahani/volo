@@ -18,6 +18,7 @@ class ResidentsController < ApplicationController
       user_id: session[:user_id]
       )
     if @resident.save
+      session[:resident] = @resident.id
       redirect_to resident_path(@resident)
     else
       flash.now[:alert] = @resident.errors.full_messages

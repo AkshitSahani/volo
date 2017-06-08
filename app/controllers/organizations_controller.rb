@@ -6,6 +6,7 @@ class OrganizationsController < ApplicationController
   end
 
   def new
+    byebug
     @organization = Organization.new
   end
 
@@ -17,6 +18,7 @@ class OrganizationsController < ApplicationController
     )
 
     if @organization.save
+      session[:organization_id] = @organization.id
       redirect_to organization_path(@organization)
     else
       flash.now[:alert] = @organization.errors.full_messages

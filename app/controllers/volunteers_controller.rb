@@ -17,6 +17,7 @@ class VolunteersController < ApplicationController
       user_id: session[:user_id]
     )
     if @volunteer.save
+      session[:volunteer_id] = @volunteer.id
       redirect_to volunteer_path(@volunteer)
     else
       flash.now[:alert] = @volunteer.errors.full_messages
@@ -25,6 +26,7 @@ class VolunteersController < ApplicationController
   end
 
   def show
+    byebug
     volunteer_organizations
   end
 

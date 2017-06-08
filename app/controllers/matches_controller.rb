@@ -17,6 +17,7 @@ class MatchesController < ApplicationController
     end
     @scores = Match.scores(@participants, surv, subject)
     @match_rankings = Match.match(@participants, @scores, surv)
+
   end
 
 end

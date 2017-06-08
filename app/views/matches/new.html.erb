@@ -1,15 +1,23 @@
 <%= form_tag(match_path(1), method: :get) do %>
-<!-- <div class="input-field"> -->
-  <%= label_tag :location %>
-  <%= select_tag :location, options_from_collection_for_select(Location.all, :id, :branch_name) %>
-<!-- </div> -->
-  <%= label_tag :survey %>
-  <%= select_tag :survey, options_from_collection_for_select(Survey.first(2), :survey_id, :name) %>
-  <%= label_tag :match_type %>
-  <%= select_tag :match_type, options_for_select([["Resident -> Volunteer"], ["Volunteer -> Resident"]]) %>
-  <%= label_tag :user %>
-  <%= select_tag :user, options_from_collection_for_select(Volunteer.all, :id, :user_id) %>
-  <%= submit_tag %>
+  <div class="input-field">
+    <%= label_tag :location %><br><br>
+    <%= select_tag :location, options_from_collection_for_select(Location.all, :id, :branch_name) %>
+  </div>
+  <div class="input-field">
+    <%= label_tag :survey %><br><br>
+    <%= select_tag :survey, options_from_collection_for_select(Survey.first(2), :id, :name) %>
+  </div>
+  <div class="input-field">
+    <%= label_tag :match_type %><br><br>
+    <%= select_tag :match_type, options_for_select([["Resident -> Volunteer"], ["Volunteer -> Resident"]]) %>
+  </div>
+  <div class="input-field">
+    <%= label_tag :user %><br><br>
+    <%= select_tag :user, options_from_collection_for_select(User.first(2), :id, :first_name) %>
+  </div>
+  <div class="match-submit">
+    <%= submit_tag %>
+  </div>
 <% end %>
 
 <!-- Organization.where(user_id: session[:user_id])[0].locations -->

@@ -1,6 +1,6 @@
 class SurveysController < ApplicationController
   before_action :load_survey, only: [:show, :edit, :update, :destroy, :show, :preview]
-  before_action :load_question_types, only: [:new, :create]
+  before_action :load_question_types, only: [:new, :create, :edit]
   before_action :question_set, only: [:show, :preview]
 
   def index
@@ -14,6 +14,7 @@ class SurveysController < ApplicationController
 
   def create
     @survey = Survey.new(survey_params)
+    @survey.organization_id = session[:organization_id]
     if @survey.save
       redirect_to preview_path(@survey) #Change this once you decide user flows.
     else
@@ -38,11 +39,13 @@ class SurveysController < ApplicationController
   end
 
   def edit
+      @organizations = Organization.all
   end
 
   def update
     if @survey.update_attributes(survey_params)
-      redirect_to root_url #Change this once you decide user flows.
+      redirect_to preview_path(@survey) #Change this once you decide user flows.
+      # organization_url(Organization.find(session[:organization_id]))
     else
       render :edit
     end
@@ -53,6 +56,7 @@ class SurveysController < ApplicationController
   end
 
   def preview
+    byebug
   end
 
 private
@@ -60,20 +64,20 @@ private
   def question_set
     @question_set = []
     @survey.questions.each do |q|
-      question = q
+      # question = q
       answers = []
       q.answer_sets.each do |a|
         answers << a
       end
-      @question_set << [question,answers]
+      @question_set << [q, answers]
     end
     @question_set
   end
 
   def survey_params
     params.require(:survey).permit(
-    :name, :location_id, :organization_id,
-    questions_attributes: [:survey_id, :question, :question_type, :ranking, answer_sets_attributes: [:question_id, :answer, :_destroy]]
+    :name, :organization_id,
+    questions_attributes: [:id, :survey_id, :question, :question_type, :ranking, :_destroy, answer_sets_attributes: [:id, :question_id, :answer, :_destroy]]
     )
   end
 

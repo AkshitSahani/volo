@@ -1,6 +1,6 @@
 <ol>
   <% @surveys.each do |survey| %>
-    <li> <%= survey.name %> </li>
+    <li> <%= link_to survey.name, preview_path(survey) %> </li>
       <ul>
         <li> <%= link_to "Assign Locations", assign_locations_path(id: params[:id], survey_id: survey.id) %> </li>
       </ul>

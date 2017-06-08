@@ -1,12 +1,11 @@
 class OrganizationsController < ApplicationController
-  before_action :load_organization, only: [:show, :edit, :update, :destroy, :view_surveys, :assign_locations]
+  before_action :load_organization, only: [:show, :edit, :update, :destroy, :view_surveys, :assign_locations, :nest_locations]
 
   def index
     @organizations = Organization.all
   end
 
   def new
-    byebug
     @organization = Organization.new
   end
 
@@ -62,10 +61,16 @@ class OrganizationsController < ApplicationController
     redirect_to organization_path(params[:id])
   end
 
+  def nest_locations
+    #code
+  end
+
   private
 
   def organization_params
-    params.require(:organization).permit(:location, :phone_number, :user_id)
+    params.require(:organization).permit(:location, :phone_number, :user_id,
+    locations_attributes:[:id, :branch_name, :address, :phone_number, :volunteer_coordinator_name,
+    :volunteer_coordinator_phone, :organization_id, :_destroy])
   end
 
   def load_organization

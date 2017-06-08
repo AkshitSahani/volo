@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     get '/organizations/:id/surveys', to: 'organizations#view_surveys', as: 'view_surveys'
     get '/organizations/:id/surveys/:survey_id/assign_locations', to: 'organizations#assign_locations', as: 'assign_locations'
     post '/organizations/:id/surveys/:survey_id/assign', to: 'organizations#assign', as: 'assign'
+    get '/organizations/:id/nest_locations', to: 'organizations#nest_locations', as: 'nest_locations'
   resources :locations
   resources :surveys
     get '/surveys/:id/preview', to: 'surveys#preview', as: 'preview'

@@ -1,21 +1,41 @@
-<% if @participants %>
-  <% @participants.each do |pa| %>
-    <%= User.find(pa.user_id).first_name%> <%= User.find(pa.user_id).last_name%><br>
+<div class="match-results">
+  <h2>Match Results</h2>
+</div>
+
+<div class="match-participatns">
+  <% if @participants.empty? %>
+    <div> Sorry, there were no participants found. </div>
+  <% else %>
+    <% @participants.each do |pa| %>
+      <div class="par-full-name">
+        <%= User.find(pa.user_id).first_name%> <%= User.find(pa.user_id).last_name%><br>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
+</div>
 
-<br><br><br>
+<br>
 
-<% if @scores %>
-  <% @scores.each do |score| %>
-    <h5><%= score %></h5><br>
+<div class="match-scores">
+  <% if @scores.empty? %>
+    <div> Sorry, there were no scores calculated due to insufficient completion of surveys. </div>
+  <% else %>
+    <% @scores.each do |score| %>
+      <b><h5><%= score %></h5></b>
+    <% end %>
   <% end %>
-<% end %>
+</div>
 
-<br><br><br>
+<br>
 
-<% if @match_rankings %>
-  <% @match_rankings.each do |volunteer, score| %>
-  <%= volunteer.id %> : <%= score %><br>
+<div class="match-rankings">
+  <% if @match_rankings.empty? %>
+    <div> Sorry, there are no match rankings due to insufficient completion of surveys. </div>
+  <% else %>
+    <% @match_rankings.each do |volunteer, score| %>
+    <div class="ranking <%= volunteer.id %>">
+      <%= User.find(volunteer.user_id).first_name %> <%= User.find(volunteer.user_id).last_name %> : <b><%= score %></b>
+    </div>
+    <% end %>
   <% end %>
-<% end %>
+</div>

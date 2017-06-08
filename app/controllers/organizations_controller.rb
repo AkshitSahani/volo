@@ -6,7 +6,6 @@ class OrganizationsController < ApplicationController
   end
 
   def new
-    byebug
     @organization = Organization.new
   end
 

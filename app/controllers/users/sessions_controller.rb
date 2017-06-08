@@ -19,7 +19,7 @@ class Users::SessionsController < Devise::SessionsController
     elsif session[:user_type] == "Resident"
       session[:resident_id] == Resident.where(user_id: session[:user_id])[0].id
     elsif session[:user_type] == "Organization"
-      session[:organization_id] == Organization.where(user_id: session[:user_id][0].id
+      session[:organization_id] == Organization.where(user_id: session[:user_id])[0].id
     end
     respond_with resource, location: after_sign_in_path_for(resource)
   end
@@ -31,16 +31,15 @@ class Users::SessionsController < Devise::SessionsController
 
   private
   def after_sign_in_path_for(resource)
-    byebug
     type = resource.user_type
     if type == "Volunteer"
-      volunteer = Volunteer.find(user_id: resource.id)
+      volunteer = Volunteer.find(resource.id)
       volunteer_path(volunteer)
     elsif type == "Resident"
-      resident = Resident.find(user_id: resource.id)
+      resident = Resident.find(resource.id)
       resident_path(resident)
     elsif type == "Organization"
-      organization = Organization.find(user_id: resource.id)
+      organization = Organization.find(resource.id)
       organization_path(organization)
     end
   end

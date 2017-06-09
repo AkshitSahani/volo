@@ -1,4 +1,6 @@
-<%= form_tag create_responses_path do %>
+<h1> Edit Responses </h1>
+
+<%= form_tag update_responses_path do %>
   <% @responses.each do |response| %>
     <% question = @question_set[@q_counter] %>
 

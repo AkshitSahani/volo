@@ -7,16 +7,14 @@
     <%= link_to "Remove Location", "#" %>
       </li></h5>
       <ul>
-        <% @org_surveys.each do |surv| %>
+        <% loc.surveys.each do |surv| %>
           <li>
-            <% if surv.locations.include?(loc) %>
-              <%= surv.name %> |
-              <% if @surveys.include?(surv) %>
-                <%= link_to "Edit Response", "#" %>,
-                <%= link_to "Delete Survey", "#" %>
-              <% else %>
-                <%= link_to "Take Survey", survey_path(surv) %>
-              <% end %>
+            <%= surv.name %> |
+            <% if @v_surveys.include?(surv) %>
+              <%= link_to "Edit Responses", edit_responses_path(surv) %>,
+              <%= link_to "Delete Responses", delete_responses_path(surv) %>
+            <% else %>
+              <%= link_to "Take Survey", survey_path(surv) %>
             <% end %>
           </li>
         <% end %>

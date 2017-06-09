@@ -1,7 +1,10 @@
 class SurveysController < ApplicationController
-  before_action :load_survey, only: [:show, :edit, :update, :destroy, :show, :preview]
+  before_action :load_survey, only: [:show, :edit, :update, :destroy, :show, :preview, :delete_responses, :edit_responses]
   before_action :load_question_types, only: [:new, :create, :edit]
   before_action :question_set, only: [:show, :preview]
+  before_action :load_respondent, only: [:show, :edit_responses, :delete_responses]
+  before_action :load_organization, only: [:show, :edit_responses, :delete_responses]
+  before_action :load_questions, only: [:edit_responses, :delete_responses]
 
   def index
     @surveys = Survey.all
@@ -14,7 +17,7 @@ class SurveysController < ApplicationController
 
   def create
     @survey = Survey.new(survey_params)
-    @survey.organization_id = session[:organization_id]
+    @survey.organization_id = session[:organization_id] #we should be testing by logging in as an organization
     if @survey.save
       redirect_to preview_path(@survey) #Change this once you decide user flows.
     else
@@ -35,7 +38,11 @@ class SurveysController < ApplicationController
     params["responses"].each do |response|
       Response.create(response_params(response))
     end
-    redirect_to root_path #update this based on who is responding to the survey
+    if session[:volunteer_id]
+      redirect_to view_org_path(id: session[:volunteer_id], org_id: params[:organization_id]) #update this based on who is responding to the survey
+    elsif session[:resident_id]
+      redirect_to resident_path(session[:resident_id])
+    end
   end
 
   def edit
@@ -56,7 +63,58 @@ class SurveysController < ApplicationController
   end
 
   def preview
-    byebug
+  end
+
+  def edit_responses
+    @responses = []
+    @question_set = []
+    @questions.each do |q|
+      answers = []
+      q.answer_sets.each do |a|
+        answers << a
+      end
+      if session[:volunteer_id]
+        response = q.responses.where(volunteer_id: @respondent).take
+      elsif session[:resident_id]
+        response = q.response.where(resident_id: @respondent).take
+      end
+      @question_set << [q, answers, response]
+      @responses << response
+    end
+    @q_counter = 0
+  end
+
+  def update_responses
+    params["responses"].each do |id, edits|
+      response = Response.find(id)
+      response.update(response_params(edits))
+    end
+    if session[:volunteer_id]
+      redirect_to view_org_path(id: session[:volunteer_id], org_id: params[:organization_id]) #update this based on who is responding to the survey
+    elsif session[:resident_id]
+      redirect_to resident_path(session[:resident_id])
+    end
+  end
+
+  def delete_responses
+    @responses = []
+    @questions.each do |q|
+      if session[:volunteer_id]
+        response = q.responses.where(volunteer_id: @respondent).take
+      elsif session[:resident_id]
+        response = q.response.where(resident_id: @respondent).take
+      end
+      @responses << response
+    end
+    @responses.each do |response|
+      response.delete
+    end
+
+    if session[:volunteer_id]
+      redirect_to view_org_path(id: session[:volunteer_id], org_id: @organization.id) #update this based on who is responding to the survey
+    elsif session[:resident_id]
+      redirect_to resident_path(session[:resident_id])
+    end
   end
 
 private
@@ -64,7 +122,6 @@ private
   def question_set
     @question_set = []
     @survey.questions.each do |q|
-      # question = q
       answers = []
       q.answer_sets.each do |a|
         answers << a
@@ -81,8 +138,16 @@ private
     )
   end
 
+  def load_respondent
+    if session[:volunteer_id]
+      @respondent = session[:volunteer_id]
+    elsif session[:resident_id]
+      @respondent = session[:resident_id]
+    end
+  end
+
   def response_params(r_params)
-    r_params.permit(:question_id, :response, :volunteer_id, :resident_id)
+    r_params.permit(:response_id, :question_id, :response, :volunteer_id, :resident_id, :organization_id)
   end
 
   def load_survey
@@ -91,6 +156,14 @@ private
 
   def load_question_types
     @question_types = ['Multiple Choice', 'Drop-Down', 'Open Response']
+  end
+
+  def load_organization
+    @organization = @survey.organization
+  end
+
+  def load_questions
+    @questions = @survey.questions
   end
 
 end

@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   resources :surveys
     get '/surveys/:id/preview', to: 'surveys#preview', as: 'preview'
     post '/surveys/:id/create_responses', to: 'surveys#create_responses', as: 'create_responses'
+    get '/surveys/:id/edit_responses', to: 'surveys#edit_responses', as: 'edit_responses'
+    post '/surveys/:id/update_responses', to: 'surveys#update_responses', as: 'update_responses'
+    get '/surveys/:id/delete_responses', to: 'surveys#delete_responses', as: 'delete_responses'
   resources :residents
   resources :volunteers
     get '/volunteers/:id/organizations/:org_id', to: 'volunteers#view_org', as: 'view_org'

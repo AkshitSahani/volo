@@ -51,13 +51,21 @@ class OrganizationsController < ApplicationController
   end
 
   def assign_locations
+    @organization = Organization.find(@organization)
     @location = Location.new
-    @survey = params[:survey_id]
+    @survey = Survey.find(params[:survey_id])
+    @selected = []
+    @survey.locations.each do |loc|
+      @selected << loc.id
+    end
   end
 
   def assign
     @survey = Survey.find(params[:survey_id])
-    @survey.locations << Location.find(params[:location][:branch_name])
+    @survey.locations.delete_all
+    params[:branch_name].each do |loc|
+      @survey.locations << Location.find(loc) if !loc.empty?
+    end
     redirect_to organization_path(params[:id])
   end
 

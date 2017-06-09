@@ -15,9 +15,9 @@ Survey.delete_all
 Question.delete_all
 AnswerSet.delete_all
 
-50.times do
+10.times do
   User.create!(
-    user_type: ['Resident','Volunteer','Organization'].sample,
+    user_type: ['Volunteer'],
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: Faker::Internet.email,
@@ -26,12 +26,34 @@ AnswerSet.delete_all
   )
 end
 
-organization_counter = 1
+10.times do
+  User.create!(
+    user_type: ['Resident'],
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    email: Faker::Internet.email,
+    password: 'topsecret',
+    password_confirmation: 'topsecret'
+  )
+end
+
+10.times do
+  User.create!(
+    user_type: ['Organization'],
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    email: Faker::Internet.email,
+    password: 'topsecret',
+    password_confirmation: 'topsecret'
+  )
+end
+
+organization_counter = 21
 10.times do
   Organization.create!(
     location: Faker::Address.street_address,
     phone_number: "1234567890",
-    user_id: (User.where(user_type: 'Organization').sample),
+    user_id: organization_counter,
     name: Faker::Company.name
   )
   organization_counter += 1

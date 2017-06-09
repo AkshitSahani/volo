@@ -17,7 +17,7 @@ class SurveysController < ApplicationController
 
   def create
     @survey = Survey.new(survey_params)
-    # @survey.organization_id = session[:organization_id] we should be testing by logging in as an organization
+    @survey.organization_id = session[:organization_id] #we should be testing by logging in as an organization
     if @survey.save
       redirect_to preview_path(@survey) #Change this once you decide user flows.
     else

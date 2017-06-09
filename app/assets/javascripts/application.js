@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require_tree .
 //= require cocoon
-//= require turbolinks
 //= require materialize-sprockets
 
 $(document).ready(function() {

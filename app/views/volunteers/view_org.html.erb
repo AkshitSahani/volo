@@ -12,7 +12,7 @@
             <%= surv.name %> |
             <% if @v_surveys.include?(surv) %>
               <%= link_to "Edit Responses", edit_responses_path(surv) %>,
-              <%= link_to "Delete Responses", "#" %>
+              <%= link_to "Delete Responses", delete_responses_path(surv) %>
             <% else %>
               <%= link_to "Take Survey", survey_path(surv) %>
             <% end %>

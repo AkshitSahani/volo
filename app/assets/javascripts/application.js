@@ -72,6 +72,29 @@ $(document).ready(function() {
         $('select').material_select();
       })
     }
+
+    else if ($(this).attr('name') === 'Organizations'){
+
+      var orgName = $( "select option:selected" ).first().text();
+
+      $.ajax({
+        url:'/residents',
+        method: 'get',
+        data:{
+          org_name: orgName
+        },
+        dataType: 'json'
+      }).done(function(data){
+        var org = $('<span>').html('Which location for this organization do you reside in?').appendTo('.resident-new-form');
+        var sel = $('<select>').attr('id', 'organizations').appendTo('.resident-new-form');
+        for(i = 0; i < data.length; i++){
+          $("select#organizations").append(
+              $("<option></option>").attr("value", data[i].id).text(data[i].branch_name)
+          )
+        }
+        $('select').material_select();
+      })
+    }
   })
 
   $('body').delegate('select', 'change', function(){
@@ -86,5 +109,8 @@ $(document).ready(function() {
   //       scrollTop: $(".nested-fields").offset().top
   //   }, 2000);
   // });
+
+  $('.alert, .notice').fadeOut(3000);
+
 
 });

@@ -13,10 +13,12 @@ class OrganizationsController < ApplicationController
     @organization = Organization.new(
       location: organization_params[:location],
       phone_number: organization_params[:phone_number],
-      user_id: session[:user_id]
+      user_id: session[:user_id],
+      name: "#{User.find(session[:user_id]).first_name} #{User.find(session[:user_id]).last_name}"
     )
 
     if @organization.save
+      @organization.name =
       session[:organization_id] = @organization.id
       redirect_to organization_path(@organization)
     else
@@ -70,7 +72,7 @@ class OrganizationsController < ApplicationController
   end
 
   def nest_locations
-    @location = Location.new
+
   end
 
   def view_locations

@@ -3,7 +3,7 @@
 <%= form_for(@organization, url: organizations_path(@organization)) do |f| %>
 
   <div class="field">
-    <%= f.label :location %><br />
+    <%= f.label :location, 'Head Office Location' %><br />
     <%= f.text_field :location %>
   </div>
 

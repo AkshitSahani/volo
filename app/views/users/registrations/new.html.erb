@@ -6,23 +6,34 @@
   <%= devise_error_messages! %>
 
   <div class="field">
-    <%= f.label :account_type %><br />
+    <%= f.label :account_type, 'Account Type' %><br />
     <%= f.select(:account_type, @account_types, {:prompt => "Select a Type"}, { :class => 'browser-default dropdown' }) %>
   </div>
 
   <div class="field">
-    <%= f.label :first_name %><br />
+    <%= f.label :first_name, 'First Name', id: 'first_name_label' %><br />
     <%= f.text_field :first_name %>
   </div>
 
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
+  <div class="field" id="last_name">
+    <%= f.label :last_name, 'Last Name', id: 'last_name_label' %><br />
+    <%= f.text_field :last_name, id: 'last_name_input' %>
   </div>
 
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <div class="field" id="phonenumber">
+    <%= f.label :phonenumber, "Phone Number" %>
+    <%= f.telephone_field :phonenumber %>
+  </div>
+
+  <div class="field" id="birthdate">
+    <%= f.label :birthdate, "Date Of Birth", id: 'birthdate_label' %><br />
+    <%#= f.date_field :birthdate, {class: "datepicker"}, id: 'birthdate_field' %>
+    <%= f.date_field :birthdate, id: 'birthdate_input' %>
   </div>
 
   <div class="field">
@@ -34,7 +45,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :password_confirmation, 'Password Confirmation' %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 

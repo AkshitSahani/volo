@@ -22,7 +22,9 @@ AnswerSet.delete_all
     last_name: Faker::Name.last_name,
     email: Faker::Internet.email,
     password: 'topsecret',
-    password_confirmation: 'topsecret'
+    password_confirmation: 'topsecret',
+    phonenumber: "1234567890",
+    birthdate: rand(Date.civil(1940, 1, 1)..Date.civil(1990, 12, 31))
   )
 end
 
@@ -33,7 +35,9 @@ end
     last_name: Faker::Name.last_name,
     email: Faker::Internet.email,
     password: 'topsecret',
-    password_confirmation: 'topsecret'
+    password_confirmation: 'topsecret',
+    phonenumber: "1234567890",
+    birthdate: rand(Date.civil(1940, 1, 1)..Date.civil(1990, 12, 31))
   )
 end
 
@@ -44,17 +48,17 @@ end
     last_name: Faker::Name.last_name,
     email: Faker::Internet.email,
     password: 'topsecret',
-    password_confirmation: 'topsecret'
+    password_confirmation: 'topsecret',
+    phonenumber: "1234567890"
   )
 end
 
 organization_counter = 21
 10.times do
   Organization.create!(
-    location: Faker::Address.street_address,
+    address: Faker::Address.street_address,
     phone_number: "1234567890",
     user_id: organization_counter,
-    name: Faker::Company.name
   )
   organization_counter += 1
 end

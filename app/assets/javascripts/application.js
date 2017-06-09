@@ -81,4 +81,10 @@ $(document).ready(function() {
     }
   })
 
+  // $(".add-org-location").click(function() {
+  //   $('html, body').animate({
+  //       scrollTop: $(".nested-fields").offset().top
+  //   }, 2000);
+  // });
+
 });

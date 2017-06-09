@@ -1,5 +1,5 @@
 class OrganizationsController < ApplicationController
-  before_action :load_organization, only: [:show, :edit, :update, :destroy, :view_surveys, :assign_locations, :nest_locations]
+  before_action :load_organization, only: [:show, :edit, :update, :destroy, :view_surveys, :assign_locations, :nest_locations, :view_locations]
 
   def index
     @organizations = Organization.all
@@ -70,6 +70,10 @@ class OrganizationsController < ApplicationController
   end
 
   def nest_locations
+    @location = Location.new
+  end
+
+  def view_locations
     #code
   end
 

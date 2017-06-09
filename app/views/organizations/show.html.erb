@@ -21,6 +21,14 @@
 <%= link_to "Match", new_match_path %>
 </div>
 
-<div class="add-nested-locations">
-<%= link_to 'Add Locations', nest_locations_path %>
+<div class="add-edit-locations">
+  <% if @organization.locations.empty? %>
+    <%= link_to 'Add Locations', nest_locations_path %>
+  <% else %>
+    <%= link_to 'Add/Edit Locations', nest_locations_path %>
+  <% end %>
+</div>
+
+<div class="view-org-locations">
+  <%= link_to 'View Locations', view_locations_path %>
 </div>

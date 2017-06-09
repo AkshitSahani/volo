@@ -73,27 +73,12 @@ $(document).ready(function() {
       })
     }
   })
-  // ajax call for match show if needed. Not needed right now. id attr had to be changed to
-  // value and now all params are being sent properly.
 
-  // $('.match-submit').on('click', function(e){
-  //   e.preventDefault();
-  //   var matchType = $( "select option:selected" )[2]['value'];
-  //   var survey = $( "select option:selected" )[1];
-  //   var surveyId = parseInt($(survey).attr('value'));
-  //   var user = $( "select option:selected" )[3];
-  //   var userId = parseInt($(user).attr('value'));
-  //   $.ajax({
-  //     url:'/matches/1',
-  //     method: 'get',
-  //     data:{
-  //       survey: surveyId,
-  //       match_type: matchType,
-  //       user: userId
-  //     },
-  //     dataType: 'json'
-  //   }).done(function(data){
-  //     console.log(data);
-  //   })
-  // })
+  $('body').delegate('select', 'change', function(){
+    if ($(this).val() === "Open Response") {
+      $(this).parent().siblings('.range-field').remove();
+      $(this).parent().siblings('.add-question-fields').remove();
+    }
+  })
+
 });

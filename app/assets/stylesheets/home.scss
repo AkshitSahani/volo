@@ -35,3 +35,30 @@ footer .container {
 .container-4 {
   margin-bottom: -51px !important;
 }
+
+.profileDash {
+  background-color: $bodyGrey;
+  height: 120px;
+}
+
+.leftDash {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.rightDash {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.spacingDiv80 {
+  background: $bodyGrey;
+  height: 80px;
+}
+
+.spacingDiv120 {
+  background: $bodyGrey;
+  height: 120px;
+}

@@ -23,6 +23,12 @@ class SurveysController < ApplicationController
   end
 
   def show
+    if session[:volunteer_id]
+      @respondent = session[:volunteer_id]
+    elsif session[:resident_id]
+      @respondent = session[:resident_id]
+    end
+    @organization = @survey.organization
     num_questions = @survey.questions.count
     @responses = []
     num_questions.times do
@@ -35,7 +41,11 @@ class SurveysController < ApplicationController
     params["responses"].each do |response|
       Response.create(response_params(response))
     end
-    redirect_to root_path #update this based on who is responding to the survey
+    if session[:volunteer_id]
+      redirect_to view_org_path(id: session[:volunteer_id], org_id: params[:organization_id]) #update this based on who is responding to the survey
+    elsif session[:resident_id]
+      redirect_to resident_path(session[:resident_id])
+    end
   end
 
   def edit
@@ -56,7 +66,46 @@ class SurveysController < ApplicationController
   end
 
   def preview
-    byebug
+  end
+
+  def edit_responses
+    if session[:volunteer_id]
+      @respondent = Volunteer.find(session[:volunteer_id])
+    elsif session[:resident_id]
+      @respondent = Resident.find(session[:resident_id])
+    end
+    @survey = Survey.find(params[:id])
+    @organization = @survey.organization
+    @questions = @survey.questions
+    @responses = []
+    @question_set = []
+    @survey.questions.each do |q|
+      answers = []
+      q.answer_sets.each do |a|
+        answers << a
+      end
+      if session[:volunteer_id]
+        response = q.responses.where(volunteer_id: @respondent.id).take
+      elsif session[:resident_id]
+        response = q.response.where(resident_id: @respondent.id).take
+      end
+      @question_set << [q, answers, response]
+      @responses << response
+    end
+    @q_counter = 0
+  end
+
+  def update_responses
+
+    params["responses"].each do |id, edits|
+      response = Response.find(id)
+      response.update(response_params(edits))
+    end
+    if session[:volunteer_id]
+      redirect_to view_org_path(id: session[:volunteer_id], org_id: params[:organization_id]) #update this based on who is responding to the survey
+    elsif session[:resident_id]
+      redirect_to resident_path(session[:resident_id])
+    end
   end
 
 private
@@ -74,6 +123,18 @@ private
     @question_set
   end
 
+  def question_set_responses
+    @question_set = []
+    @survey.questions.each do |q|
+      answers = []
+      q.answer_sets.each do |a|
+        answers << a
+      end
+      @question_set << [q, answers]
+    end
+    @question_set
+  end
+
   def survey_params
     params.require(:survey).permit(
     :name, :organization_id,
@@ -82,7 +143,7 @@ private
   end
 
   def response_params(r_params)
-    r_params.permit(:question_id, :response, :volunteer_id, :resident_id)
+    r_params.permit(:response_id, :question_id, :response, :volunteer_id, :resident_id, :organization_id)
   end
 
   def load_survey

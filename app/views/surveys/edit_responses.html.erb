@@ -1,13 +1,15 @@
-<%= form_tag create_responses_path do %>
+<h1> Edit Responses </h1>
+
+<%= form_tag update_responses_path do %>
   <% @responses.each do |response| %>
     <% question = @question_set[@q_counter] %>
 
     <%= fields_for 'responses[]', response do |r| %>
       <% if question[0].question_type == "Open Response" %>
         <% if session[:volunteer_id] %>
-          <%= r.hidden_field :volunteer_id, value: @respondent %>
+          <%= r.hidden_field :volunteer_id, value: @respondent.id %>
         <% elsif session[:resident_id] %>
-          <%= r.hidden_field :resident_id, value: @respondent %>
+          <%= r.hidden_field :resident_id, value: @respondent.id %>
         <% end %>
         <div class="input-field">
           <%= r.label :question_id, question[0].question %><br>
@@ -19,9 +21,9 @@
 
       <% elsif question[0].question_type == "Multiple Choice" %>
         <% if session[:volunteer_id] %>
-          <%= r.hidden_field :volunteer_id, value: @respondent %>
+          <%= r.hidden_field :volunteer_id, value: @respondent.id %>
         <% elsif session[:resident_id] %>
-          <%= r.hidden_field :resident_id, value: @respondent %>
+          <%= r.hidden_field :resident_id, value: @respondent.id %>
         <% end %>
         <div class="input-field">
           <%= r.label :question_id, question[0].question %><br>
@@ -34,9 +36,9 @@
 
       <% else %>
         <% if session[:volunteer_id] %>
-          <%= r.hidden_field :volunteer_id, value: @respondent %>
+          <%= r.hidden_field :volunteer_id, value: @respondent.id %>
         <% elsif session[:resident_id] %>
-          <%= r.hidden_field :resident_id, value: @respondent %>
+          <%= r.hidden_field :resident_id, value: @respondent.id %>
         <% end %>
         <div class="input-field">
           <%= r.label :question_id, question[0].question %><br>

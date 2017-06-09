@@ -26,7 +26,6 @@ class VolunteersController < ApplicationController
   end
 
   def show
-    byebug
     volunteer_organizations
   end
 
@@ -51,19 +50,14 @@ class VolunteersController < ApplicationController
     @org = Organization.find(params[:org_id])
     @org_locations = @org.locations
     @v_locations = @volunteer.locations.where(organization_id: @org)
-    @org_surveys = []
-    @org_locations.each do |loc|
-      loc.surveys.each do |surv|
-        @org_surveys << surv
-      end
-    end
+    @org_surveys = @org.surveys
 
     responses = @volunteer.responses
-    @surveys = []
+    @v_surveys = []
     responses.each do |r|
-      @surveys << r.question.survey
+      @v_surveys << r.question.survey
     end
-    @surveys = @surveys.uniq
+    @v_surveys = @v_surveys.uniq
   end
 
   def add_organizations

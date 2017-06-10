@@ -2,6 +2,9 @@
 <h3>This should also show the total number of orgs, locations, and surveys associated with that volunteer. </h3>
 
 <h1>Volunteer Show Page</h1>
+
+<h5><%= link_to "Edit Profile", edit_user_registration_path %></h5>
+
 <%= image_tag User.find(@volunteer.user).avatar %>
 
 <%= link_to "Add Organizations", add_organizations_path %>

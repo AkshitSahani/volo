@@ -1,3 +1,6 @@
+<h3><%= @survey.organization.name %></h3>
+<h4><%= @survey.name %></h4>
+
 <%= form_tag create_responses_path do %>
   <% @responses.each do |response| %>
     <% question = @question_set[@q_counter] %>

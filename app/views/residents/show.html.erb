@@ -1,3 +1,4 @@
+
 <h2> <%= User.find(@resident.user_id).first_name %> <%= User.find(@resident.user_id).last_name %></h2>
 
 <div class="res-avatar">
@@ -23,3 +24,6 @@
   Completed surveys:
   
 </div>
+
+<h3><%= link_to "Edit Profile", edit_user_registration_path %>
+

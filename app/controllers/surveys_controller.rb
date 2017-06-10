@@ -35,9 +35,18 @@ class SurveysController < ApplicationController
   end
 
   def create_responses
-    byebug
     params["responses"].each do |response|
-      Response.create(response_params)
+
+      if response[:response].is_a? Array
+        Response.create(
+          question_id: response_params(response)[:question_id],
+          volunteer_id: response_params(response)[:volunteer_id],
+          resident_id: response_params(response)[:resident_id],
+          response: response_params(response)[:response].reject(&:empty?).join(', ')
+        )
+      else
+        Response.create(response_params(response))
+      end
     end
     if session[:volunteer_id]
       redirect_to view_org_path(id: session[:volunteer_id], org_id: params[:organization_id])
@@ -81,7 +90,11 @@ class SurveysController < ApplicationController
       elsif session[:resident_id]
         response = q.response.where(resident_id: @respondent).take
       end
-      @question_set << [q, answers, response]
+      response_ids = []
+      response.response.split(', ').each do |r|
+        response_ids << AnswerSet.where(question_id: q.id, answer: r).take.answer if AnswerSet.where(question_id: q.id, answer: r).take
+      end
+      @question_set << [q, answers, response_ids]
       @responses << response
     end
     @q_counter = 0
@@ -90,8 +103,15 @@ class SurveysController < ApplicationController
   def update_responses
     params["responses"].each do |id, edits|
       response = Response.find(id)
-      response.update(response_params(edits))
+      if edits[:response].is_a? Array
+        response.update(
+          response: response_params(edits)[:response].reject(&:empty?).join(', ')
+        )
+      else
+        response.update(response_params(edits))
+      end
     end
+
     if session[:volunteer_id]
       redirect_to view_org_path(id: session[:volunteer_id], org_id: params[:organization_id]) #update this based on who is responding to the survey
     elsif session[:resident_id]
@@ -150,7 +170,11 @@ private
   end
 
   def response_params(r_params)
-    r_params.permit(:question_id, :response, :volunteer_id, :resident_id)
+    if r_params[:response].is_a? Array
+      r_params.permit(:response_id, :question_id, {:response => []}, :volunteer_id, :resident_id, :organization_id)
+    else
+      r_params.permit(:response_id, :question_id, :response, :volunteer_id, :resident_id, :organization_id)
+    end
   end
 
   def load_survey

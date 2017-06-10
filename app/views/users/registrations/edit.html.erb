@@ -3,14 +3,53 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :First_name %>
-    <%= f.text_field :first_name %>
-  </div>
+  <% if resource.user_type == "Resident" %>
 
-  <div class="field">
-    <%= f.label :Last_name %>
-    <%= f.text_field :last_name %>
+    <div class="field" id="organization">
+      <%= label_tag :organization, "Organization", id: 'organization_label' %>
+      <%= select_tag :organization, options_from_collection_for_select(@organization, "id", "name") %>
+    </div>
+
+    <div class="field" id="locations">
+      <%= label_tag :location_id, "Location" %>
+      <%= select_tag :location_id, options_from_collection_for_select(@locations, "id", "branch_name") %>
+    </div>
+
+  <% end %>
+
+  <% if resource.user_type != "Organization" %>
+    <div class="field">
+      <%= f.label :First_name %>
+      <%= f.text_field :first_name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :Last_name %>
+      <%= f.text_field :last_name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :birthdate, "Date Of Birth", id: 'birthdate_label' %><br />
+      <%= f.date_field :birthdate, {class: "datepicker"}  %>
+    </div>
+
+  <% else %>
+
+    <div class="field">
+      <%= f.label :first_name, "Name Of Organization" %>
+      <%= f.text_field :first_name %>
+    </div>
+
+    <div class="field">
+      <%= label_tag :address, "Head Office's Address" %>
+      <%= text_field_tag :address, @organization.address %>
+    </div>
+
+  <% end %>
+
+  <div class="field" id="phonenumber">
+    <%= f.label :phonenumber, "Phone Number" %>
+    <%= f.telephone_field :phonenumber %>
   </div>
 
   <div class="field">

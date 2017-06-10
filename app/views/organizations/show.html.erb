@@ -12,6 +12,8 @@
 
 </div>
 
+<%= link_to "Edit Profile", edit_user_registration_path %>
+
 <%= image_tag User.find(@organization.user_id).avatar.url(:medium) %>
 
 <div class="formContainer" style="position:relative">

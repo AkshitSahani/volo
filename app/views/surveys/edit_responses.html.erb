@@ -31,7 +31,7 @@
         </div>
         <div class="input-field">
           <br><br>
-          <%= r.collection_select(:response, question[1], :id, :answer, {prompt: "Please select", :selected => question[2]}, {:multiple => true})%>
+          <%= r.collection_select(:response, question[1], :answer, :answer, {:selected => question[2]}, {:multiple => true})%>
         </div>
 
       <% else %>

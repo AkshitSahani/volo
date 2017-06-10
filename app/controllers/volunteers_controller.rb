@@ -26,7 +26,6 @@ class VolunteersController < ApplicationController
   end
 
   def show
-    # byebug
     volunteer_organizations
   end
 

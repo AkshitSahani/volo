@@ -46,7 +46,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     build_resource(sign_up_params)
-    byebug
     resource.save
     if resource.user_type == "Volunteer"
       user = Volunteer.create(user_id: resource.id)

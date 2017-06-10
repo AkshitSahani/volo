@@ -1,24 +1,46 @@
-<h1 class="org-name">
-  <% if User.find(@organization.user_id).first_name %>
+
+<div class="profileDash">
+
+  <h1 class="org-name">
+    <% if User.find(@organization.user_id).first_name %>
     <%= User.find(@organization.user_id).first_name %>
-  <% end %>
-  <% if User.find(@organization.user_id).last_name %>
+    <% end %>
+    <% if User.find(@organization.user_id).last_name %>
     <%= User.find(@organization.user_id).last_name %>
-  <% end %>
-</h1>
+    <% end %>
+  </h1>
+
+</div>
 
 <%= image_tag User.find(@organization.user_id).avatar.url(:medium) %>
 
-<div class="create-survey">
-<%= link_to "Create Survey", new_survey_path %>
+<div class="formContainer" style="position:relative">
+
+
+<div class="leftDash">
+
+  <div class="create-survey">
+    <%= link_to "Create Survey", new_survey_path %>
+  </div>
 </div>
 
-<div class="view-survey">
-<%= link_to "View Surveys", view_surveys_path %>
+<div class="rightDash">
+
+  <div class="view-survey">
+    <%= link_to "View Surveys", view_surveys_path %>
+  </div>
+
+  <div class="create-match">
+    <%= link_to "Match", new_match_path %>
+  </div>
+
+  <div class="add-nested-locations">
+    <%= link_to 'Add Locations', nest_locations_path %>
+  </div>
+
 </div>
 
-<div class="create-match">
-<%= link_to "Match", new_match_path %>
+
 </div>
 
 <div class="add-edit-locations">
@@ -31,4 +53,7 @@
 
 <div class="view-org-locations">
   <%= link_to 'View Locations', view_locations_path %>
+
+<div class=spacingDiv80>
+
 </div>

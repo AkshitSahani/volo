@@ -9,14 +9,14 @@
 @font-face {
     font-family: "Roboto";
     src: local(Roboto Light),
-        url("#{$roboto-font-path}Roboto-Light.woff2") format("woff2"),
-        url("#{$roboto-font-path}Roboto-Light.woff") format("woff");
+        asset_url("#{$roboto-font-path}Roboto-Light.woff2") format("woff2"),
+        asset_url("#{$roboto-font-path}Roboto-Light.woff") format("woff");
     font-weight: 300;
 }
 
 @font-face {
     font-family: "Roboto";
-    src: local(Roboto Regular), 
+    src: local(Roboto Regular),
         url("#{$roboto-font-path}Roboto-Regular.woff2") format("woff2"),
         url("#{$roboto-font-path}Roboto-Regular.woff") format("woff");
     font-weight: 400;

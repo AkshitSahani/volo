@@ -35,8 +35,9 @@ class SurveysController < ApplicationController
   end
 
   def create_responses
+    byebug
     params["responses"].each do |response|
-      Response.create(response_params(response))
+      Response.create(response_params)
     end
     if session[:volunteer_id]
       redirect_to view_org_path(id: session[:volunteer_id], org_id: params[:organization_id])
@@ -149,7 +150,7 @@ private
   end
 
   def response_params(r_params)
-    r_params.permit(:response_id, :question_id, :response, :volunteer_id, :resident_id, :organization_id)
+    r_params.permit(:question_id, :response, :volunteer_id, :resident_id)
   end
 
   def load_survey

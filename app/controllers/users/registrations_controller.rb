@@ -56,6 +56,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
     session[:user_id] = resource.id
     session[:user_type] = resource.user_type
+    if session[:user_type] == "Volunteer"
+      session[:volunteer_id] = Volunteer.where(user_id: session[:user_id])[0].id
+    elsif session[:user_type] == "Resident"
+      session[:resident_id] = Resident.where(user_id: session[:user_id])[0].id
+    elsif session[:user_type] == "Organization"
+      session[:organization_id] = Organization.where(user_id: session[:user_id])[0].id
+    end
     yield resource if block_given?
     if resource.persisted?
       if resource.active_for_authentication?

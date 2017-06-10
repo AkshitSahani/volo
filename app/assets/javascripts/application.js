@@ -30,6 +30,7 @@ $(document).ready(function() {
         },
         dataType: 'json'
       }).done(function(data){
+        console.log(data);
         $('select#survey').empty();
 
         for(i = 0; i < data.length; i++){

@@ -17,7 +17,7 @@ AnswerSet.delete_all
 
 10.times do
   User.create!(
-    user_type: ['Volunteer'],
+    user_type: 'Volunteer',
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: Faker::Internet.email,
@@ -30,7 +30,7 @@ end
 
 10.times do
   User.create!(
-    user_type: ['Resident'],
+    user_type: 'Resident',
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: Faker::Internet.email,
@@ -43,9 +43,8 @@ end
 
 10.times do
   User.create!(
-    user_type: ['Organization'],
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
+    user_type: 'Organization',
+    first_name: Faker::Company.name,
     email: Faker::Internet.email,
     password: 'topsecret',
     password_confirmation: 'topsecret',

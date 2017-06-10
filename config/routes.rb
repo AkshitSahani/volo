@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions'}
+  devise_scope :user do
+     get '/register_type', to: 'users/registrations#register_type', as: 'register_type'
+     get '/new_volunteer', to: 'users/registrations#new_volunteer', as: 'new_volunteer'
+     get '/new_organization', to: 'users/registrations#new_organization', as: 'new_organization'
+     get '/new_resident', to: 'users/registrations#new_resident', as: 'new_resident'
+     get '/get_locations', to: 'users/registrations#get_locations', as: 'get_locations'
+  end
   root to: "home#index"
   resources :organizations
     get '/organizations/:id/surveys', to: 'organizations#view_surveys', as: 'view_surveys'

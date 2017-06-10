@@ -6,11 +6,6 @@
   <%= devise_error_messages! %>
 
   <div class="field">
-    <%= f.label :account_type, 'Account Type' %><br />
-    <%= f.select(:account_type, @account_types, {:prompt => "Select a Type"}, { :class => 'browser-default dropdown' }) %>
-  </div>
-
-  <div class="field">
     <%= f.label :first_name, 'First Name', id: 'first_name_label' %><br />
     <%= f.text_field :first_name %>
   </div>
@@ -30,9 +25,9 @@
     <%= f.telephone_field :phonenumber %>
   </div>
 
-  <div class="field" id="birthdate">
+  <div class="field">
     <%= f.label :birthdate, "Date Of Birth", id: 'birthdate_label' %><br />
-    <%= f.date_field :birthdate, {class: "datepicker", id: 'birthdate_field'}  %>
+    <%= f.date_field :birthdate, {class: "datepicker"}  %>
   </div>
 
   <div class="field">
@@ -51,6 +46,10 @@
   <div class="field">
     <%= f.label :avatar, "Upload an avatar" %>
     <%= f.file_field :avatar %>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field :user_type, value: "Volunteer" %>
   </div>
 
   <div class="actions">

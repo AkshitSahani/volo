@@ -1,28 +1,62 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
-  before_action :load_account_types, only: [:new, :create]
+  before_action :load_user_types, only: [:new, :create]
+
+
+  def register_type
+  end
+
+  def new_volunteer
+    build_resource({})
+    yield resource if block_given?
+    respond_with resource
+  end
+
+  def new_resident
+    @organizations = User.where(user_type: "Organization")
+    @locations = []
+    build_resource({})
+    yield resource if block_given?
+    respond_with resource
+  end
+
+  def new_organization
+    build_resource({})
+    yield resource if block_given?
+    respond_with resource
+  end
+
+  def get_locations
+    if request.xhr? && params['organization']
+      @user = User.where(first_name: params['organization'])[0]
+      @organization = Organization.where(user_id: @user.id)[0]
+      @locations = @organization.locations
+      respond_to do |format|
+        format.json { render json: @locations }
+      end
+    end
+  end
 
   # GET /resource/sign_up
-  def new
-
-    super
-  end
+  # def new
+  #   super
+  # end
 
   # POST /resource
   def create
+    byebug
     build_resource(sign_up_params)
     resource.save
-    if resource.account_type == "Volunteer"
+    if resource.user_type == "Volunteer"
       user = Volunteer.create(user_id: resource.id)
-    elsif resource.account_type == "Resident"
-      user = Resident.create(user_id: resource.id)
-      #this needs Sahani's code to be added in the registration JS for auto generating org, locations
+    elsif resource.user_type == "Resident"
+      user = Resident.create(user_id: resource.id, location_id: res_params(params)[:location_id].to_i)
     else
-      user = Organization.create(address: params['organization']['address'], user_id: resource.id)
+      user = Organization.create(address: org_params(params)[:address], user_id: resource.id)
     end
     session[:user_id] = resource.id
-    session[:user_type] = resource.account_type
+    session[:user_type] = resource.user_type
     yield resource if block_given?
     if resource.persisted?
       if resource.active_for_authentication?
@@ -68,32 +102,41 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
 
   def after_sign_up_path_for(user)
-    if params[:user][:account_type] == "Organization"
+    if params[:user][:user_type] == "Organization"
       organization_url(user)
-    elsif params[:user][:account_type] == "Resident"
+    elsif params[:user][:user_type] == "Resident"
       resident_url(user)
-    elsif params[:user][:account_type] == "Volunteer"
+    elsif params[:user][:user_type] == "Volunteer"
       volunteer_url(user)
     end
   end
 
   def after_inactive_sign_up_path_for(user)
-    if params[:user][:account_type] == "Organization"
+    if params[:user][:user_type] == "Organization"
       organization_url(user)
-    elsif params[:user][:account_type] == "Resident"
+    elsif params[:user][:user_type] == "Resident"
       resident_url(user)
-    elsif params[:user][:account_type] == "Volunteer"
+    elsif params[:user][:user_type] == "Volunteer"
       volunteer_url(user)
     end
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-   devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :account_type, :avatar, :phonenumber, :birthdate])
+   devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :user_type, :avatar, :phonenumber, :birthdate])
   end
 
- def load_account_types
-   @account_types = ['Organization', 'Volunteer', 'Resident']
+  def org_params(params)
+    params.permit(:address)
+  end
+
+  def res_params(params)
+    params.permit(:location_id)
+  end
+
+
+ def load_user_types
+   @user_types = ['Organization', 'Volunteer', 'Resident']
  end
 
   # If you have extra params to permit, append them to the sanitizer.

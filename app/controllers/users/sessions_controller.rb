@@ -31,7 +31,7 @@ class Users::SessionsController < Devise::SessionsController
 
   private
   def after_sign_in_path_for(resource)
-    type = resource.account_type
+    type = resource.user_type
     if type == "Volunteer"
       volunteer = Volunteer.where(user_id: resource.id).take
       volunteer_path(volunteer)

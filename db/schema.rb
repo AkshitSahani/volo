@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170610025504) do
+ActiveRecord::Schema.define(version: 20170610171956) do
 
   create_table "answer_sets", force: :cascade do |t|
     t.datetime "created_at",  null: false
@@ -112,7 +112,6 @@ ActiveRecord::Schema.define(version: 20170610025504) do
     t.string   "user_type"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "account_type"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"

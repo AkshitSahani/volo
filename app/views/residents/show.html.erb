@@ -20,10 +20,21 @@
   <% end %>
 </div>
 
-<div class="comp-survs">
-  Completed surveys:
-  
+<% if !@completed_surveys.empty? %>
+  <div class="comp-survs">
+    Completed surveys:<br>
+    <% @completed_surveys.each do |surv| %>
+      <div class="res-surv">
+        <%= Survey.find(surv).name %><br><%= link_to 'Edit responses', edit_responses_path(surv) %> <%= link_to 'Delete completed survey', delete_responses_path(surv) %>
+      </div><br><br>
+    <% end %>
+  </div>
+<% end %>
+
+<div class="edit-res-profile">
+<%= link_to "Edit Profile", edit_user_registration_path %>
 </div>
 
-<h3><%= link_to "Edit Profile", edit_user_registration_path %>
-
+<!-- <div class="delete-res-profile"> -->
+<%# link_to "Delete Profile", delete_user_registration_path %> <!--Need to get path for deleting account-->
+<!-- </div> -->

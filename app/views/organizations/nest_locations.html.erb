@@ -3,9 +3,11 @@
     <%= f.fields_for :locations do |location| %>
       <%= render 'location_fields', f: location %>
     <% end %>
-    <%= link_to_add_association "Add location", f, :locations %>
-  </div>
+    <div class="add-org-location">
+      <%= link_to_add_association "Add location", f, :locations %>
+    </div>
+  </div><br>
   <div class="action">
-    <%= f.submit "Submit Survey" %>
+    <%= f.submit "Save Locations" %>
   </div>
 <% end %>

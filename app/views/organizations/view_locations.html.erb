@@ -1,0 +1,15 @@
+<div>
+  <h2><%= User.find(@organization.user_id).first_name %> <%= User.find(@organization.user_id).last_name %> Locations</h2>
+</div>
+
+<% @organization.locations.each do |loc| %>
+  <%= link_to location_path(loc) do %>
+  <div class="location details">
+    Branch name: <%= loc.branch_name %><br>
+    Adress: <%= loc.address %><br>
+    Phone Number: <%= loc.phone_number %><br>
+    Volunteer Coordinator Name: <%= loc.volunteer_coordinator_name %><br>
+    Volunteer Coordinator Phone Number: <%= loc.volunteer_coordinator_phone %>
+  </div><br><br>
+  <% end %>
+<% end %>

@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require_tree .
 //= require cocoon
-//= require turbolinks
 //= require materialize-sprockets
 
 $(document).ready(function() {
@@ -73,28 +72,63 @@ $(document).ready(function() {
         $('select').material_select();
       })
     }
-  })
-  // ajax call for match show if needed. Not needed right now. id attr had to be changed to
-  // value and now all params are being sent properly.
 
-  // $('.match-submit').on('click', function(e){
-  //   e.preventDefault();
-  //   var matchType = $( "select option:selected" )[2]['value'];
-  //   var survey = $( "select option:selected" )[1];
-  //   var surveyId = parseInt($(survey).attr('value'));
-  //   var user = $( "select option:selected" )[3];
-  //   var userId = parseInt($(user).attr('value'));
-  //   $.ajax({
-  //     url:'/matches/1',
-  //     method: 'get',
-  //     data:{
-  //       survey: surveyId,
-  //       match_type: matchType,
-  //       user: userId
-  //     },
-  //     dataType: 'json'
-  //   }).done(function(data){
-  //     console.log(data);
-  //   })
-  // })
+
+  })
+
+  $('body').delegate('select', 'change', function(){
+    if ($(this).val() === "Open Response") {
+      $(this).parent().siblings('.range-field').remove();
+      $(this).parent().siblings('.add-question-fields').remove();
+    }
+
+    else if ($(this).attr('name') === 'Organizations'){
+      var orgName = $( "select option:selected" ).first().text();
+
+      $.ajax({
+        url:'/residents',
+        method: 'get',
+        data:{
+          org_name: orgName
+        },
+        dataType: 'json'
+      }).done(function(data){
+        if($('.loc-reside')){
+          $('.loc-reside').remove();
+        }
+
+        if($('.removal')){
+          $('.removal').remove();
+        }
+        $('select').material_select();
+        var org = $('<span>').addClass('loc-reside').html('Which location for this organization do you reside in?').appendTo('.resident-new-form');
+        var span = $('<span>').addClass('removal');
+        var sel = (span.append($('<select>').attr('name', 'locations').attr('id', 'locations'))).appendTo('.resident-new-form');
+        for(i = 0; i < data.length; i++){
+          $("select#locations").append(
+              $("<option></option>").attr("value", data[i].id).text(data[i].branch_name)
+          )
+        }
+        $('select').material_select();
+      })
+    }
+
+    else if ($(this).attr('name') === 'locations'){
+      var locId = parseInt($( "select option:selected" ).last().attr('value'));
+      var input = $("<input>")
+               .attr("type", "hidden")
+               .attr("name", "location_id").val(locId);
+      $('.resident-new-form > form').append($(input));
+    }
+  })
+
+  // $(".add-org-location").click(function() {
+  //   $('html, body').animate({
+  //       scrollTop: $(".nested-fields").offset().top
+  //   }, 2000);
+  // });
+
+  $('.alert, .notice').fadeOut(3000);
+
+
 });

@@ -6,6 +6,9 @@ Rails.application.routes.draw do
      get '/new_organization', to: 'users/registrations#new_organization', as: 'new_organization'
      get '/new_resident', to: 'users/registrations#new_resident', as: 'new_resident'
      get '/get_locations', to: 'users/registrations#get_locations', as: 'get_locations'
+     get '/edit_volunteer', to: 'users/registrations#edit_volunteer', as: 'edit_volunteer'
+     get '/edit_resident', to: 'users/registrations#edit_resident', as: 'edit_resident'
+     get '/edit_organization', to: 'users/registrations#edit_organization', as: 'edit_organization'
   end
   root to: "home#index"
   resources :organizations

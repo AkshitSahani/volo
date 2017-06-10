@@ -39,9 +39,11 @@ class SurveysController < ApplicationController
       Response.create(response_params(response))
     end
     if session[:volunteer_id]
-      redirect_to view_org_path(id: session[:volunteer_id], org_id: params[:organization_id]) #update this based on who is responding to the survey
+      redirect_to view_org_path(id: session[:volunteer_id], org_id: params[:organization_id])
     elsif session[:resident_id]
       redirect_to resident_path(session[:resident_id])
+    else
+      redirect_to root_url #not sure where this should go atm
     end
   end
 

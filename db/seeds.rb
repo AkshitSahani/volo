@@ -17,44 +17,48 @@ AnswerSet.delete_all
 
 10.times do
   User.create!(
-    user_type: ['Volunteer'],
+    user_type: 'Volunteer',
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: Faker::Internet.email,
     password: 'topsecret',
-    password_confirmation: 'topsecret'
+    password_confirmation: 'topsecret',
+    phonenumber: "1234567890",
+    birthdate: rand(Date.civil(1940, 1, 1)..Date.civil(1990, 12, 31))
   )
 end
 
 10.times do
   User.create!(
-    user_type: ['Resident'],
+    user_type: 'Resident',
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: Faker::Internet.email,
     password: 'topsecret',
-    password_confirmation: 'topsecret'
+    password_confirmation: 'topsecret',
+    phonenumber: "1234567890",
+    birthdate: rand(Date.civil(1940, 1, 1)..Date.civil(1990, 12, 31))
   )
 end
 
 10.times do
   User.create!(
-    user_type: ['Organization'],
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
+    user_type: 'Organization',
+    first_name: Faker::Company.name,
     email: Faker::Internet.email,
     password: 'topsecret',
-    password_confirmation: 'topsecret'
+    password_confirmation: 'topsecret',
+    phonenumber: "1234567890"
   )
 end
 
 organization_counter = 21
 10.times do
   Organization.create!(
-    location: Faker::Address.street_address,
+    address: Faker::Address.street_address,
     phone_number: "1234567890",
     user_id: organization_counter,
-    name: Faker::Company.name
+    name: User.find(organization_counter).first_name
   )
   organization_counter += 1
 end
@@ -122,9 +126,7 @@ end
 volunteer_counter = 1
 10.times do
   v = Volunteer.create!(
-    birthdate: rand(Date.civil(1940, 1, 1)..Date.civil(1990, 12, 31)),
-    user_id: volunteer_counter,
-    phone_number: "1234567890"
+    user_id: volunteer_counter
   )
   location_counter = rand(1..5)
   2.times do
@@ -137,9 +139,7 @@ end
 resident_counter = 11
 10.times do
   Resident.create!(
-    birthdate: rand(Date.civil(1940, 1, 1)..Date.civil(1990, 12, 31)),
     user_id: resident_counter,
-    phone_number: "1234567890",
     location_id: Location.find(rand(1..10)).id
   )
   resident_counter += 1

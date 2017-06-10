@@ -5,13 +5,6 @@ class ResidentsController < ApplicationController
 
   def index
     @residents = Resident.all
-    if request.xhr?
-      @locations = Organization.where(name: params['org_name'])[0].locations
-      respond_to do |format|
-        format.html
-        format.json { render json: @locations }
-      end
-    end
   end
 
   def new

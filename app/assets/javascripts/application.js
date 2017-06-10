@@ -82,46 +82,7 @@ $(document).ready(function() {
       $(this).parent().siblings('.range-field').remove();
       $(this).parent().siblings('.add-question-fields').remove();
     }
-
-    else if ($(this).attr('name') === 'Organizations'){
-      var orgName = $( "select option:selected" ).first().text();
-
-      $.ajax({
-        url:'/residents',
-        method: 'get',
-        data:{
-          org_name: orgName
-        },
-        dataType: 'json'
-      }).done(function(data){
-        if($('.loc-reside')){
-          $('.loc-reside').remove();
-        }
-
-        if($('.removal')){
-          $('.removal').remove();
-        }
-        $('select').material_select();
-        var org = $('<span>').addClass('loc-reside').html('Which location for this organization do you reside in?').appendTo('.resident-new-form');
-        var span = $('<span>').addClass('removal');
-        var sel = (span.append($('<select>').attr('name', 'locations').attr('id', 'locations'))).appendTo('.resident-new-form');
-        for(i = 0; i < data.length; i++){
-          $("select#locations").append(
-              $("<option></option>").attr("value", data[i].id).text(data[i].branch_name)
-          )
-        }
-        $('select').material_select();
-      })
-    }
-
-    else if ($(this).attr('name') === 'locations'){
-      var locId = parseInt($( "select option:selected" ).last().attr('value'));
-      var input = $("<input>")
-               .attr("type", "hidden")
-               .attr("name", "location_id").val(locId);
-      $('.resident-new-form > form').append($(input));
-    }
-  })
+  
 
   // $(".add-org-location").click(function() {
   //   $('html, body').animate({

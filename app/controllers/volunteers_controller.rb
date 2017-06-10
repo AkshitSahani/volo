@@ -59,11 +59,11 @@ class VolunteersController < ApplicationController
     end
 
     responses = @volunteer.responses
-    @surveys = []
+    @v_surveys = []
     responses.each do |r|
-      @surveys << r.question.survey
+      @v_surveys << r.question.survey
     end
-    @surveys = @surveys.uniq
+    @v_surveys = @v_surveys.uniq
   end
 
   def add_organizations

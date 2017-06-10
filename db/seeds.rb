@@ -58,6 +58,7 @@ organization_counter = 21
     address: Faker::Address.street_address,
     phone_number: "1234567890",
     user_id: organization_counter,
+    name: User.find(organization_counter).first_name
   )
   organization_counter += 1
 end

@@ -45,15 +45,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    byebug
     build_resource(sign_up_params)
+    byebug
     resource.save
     if resource.user_type == "Volunteer"
       user = Volunteer.create(user_id: resource.id)
     elsif resource.user_type == "Resident"
       user = Resident.create(user_id: resource.id, location_id: res_params(params)[:location_id].to_i)
     else
-      user = Organization.create(address: org_params(params)[:address], user_id: resource.id)
+      user = Organization.create(name: sign_up_params[:first_name], address: org_params(params)[:address], user_id: resource.id)
     end
     session[:user_id] = resource.id
     session[:user_type] = resource.user_type

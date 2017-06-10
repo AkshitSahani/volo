@@ -10,7 +10,7 @@
         <% loc.surveys.each do |surv| %>
           <li>
             <%= surv.name %> |
-            <% if @v_surveys.include?(surv) %>
+            <% if @v_surveys && @v_surveys.include?(surv) %>
               <%= link_to "Edit Responses", edit_responses_path(surv) %>,
               <%= link_to "Delete Responses", delete_responses_path(surv) %>
             <% else %>

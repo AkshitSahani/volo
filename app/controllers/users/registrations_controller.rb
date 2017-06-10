@@ -13,6 +13,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     build_resource(sign_up_params)
     resource.save
+    if resource.account_type == "Volunteer"
+      user = Volunteer.create(user_id: resource.id)
+    elsif resource.account_type == "Resident"
+      user = Resident.create(user_id: resource.id)
+      #this needs Sahani's code to be added in the registration JS for auto generating org, locations
+    else
+      user = Organization.create(address: params['organization']['address'], user_id: resource.id)
+    end
     session[:user_id] = resource.id
     session[:user_type] = resource.account_type
     yield resource if block_given?
@@ -20,11 +28,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
       if resource.active_for_authentication?
         set_flash_message! :notice, :signed_up
         sign_up(resource_name, resource)
-        respond_with resource, location: after_sign_up_path_for(resource)
+        respond_with resource, location: after_sign_up_path_for(user)
       else
         set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
         expire_data_after_sign_in!
-        respond_with resource, location: after_inactive_sign_up_path_for(resource)
+        respond_with resource, location: after_inactive_sign_up_path_for(user)
       end
     else
       clean_up_passwords resource
@@ -61,27 +69,27 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def after_sign_up_path_for(user)
     if params[:user][:account_type] == "Organization"
-      new_organization_url
+      organization_url(user)
     elsif params[:user][:account_type] == "Resident"
-      new_resident_url
+      resident_url(user)
     elsif params[:user][:account_type] == "Volunteer"
-      new_volunteer_url
+      volunteer_url(user)
     end
   end
 
   def after_inactive_sign_up_path_for(user)
     if params[:user][:account_type] == "Organization"
-      new_organization_url
+      organization_url(user)
     elsif params[:user][:account_type] == "Resident"
-      new_resident_url
+      resident_url(user)
     elsif params[:user][:account_type] == "Volunteer"
-      new_volunteer_url
+      volunteer_url(user)
     end
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-   devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :account_type, :avatar])
+   devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :account_type, :avatar, :phonenumber, :birthdate])
   end
 
  def load_account_types

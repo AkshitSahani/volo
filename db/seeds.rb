@@ -126,9 +126,7 @@ end
 volunteer_counter = 1
 10.times do
   v = Volunteer.create!(
-    birthdate: rand(Date.civil(1940, 1, 1)..Date.civil(1990, 12, 31)),
-    user_id: volunteer_counter,
-    phone_number: "1234567890"
+    user_id: volunteer_counter
   )
   location_counter = rand(1..5)
   2.times do
@@ -141,9 +139,7 @@ end
 resident_counter = 11
 10.times do
   Resident.create!(
-    birthdate: rand(Date.civil(1940, 1, 1)..Date.civil(1990, 12, 31)),
     user_id: resident_counter,
-    phone_number: "1234567890",
     location_id: Location.find(rand(1..10)).id
   )
   resident_counter += 1

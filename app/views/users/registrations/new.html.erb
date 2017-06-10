@@ -32,8 +32,7 @@
 
   <div class="field" id="birthdate">
     <%= f.label :birthdate, "Date Of Birth", id: 'birthdate_label' %><br />
-    <%#= f.date_field :birthdate, {class: "datepicker"}, id: 'birthdate_field' %>
-    <%= f.date_field :birthdate, id: 'birthdate_input' %>
+    <%= f.date_field :birthdate, {class: "datepicker", id: 'birthdate_field'}  %>
   </div>
 
   <div class="field">

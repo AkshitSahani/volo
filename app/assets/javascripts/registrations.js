@@ -30,7 +30,7 @@ $(document).ready(function() {
         $('#phonenumber').after(birthdateDiv);
       }
     }
-    else if ($( "select option:selected" ).first().text() == "Volunteer" || "Resident") {
+    else if ($( "select option:selected" ).first().text() == "Volunteer") {
       console.log("D");
       if ($('#first_name_label').html() != 'First Name') {
         console.log("E");
@@ -48,5 +48,23 @@ $(document).ready(function() {
         $('#phonenumber').after(birthdateDiv);
       }
     }
+    else if ($( "select option:selected" ).first().text() == "Resident") {
+      console.log("E");
+      if ($('#first_name_label').html() != 'First Name') {
+        console.log("E");
+        $('#first_name_label').html('First Name');
+        var lastNameDiv = $('<div>').addClass('field').attr('id','last_name');
+        var inputLastName = $('<input></input>').attr('type','text').attr('name','user[last_name]').attr('id', 'last_name_input');
+        var labelLastName = $('<label></label>').attr('id', 'last_name_label').attr('for', 'user_last_name').html('Last Name');
+        lastNameDiv = $(lastNameDiv).append(labelLastName).append(inputLastName);
+        $('#first_name_label').parent().after(lastNameDiv);
+        $('#org_address').remove();
+        var birthdateDiv = $('<div>').addClass('field').attr('id','birthdate');
+        var inputBirthdate = $('<input></input>').attr('type','date').attr('name','user[birthdate]').attr('id', 'birthdate_input');
+        var labelBirthdate = $('<label></label>').attr('id', 'birthdate_label').attr('for', 'user_birthdate').html('Date Of Birth');
+        birthdateDiv = $(birthdateDiv).append(labelBirthdate).append(inputBirthdate);
+        $('#phonenumber').after(birthdateDiv);
+      }
+    };
   });
 })

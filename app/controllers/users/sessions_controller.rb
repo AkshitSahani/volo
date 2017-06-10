@@ -31,15 +31,15 @@ class Users::SessionsController < Devise::SessionsController
 
   private
   def after_sign_in_path_for(resource)
-    type = resource.user_type
+    type = resource.account_type
     if type == "Volunteer"
-      volunteer = Volunteer.find(resource.id)
+      volunteer = Volunteer.where(user_id: resource.id).take
       volunteer_path(volunteer)
     elsif type == "Resident"
-      resident = Resident.find(resource.id)
+      resident = Resident.where(user_id: resource.id).take
       resident_path(resident)
     elsif type == "Organization"
-      organization = Organization.find(resource.id)
+      organization = Organization.where(user_id: resource.id).take
       organization_path(organization)
     end
   end

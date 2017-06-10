@@ -36,6 +36,7 @@ class SurveysController < ApplicationController
 
   def create_responses
     params["responses"].each do |response|
+
       if response[:response].is_a? Array
         Response.create(
           question_id: response_params(response)[:question_id],

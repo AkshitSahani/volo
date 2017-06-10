@@ -1,3 +1,29 @@
-<h1> Resident Show Page </h1>
+
+<h2> <%= User.find(@resident.user_id).first_name %> <%= User.find(@resident.user_id).last_name %></h2>
+
+<div class="res-avatar">
+  <%= image_tag User.find(@resident.user_id).avatar.url(:medium) %>
+</div>
+
+<div class="res-org-name">
+  Organization: <%= Organization.find(@resident.location.organization_id).name %>
+</div>
+
+<div class="res-loc-name">
+  Location: <%= @resident.location.branch_name %>
+</div>
+
+<div class="surveys-available">
+  Available surveys:<br>
+  <% Organization.find(@resident.location.organization_id).surveys.each do |surv| %>
+    <%= link_to "#{surv.name}", survey_path(surv) %><br>
+  <% end %>
+</div>
+
+<div class="comp-survs">
+  Completed surveys:
+  
+</div>
 
 <h3><%= link_to "Edit Profile", edit_user_registration_path %>
+

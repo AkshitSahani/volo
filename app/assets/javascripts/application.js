@@ -73,16 +73,14 @@ $(document).ready(function() {
         $('select').material_select();
       })
     }
-
-
   })
 
-  $('body').delegate('select', 'change', function(){
+  $('body').delegate('select', 'change', function() {
     if ($(this).val() === "Open Response") {
       $(this).parent().siblings('.range-field').remove();
       $(this).parent().siblings('.add-question-fields').remove();
     }
-  
+
 
   // $(".add-org-location").click(function() {
   //   $('html, body').animate({
@@ -90,7 +88,11 @@ $(document).ready(function() {
   //   }, 2000);
   // });
 
+
+
+
+  });
+
   $('.alert, .notice').fadeOut(3000);
 
-
-});
+})

@@ -20,8 +20,8 @@ class ResidentsController < ApplicationController
 
   def create
     @resident = Resident.new(
-      birthdate: resident_params[:birthdate].to_date,
-      location_id: resident_params[:location_id],
+      birthdate: params[:birthdate].to_date,
+      location_id: params[:location_id],
       user_id: session[:user_id]
       )
     if @resident.save

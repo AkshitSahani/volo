@@ -73,8 +73,16 @@ $(document).ready(function() {
       })
     }
 
-    else if ($(this).attr('name') === 'Organizations'){
 
+  })
+
+  $('body').delegate('select', 'change', function(){
+    if ($(this).val() === "Open Response") {
+      $(this).parent().siblings('.range-field').remove();
+      $(this).parent().siblings('.add-question-fields').remove();
+    }
+
+    else if ($(this).attr('name') === 'Organizations'){
       var orgName = $( "select option:selected" ).first().text();
 
       $.ajax({
@@ -85,22 +93,32 @@ $(document).ready(function() {
         },
         dataType: 'json'
       }).done(function(data){
-        var org = $('<span>').html('Which location for this organization do you reside in?').appendTo('.resident-new-form');
-        var sel = $('<select>').attr('id', 'organizations').appendTo('.resident-new-form');
+        if($('.loc-reside')){
+          $('.loc-reside').remove();
+        }
+
+        if($('.removal')){
+          $('.removal').remove();
+        }
+        $('select').material_select();
+        var org = $('<span>').addClass('loc-reside').html('Which location for this organization do you reside in?').appendTo('.resident-new-form');
+        var span = $('<span>').addClass('removal');
+        var sel = (span.append($('<select>').attr('name', 'locations').attr('id', 'locations'))).appendTo('.resident-new-form');
         for(i = 0; i < data.length; i++){
-          $("select#organizations").append(
+          $("select#locations").append(
               $("<option></option>").attr("value", data[i].id).text(data[i].branch_name)
           )
         }
         $('select').material_select();
       })
     }
-  })
 
-  $('body').delegate('select', 'change', function(){
-    if ($(this).val() === "Open Response") {
-      $(this).parent().siblings('.range-field').remove();
-      $(this).parent().siblings('.add-question-fields').remove();
+    else if ($(this).attr('name') === 'locations'){
+      var locId = parseInt($( "select option:selected" ).last().attr('value'));
+      var input = $("<input>")
+               .attr("type", "hidden")
+               .attr("name", "location_id").val(locId);
+      $('.resident-new-form > form').append($(input));
     }
   })
 

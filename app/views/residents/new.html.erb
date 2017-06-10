@@ -8,15 +8,10 @@
     </div>
 
     <div class="field">
-      <%= label_tag :organization_id, "What organization are you a resident with?"%><br />
+      <%= label_tag :organization_id, "What organization are you a resident with?"%><br/>
       <%= select_tag 'Organizations', options_from_collection_for_select(@organizations, "id", "name"), prompt: "Select an Organization" %>
     </div>
-
-    <!-- <div class="field"> -->
-      <%# label_tag :location_id, "Which location for this organization do you reside in?" %>
-      <%# select_tag %>
-    <!-- </div> -->
-  </div>
+</div>
 
     <div class="actions">
       <%= submit_tag "Sign up" %>

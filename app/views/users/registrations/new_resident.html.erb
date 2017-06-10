@@ -1,0 +1,72 @@
+<div class="formContainer">
+
+  <h2>Sign up</h2>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field" id="organization">
+    <%= label_tag :organization, "Organization", id: 'organization_label' %>
+    <%= select_tag :organization, options_from_collection_for_select(@organizations, "id", "first_name"), {:prompt => "" } %>
+  </div>
+
+  <div class="field" id="locations">
+    <%= label_tag :location_id, "Location" %>
+    <%= select_tag :location_id, options_from_collection_for_select(@locations, "id", "branch_name"), {:prompt => "Select An Organization"} %>
+  </div>
+
+  <div class="field">
+    <%= f.label :first_name, 'First Name', id: 'first_name_label' %><br />
+    <%= f.text_field :first_name %>
+  </div>
+
+  <div class="field" id="last_name">
+    <%= f.label :last_name, 'Last Name', id: 'last_name_label' %><br />
+    <%= f.text_field :last_name, id: 'last_name_input' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <div class="field" id="phonenumber">
+    <%= f.label :phonenumber, "Phone Number" %>
+    <%= f.telephone_field :phonenumber %>
+  </div>
+
+  <div class="field">
+    <%= f.label :birthdate, "Date Of Birth", id: 'birthdate_label' %><br />
+    <%= f.date_field :birthdate, {class: "datepicker"}  %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation, 'Password Confirmation' %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :avatar, "Upload an avatar" %>
+    <%= f.file_field :avatar %>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field :user_type, value: "Resident" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+
+</div>

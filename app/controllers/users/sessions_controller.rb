@@ -15,11 +15,11 @@ class Users::SessionsController < Devise::SessionsController
     session[:user_id] = resource.id
     session[:user_type] = resource.user_type
     if session[:user_type] == "Volunteer"
-      session[:volunteer_id] == Volunteer.where(user_id: session[:user_id])[0].id
+      session[:volunteer_id] = Volunteer.where(user_id: session[:user_id])[0].id
     elsif session[:user_type] == "Resident"
-      session[:resident_id] == Resident.where(user_id: session[:user_id])[0].id
+      session[:resident_id] = Resident.where(user_id: session[:user_id])[0].id
     elsif session[:user_type] == "Organization"
-      session[:organization_id] == Organization.where(user_id: session[:user_id])[0].id
+      session[:organization_id] = Organization.where(user_id: session[:user_id])[0].id
     end
     respond_with resource, location: after_sign_in_path_for(resource)
   end
@@ -33,13 +33,13 @@ class Users::SessionsController < Devise::SessionsController
   def after_sign_in_path_for(resource)
     type = resource.user_type
     if type == "Volunteer"
-      volunteer = Volunteer.find(resource.id)
+      volunteer = Volunteer.where(user_id: resource.id).take
       volunteer_path(volunteer)
     elsif type == "Resident"
-      resident = Resident.find(resource.id)
+      resident = Resident.where(user_id: resource.id).take
       resident_path(resident)
     elsif type == "Organization"
-      organization = Organization.find(resource.id)
+      organization = Organization.where(user_id: resource.id).take
       organization_path(organization)
     end
   end

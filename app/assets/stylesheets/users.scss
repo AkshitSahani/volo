@@ -1,0 +1,15 @@
+.sign-up-type {
+  height: 40vh;
+  padding-top: 6rem;
+  text-align: center;
+  transition-duration: 0.1s;
+}
+
+.sign-up-type h5:hover {
+  color: $voloYellow;
+  transition-duration: 0.1s;
+}
+
+.sign-up-type-title {
+  color: grey;
+}

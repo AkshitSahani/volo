@@ -71,10 +71,18 @@ $(document).ready(function() {
       })
     }
   })
+
   // $(".add-org-location").click(function() {
   //   $('html, body').animate({
   //       scrollTop: $(".nested-fields").offset().top
   //   }, 2000);
   // });
   $('.alert, .notice').fadeOut(3000);
+
+  $(".add-question-fields").click(function() {
+    // $('html, body').animate({
+    //     scrollTop: $("form .nested-fields:nth-last-child(3)").offset().top
+    // }, 2000);
+    // $('body').scrollTo('form .nested-fields:nth-last-child(3)');
+  });
 })

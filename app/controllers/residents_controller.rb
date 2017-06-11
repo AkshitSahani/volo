@@ -27,7 +27,11 @@ class ResidentsController < ApplicationController
   end
 
   def show
-    #code
+    @completed_surveys = []
+    @resident.responses.each do |resp|
+      @completed_surveys << resp.question.survey.id
+    end
+    @completed_surveys = @completed_surveys.uniq
   end
 
   def edit

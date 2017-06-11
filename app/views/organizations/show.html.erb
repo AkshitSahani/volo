@@ -1,6 +1,7 @@
 
 <div class="profileDash">
 
+  <%= image_tag User.find(@organization.user_id).avatar.url(:medium), :class=>"profilePhoto" %>
   <h1 class="org-name">
     <% if User.find(@organization.user_id).first_name %>
     <%= User.find(@organization.user_id).first_name %>
@@ -9,12 +10,11 @@
     <%= User.find(@organization.user_id).last_name %>
     <% end %>
   </h1>
+  <%= link_to "Edit Profile", edit_user_registration_path, :class=>"profileDashEdit" %>
 
 </div>
 
-<%= link_to "Edit Profile", edit_user_registration_path %>
 
-<%= image_tag User.find(@organization.user_id).avatar.url(:medium) %>
 
 <div class="formContainer" style="position:relative">
 
@@ -34,10 +34,6 @@
 
   <div class="create-match">
     <%= link_to "Match", new_match_path %>
-  </div>
-
-  <div class="add-nested-locations">
-    <%= link_to 'Add Locations', nest_locations_path %>
   </div>
 
 </div>

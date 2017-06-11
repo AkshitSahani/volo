@@ -16,7 +16,7 @@
 <div class="surveys-available">
   Available surveys:<br>
   <% Organization.find(@resident.location.organization_id).surveys.each do |surv| %>
-    <%= link_to "#{surv.name}", survey_path(surv) %><br>
+    <%= link_to "#{surv.name}", survey_path(surv) if !@completed_surveys.include?(surv.id)%><br>
   <% end %>
 </div>
 

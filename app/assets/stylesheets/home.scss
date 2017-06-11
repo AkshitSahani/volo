@@ -78,9 +78,11 @@ a.profileDashEdit {
 }
 
 .leftDash {
-  position: absolute;
-  left: 0;
-  top: 0;
+  height: 400px;
+  display: inline-block;
+  width: 35%;
+  border-right: 2px $bodyGrey solid;
+  position: relative;
 }
 
 .rightDash {
@@ -97,4 +99,10 @@ a.profileDashEdit {
 .spacingDiv120 {
   background: $bodyGrey;
   height: 120px;
+}
+
+.organizationSurveys {
+  min-height: 400px;
+  margin-left: auto;
+  margin-right: auto;
 }

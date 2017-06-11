@@ -31,7 +31,7 @@ input[type="submit"]:hover {
   transition-duration: .2s;
 }
 
-.create-survey a {
+.create-survey a, .create-match a {
   padding: 10px 25px;
   background: $voloGreen;
   border: 2px solid $voloGreen;
@@ -41,8 +41,26 @@ input[type="submit"]:hover {
   transition-duration: .2s;
 }
 
-.create-survey a:hover {
+.create-survey a:hover, .create-match a:hover {
   background: transparent;
   color: $voloGreen;
   transition-duration: .2s;
+}
+
+.create-match a {
+  position: absolute;
+  right: 15px;
+  top: 85px;
+  padding: 10px 40px;
+  border-radius: 50px;
+}
+
+.create-survey a {
+  position: absolute;
+  top: 80px;
+}
+
+.create-survey {
+  width: 50%;
+  margin: 0 auto;
 }

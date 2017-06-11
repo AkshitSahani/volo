@@ -72,6 +72,7 @@ class SurveysController < ApplicationController
 
   def destroy
     @survey.destroy
+    redirect_to organization_path(Organization.where(user_id: session[:user_id])[0])
   end
 
   def preview

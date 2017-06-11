@@ -26,7 +26,7 @@ class Match < ApplicationRecord
           if par.responses.where(question_id: q.id).first.response.split(", ").count > 1
             par_answers = par.responses.where(question_id: q.id).first.response.split(", ")
           else
-            par_answers = par.responses.where(question_id: q.id).first.response
+            par_answers = [par.responses.where(question_id: q.id).first.response]
           end
 
           if !(subject.responses.where(question_id: q.id).empty?)
@@ -47,7 +47,7 @@ class Match < ApplicationRecord
               i+=1
             end
           end
-          byebug
+          # byebug
           scores << [par, q, match_score, match_potential]
         elsif q.question_type == "Drop-Down"
           if (!(par.responses.where(question_id: q.id).empty?)) && (!(subject.responses.where(question_id: q.id).empty?))
@@ -76,7 +76,7 @@ class Match < ApplicationRecord
         end
       end
     end
-
+    # byebug
     par_score = {}
     par_hash.keys.each do |key|
       par_points = 0

@@ -27,6 +27,7 @@ class LocationsController < ApplicationController
         @responses.each do |resp|
           @participants << resp.volunteer.user
         end
+        @participants = @participants.uniq
 
       elsif params['match_type'] == 'Resident -> Volunteer'
         residents = Resident.where(location_id: @location.id)
@@ -42,7 +43,7 @@ class LocationsController < ApplicationController
         @responses.each do |resp|
           @participants << resp.resident.user
         end
-
+        @participants = @participants.uniq
       end
 
 

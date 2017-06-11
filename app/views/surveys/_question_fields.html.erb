@@ -1,10 +1,10 @@
 <div class="nested-fields">
   <div class="field">
-    <%= f.label :question_type, "What type of question would you like to ask?" %>
-    <%= f.select(:question_type, @question_types, {:prompt => "Select A Question Type"}, {:class => 'browser-default dropdown'})  %>
+    <%= f.label :question_type, "What type of content would you like to add?" %>
+    <%= f.select(:question_type, @question_types, {:prompt => "Select A Content Type"}, {:class => 'browser-default dropdown question_type_dropdown'})  %>
   </div>
 
-  <div class="field">
+  <div class="field question_description">
     <%= f.label :question, "What question would you like to ask?" %>
     <%= f.text_field :question %>
   </div>
@@ -22,6 +22,6 @@
   </div>
 
   <div style="text-align:right">
-    <%= link_to_remove_association "Remove Question", f %>
+    <%= link_to_remove_association "Remove Content", f %>
   </div>
 </div>

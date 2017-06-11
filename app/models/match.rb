@@ -34,8 +34,8 @@ class Match < ApplicationRecord
               subject_answers = subject.responses.where(question_id: q.id).first.response.split(", ")
               match_potential = subject_answers.count
             else
-              subject_answers = subject.responses.where(question_id: q.id).first.response
-              match_potential = subject_answers.count
+              subject_answers = [subject.responses.where(question_id: q.id).first.response]
+              match_potential = 1
             end
           end
 
@@ -47,8 +47,8 @@ class Match < ApplicationRecord
               i+=1
             end
           end
-
-            scores << [par, q, match_score, match_potential]
+          byebug
+          scores << [par, q, match_score, match_potential]
         elsif q.question_type == "Drop-Down"
           if (!(par.responses.where(question_id: q.id).empty?)) && (!(subject.responses.where(question_id: q.id).empty?))
             par_answers = par.responses.where(question_id: q.id)[0].response

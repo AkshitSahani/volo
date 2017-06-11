@@ -35,7 +35,7 @@
           <%= r.collection_select(:response, question[1], :answer, :answer, {prompt: "Please select"}, {:multiple => true} )%>
         </div>
 
-      <% else %>
+      <% elsif question[0].question_type == "Drop-Down" %>
         <% if session[:volunteer_id] %>
           <%= r.hidden_field :volunteer_id, value: @respondent %>
         <% elsif session[:resident_id] %>
@@ -49,6 +49,10 @@
           <br><br>
           <%= r.collection_select :response, question[1], :id, :answer %>
         </div>
+      <% else %>
+      <div class="input-field">
+        <%= r.label :question_id, question[0].question %><br>
+      </div><br><br>
       <% end %>
     <% end %>
     <% @q_counter += 1 %>

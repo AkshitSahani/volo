@@ -4,14 +4,24 @@
 
 html {
   background: $bodyGrey;
+  height: 100%;
 }
 
 body {
   margin-top: 54px;
+  min-height: 100%;
+  position: relative;
 }
 
 footer .container {
   background: $footerGrey;
+}
+
+.page-footer {
+  position: absolute;
+  bottom: -205px;
+  left: 0;
+  right: 0;
 }
 
 .formContainer {
@@ -38,7 +48,33 @@ footer .container {
 
 .profileDash {
   background-color: $bodyGrey;
+  min-height: 200px;
+  position: relative;
+}
+
+.profilePhoto {
   height: 120px;
+  width: 120px;
+  border-radius: 500px;
+  position: absolute;
+  left: 0;
+  top: 40px;
+}
+
+h1.org-name {
+    font-size: 35px;
+    position: absolute;
+    top: 50px;
+    left: 165px;
+    margin-top: 0;
+    color: $voloGrey;
+}
+
+a.profileDashEdit {
+    position: absolute;
+    top: 105px;
+    left: 165px;
+    color: $voloGreen;
 }
 
 .leftDash {

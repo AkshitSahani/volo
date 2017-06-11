@@ -17,6 +17,7 @@
  @import "inputRules";
  @import 'materialize';
  @import 'home';
+ @import "users";
 
 // @import "materialize";
 // @import "https://fonts.googleapis.com/icon?family=Material+Icons";
@@ -47,7 +48,7 @@
 }
 
 .head {
-  background-image: url("talk.jpg");
+  background-image: url("talk2.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
   height: 40rem;

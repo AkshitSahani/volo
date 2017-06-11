@@ -33,17 +33,16 @@ input[type="submit"]:hover {
 
 .create-survey a {
   padding: 10px 25px;
-  background: transparent;
+  background: $voloGreen;
   border: 2px solid $voloGreen;
-  color: $voloGreen;
-  column-rule: white;
   border-radius: 20px;
+  color: white;
   font-weight: 600;
   transition-duration: .2s;
 }
 
 .create-survey a:hover {
-  background: $voloGreen;
-  color: white;
+  background: transparent;
+  color: $voloGreen;
   transition-duration: .2s;
 }

@@ -183,7 +183,7 @@ private
   end
 
   def load_question_types
-    @question_types = ['Multiple Choice', 'Drop-Down', 'Open Response', 'Display Text']
+    @question_types = ['Multiple Choice Question', 'Drop-Down Question', 'Open Response Question', 'Display Text']
   end
 
   def load_organization

@@ -22,7 +22,7 @@ class Match < ApplicationRecord
     scores = []
     surv.questions.each do |q|
       participants.each do |par|
-        if q.question_type == "Multiple Choice"
+        if q.question_type == "Multiple Choice Question"
           if par.responses.where(question_id: q.id).first.response.split(", ").count > 1
             par_answers = par.responses.where(question_id: q.id).first.response.split(", ")
           else
@@ -49,7 +49,7 @@ class Match < ApplicationRecord
           end
           # byebug
           scores << [par, q, match_score, match_potential]
-        elsif q.question_type == "Drop-Down"
+        elsif q.question_type == "Drop-Down Question"
           if (!(par.responses.where(question_id: q.id).empty?)) && (!(subject.responses.where(question_id: q.id).empty?))
             par_answers = par.responses.where(question_id: q.id)[0].response
             subject_answers = subject.responses.where(question_id: q.id)[0].response

@@ -6,7 +6,7 @@
     <% question = @question_set[@q_counter] %>
 
     <%= fields_for 'responses[]', response do |r| %>
-      <% if question[0].question_type == "Open Response" %>
+      <% if question[0].question_type == "Open Response Question" %>
         <% if session[:volunteer_id] %>
           <%= r.hidden_field :volunteer_id, value: @respondent %>
         <% elsif session[:resident_id] %>
@@ -20,7 +20,7 @@
           <%= r.text_field :response %>
         </div>
 
-      <% elsif question[0].question_type == "Multiple Choice" %>
+      <% elsif question[0].question_type == "Multiple Choice Question" %>
         <% if session[:volunteer_id] %>
           <%= r.hidden_field :volunteer_id, value: @respondent %>
         <% elsif session[:resident_id] %>
@@ -35,7 +35,7 @@
           <%= r.collection_select(:response, question[1], :answer, :answer, {prompt: "Please select"}, {:multiple => true} )%>
         </div>
 
-      <% elsif question[0].question_type == "Drop-Down" %>
+      <% elsif question[0].question_type == "Drop-Down Question" %>
         <% if session[:volunteer_id] %>
           <%= r.hidden_field :volunteer_id, value: @respondent %>
         <% elsif session[:resident_id] %>

@@ -15,18 +15,17 @@ $(document).ready(function() {
   $('select').material_select();
   console.log('i am running');
   $('body').delegate('select.question_type_dropdown', 'change', function() {
-    console.log('i am recognizing the change');
-    if ($(this).val() === "Multiple Choice") {
+    if ($(this).val() === "Multiple Choice Question") {
         $(this).parent().siblings('.field.question_description').children().first().text('Respondents can choose multiple answers to this question.')
         $(this).parent().siblings('.range-field').show();
         $(this).parent().siblings('.add-question-fields').show();
     }
-    else if ($(this).val() === "Open Response") {
+    else if ($(this).val() === "Open Response Question") {
       $(this).parent().siblings('.field.question_description').children().first().text('Respondents can enter a text response to this question. This question will not be ranked in matches.')
       $(this).parent().siblings('.range-field').hide();
       $(this).parent().siblings('.add-question-fields').hide();
     }
-    else if ($(this).val() === "Drop-Down") {
+    else if ($(this).val() === "Drop-Down Question") {
         $(this).parent().siblings('.field.question_description').children().first().text('Respondents can choose one answer to this question.')
         $(this).parent().siblings('.range-field').show();
         $(this).parent().siblings('.add-question-fields').show();

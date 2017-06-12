@@ -49,8 +49,6 @@ $(document).ready(function() {
       var matchType = $( "select option:selected" )[2]['value']
       var survey = $( "select option:selected" )[1]
       var surveyId = $(survey).attr('value');
-      // console.log(matchType);
-      // console.log(surveyId);
       $.ajax({
         url: '/locations',
         method: "get",
@@ -61,9 +59,8 @@ $(document).ready(function() {
         },
         dataType: 'json'
       }).done(function(data){
-        // console.log(data);
+        console.log(data);
         $('select#user').empty();
-
         for(i = 0; i < data.length; i++){
           var name = data[i].first_name + ' ' + data[i].last_name
           $("select#user").append(
@@ -75,24 +72,17 @@ $(document).ready(function() {
     }
   })
 
-  $('body').delegate('select', 'change', function() {
-    if ($(this).val() === "Open Response") {
-      $(this).parent().siblings('.range-field').remove();
-      $(this).parent().siblings('.add-question-fields').remove();
-    }
-
-
   // $(".add-org-location").click(function() {
   //   $('html, body').animate({
   //       scrollTop: $(".nested-fields").offset().top
   //   }, 2000);
   // });
-
-
-
-
-  });
-
   $('.alert, .notice').fadeOut(3000);
 
+  $(".add-question-fields").click(function() {
+    // $('html, body').animate({
+    //     scrollTop: $("form .nested-fields:nth-last-child(3)").offset().top
+    // }, 2000);
+    // $('body').scrollTo('form .nested-fields:nth-last-child(3)');
+  });
 })

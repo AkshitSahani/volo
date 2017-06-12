@@ -3,11 +3,9 @@ class LocationsController < ApplicationController
 
   def index
     @locations = Location.all
-
     if request.xhr? && params['branch_name']
       @location = Location.where(branch_name: params['branch_name'])[0]
-      # @surveys = @location.surveys #actual code
-      @surveys = Survey.all #also to test. Should actually be like 9.
+      @surveys = @location.surveys
       respond_to do |format|
         format.html
         format.json { render json: @surveys }
@@ -15,38 +13,48 @@ class LocationsController < ApplicationController
     elsif request.xhr? && params['match_type']
       @location = Location.where(branch_name: params['branch'])[0]
       @survey = Survey.find(params['survey_id'])
-      if params['match_type'] == 'Resident -> Volunteer'
-        @participant = Volunteer.all
-        @participants = []
-        @participant.each do |par|
-          @participants << User.find(par.user_id)
-        end
-        @participants #all of this is to test since most of the below queries give empty arrays.
-
-        #actual code
+      if params['match_type'] == 'Volunteer -> Resident'
+        # @participant = Volunteer.all
         # @participants = []
-        # a = @location.volunteers
-        # b = @survey.responses.where.not(volunteer_id: nil)
-        #
-        # b.each do |vol|
-        #   @participants << vol if a.include?(vol)
+        # @participant.each do |par|
+        #   @participants << User.find(par.user_id)
         # end
-        #
-        # @participants.map { |par| User.find(par.user_id) } #chose to use users so that we can display names
+        # @participants #all of this is to test since most of the below queries give empty arrays.
 
-      elsif params['match_type'] == 'Volunteer -> Resident'
-        # @participants = Resident.all.each do |res| User.find(res.user_id) end
-        a = Resident.where(location_id: @location.id)
-        b = @survey.responses.where.not(resident_id: nil)
-
+        # actual code
         @participants = []
+        @responses = []
 
-        b.each do |res|
-          @participants << res if a.include?(res)
+        volunteers = @location.volunteers
+        responses = @survey.responses.where.not(volunteer_id: nil)
+
+        responses.each do |resp|
+          @responses << resp if volunteers.include?(Volunteer.find(resp.volunteer_id))
         end
 
-        @participants.map { |par| User.find(par.user_id) }
+        @responses.each do |resp|
+          @participants << resp.volunteer.user
+        end
+
+      elsif params['match_type'] == 'Resident -> Volunteer'
+        # @participants = Resident.all.each do |res| User.find(res.user_id) end
+        residents = Resident.where(location_id: @location.id)
+        responses = @survey.responses.where.not(resident_id: nil)
+
+        @participants = []
+        @responses = []
+
+        responses.each do |resp|
+          @responses << resp if residents.include?(Resident.find(resp.resident_id))
+        end
+
+        @responses.each do |resp|
+          @participants << resp.resident.user
+        end
+
       end
+
+
       respond_to do |format|
         format.html
         format.json { render json: @participants }

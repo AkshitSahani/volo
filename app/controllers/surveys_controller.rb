@@ -88,7 +88,7 @@ class SurveysController < ApplicationController
       if session[:volunteer_id]
         response = q.responses.where(volunteer_id: @respondent).take
       elsif session[:resident_id]
-        response = q.response.where(resident_id: @respondent).take
+        response = q.responses.where(resident_id: @respondent).take
       end
       response_ids = []
       response.response.split(', ').each do |r|
@@ -125,7 +125,7 @@ class SurveysController < ApplicationController
       if session[:volunteer_id]
         response = q.responses.where(volunteer_id: @respondent).take
       elsif session[:resident_id]
-        response = q.response.where(resident_id: @respondent).take
+        response = q.responses.where(resident_id: @respondent).take
       end
       @responses << response
     end
@@ -182,7 +182,7 @@ private
   end
 
   def load_question_types
-    @question_types = ['Multiple Choice', 'Drop-Down', 'Open Response']
+    @question_types = ['Multiple Choice', 'Drop-Down', 'Open Response', 'Display Text']
   end
 
   def load_organization

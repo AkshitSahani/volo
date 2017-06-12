@@ -8,6 +8,23 @@ input[type="other"] {
   transition-duration: .2s;
 }
 
+.register-button {
+ padding: 10px 25px;
+ background: white;
+ border: 2px solid white;
+ border-radius: 20px;
+ color: $voloGreen;
+ font-weight: 600;
+ transition-duration: .2s;
+}
+
+.register-button:hover {
+  background: $voloGreen;
+  border: 2px solid $voloGreen;
+  color: white;
+  transition-duration: .2s;
+}
+
 //opposite
 input[type="submit"] {
   padding: 10px 25px;

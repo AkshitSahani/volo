@@ -91,7 +91,6 @@ class Match < ApplicationRecord
         end
       end
     end
-    # byebug
     par_score = {}
     par_hash.keys.each do |key|
       par_points = 0

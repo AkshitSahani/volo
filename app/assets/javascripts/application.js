@@ -98,7 +98,7 @@ $(document).ready(function() {
   //       scrollTop: $(".nested-fields").offset().top
   //   }, 2000);
   // });
-  $('.alert, .notice').fadeOut(3000);
+  $('.alert, .notice').fadeOut(4000);
 
   $(".add-question-fields").click(function() {
     // $('html, body').animate({

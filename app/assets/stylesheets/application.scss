@@ -192,3 +192,76 @@ $roboto-font-path: "roboto/" !default;
 .list-of-actions {
   text-align: center;
 }
+
+// match page CSS starts
+
+.match-filters {
+  display: inline;
+  width: 30%;
+  float: left;
+}
+
+.results {
+  display: inline;
+  width: 68%;
+  float: right;
+  position: relative;
+}
+
+.match-avatar img{
+  width: 20%;
+  height: 20%;
+  display: inline;
+  border-radius: 5rem;
+}
+
+.ranking {
+  position: relative;
+  border: 1px solid grey;
+  padding: 5%;
+}
+
+.match-user-name {
+  position: absolute;
+  font-weight: bold;
+  font-size: 1.5rem;
+  top: 0%;
+  left: 22%;
+}
+
+.match-availability {
+  position: absolute;
+  top: 40%;
+  left: 25%;
+}
+
+.match-score-container {
+  position: absolute;
+  // top: 10%;
+  left: 75%;
+}
+
+.match-score {
+  border: 1px solid yellow;
+  background-color: yellow;
+  padding: 5px;
+}
+
+.match-location {
+  position: absolute;
+  top: 50%;
+  left: 25%;
+}
+
+.results-count {
+  position: absolute;
+  top: 12%;
+  right: 0%;
+}
+
+.match-results {
+  // border-bottom: 1px solid grey;
+  // border-left: 1px solid grey;
+  margin-bottom: 0;
+  padding: 2%;
+}

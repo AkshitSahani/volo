@@ -94,7 +94,7 @@ survey_counter = 1
   Question.create!(
     question: open_question_set.sample,
     survey_id: survey_counter,
-    question_type: "Open Response",
+    question_type: "Open Response Question",
     ranking: 20
   )
   survey_counter += 1
@@ -105,7 +105,7 @@ survey_counter = 1
   Question.create!(
     question: "What languages do you speak?",
     survey_id: survey_counter,
-    question_type: "Multiple Choice",
+    question_type: "Multiple Choice Question",
     ranking: rand(1..100)
   )
   survey_counter += 1
@@ -116,7 +116,7 @@ survey_counter = 1
   Question.create!(
     question: "How old are you?",
     survey_id: survey_counter,
-    question_type: "Drop-Down",
+    question_type: "Drop-Down Question",
     ranking: rand(1..100)
   )
 survey_counter += 1
@@ -191,19 +191,19 @@ volunteers.each do |v|
     end
   end
   questions.each do |q|
-    if q.question_type == "Open Response"
+    if q.question_type == "Open Response Question"
       Response.create!(
         question_id: q.id,
         volunteer_id: v.id,
         response: open_response_set.sample
       )
-    elsif q.question_type == "Multiple Choice"
+    elsif q.question_type == "Multiple Choice Question"
       Response.create!(
         question_id: q.id,
         volunteer_id: v.id,
         response: "#{q.answer_sets.to_a.shuffle!.pop.answer}, #{q.answer_sets.to_a.shuffle!.pop.answer}"
       )
-    elsif q.question_type == "Drop-Down"
+    elsif q.question_type == "Drop-Down Question"
       Response.create!(
         question_id: q.id,
         volunteer_id: v.id,
@@ -225,19 +225,19 @@ residents.each do |r|
     end
   end
   questions.each do |q|
-    if q.question_type == "Open Response"
+    if q.question_type == "Open Response Question"
       Response.create!(
         question_id: q.id,
         resident_id: r.id,
         response: "N/A"
       )
-    elsif q.question_type == "Multiple Choice"
+    elsif q.question_type == "Multiple Choice Question"
       Response.create!(
         question_id: q.id,
         resident_id: r.id,
         response: "#{q.answer_sets.to_a.shuffle!.pop.answer}, #{q.answer_sets.to_a.shuffle!.pop.answer}"
       )
-    elsif q.question_type == "Drop-Down"
+    elsif q.question_type == "Drop-Down Question"
       Response.create!(
         question_id: q.id,
         resident_id: r.id,

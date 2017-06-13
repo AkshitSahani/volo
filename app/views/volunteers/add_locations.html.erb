@@ -1,13 +1,13 @@
 <%= form_for(@new_location, url: associate_locations_path) do |f| %>
 
   <div class="input-field">
-    <%= f.label :organization, @organization.name %> <br><br>
-    <%= f.hidden_field :organization, value: @organization.id %>
+    <%= f.label :organization_id, "Name of Organization" %><br><br>
+    <%= f.collection_select(:organization_id, @uniq_organizations, :id, :name) %>
   </div>
 
   <div class="input-field">
     <%= f.label :branch_name, "Location" %><br><br>
-    <%= f.collection_select(:branch_name, @locations, :id, :branch_name) %>
+    <%= f.collection_select(:branch_name, Match.all, :id, :branch_name, { :prompt => "Select an organization" } , {:multiple => true}) %>
   </div>
   <div class="action">
     <%= f.submit "Add Location" %>

@@ -1,8 +1,12 @@
-<ol>
-  <% @surveys.each do |survey| %>
-    <li> <%= link_to survey.name, preview_path(survey) %> </li>
-      <ul>
-        <li> <%= link_to "Assign Locations", assign_locations_path(id: params[:id], survey_id: survey.id) %> </li>
-      </ul>
-  <% end %>
-</ol>
+<% if @surveys.empty? %>
+  <h3>There are no surveys to display at the moment. Create some!</h3>
+<% else %>
+  <ol>
+    <% @surveys.each do |survey| %>
+      <li> <%= link_to survey.name, preview_path(survey) %> <%= link_to 'Delete Survey', survey_path(survey), data: {:confirm => 'Are you sure?'}, :method => :delete %></li>
+        <ul>
+          <li> <%= link_to "Assign Locations", assign_locations_path(id: params[:id], survey_id: survey.id) %> </li>
+        </ul>
+    <% end %>
+  </ol>
+<% end %>

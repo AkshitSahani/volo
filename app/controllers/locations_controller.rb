@@ -14,14 +14,6 @@ class LocationsController < ApplicationController
       @location = Location.where(branch_name: params['branch'])[0]
       @survey = Survey.find(params['survey_id'])
       if params['match_type'] == 'Volunteer -> Resident'
-        # @participant = Volunteer.all
-        # @participants = []
-        # @participant.each do |par|
-        #   @participants << User.find(par.user_id)
-        # end
-        # @participants #all of this is to test since most of the below queries give empty arrays.
-
-        # actual code
         @participants = []
         @responses = []
 
@@ -35,9 +27,9 @@ class LocationsController < ApplicationController
         @responses.each do |resp|
           @participants << resp.volunteer.user
         end
+        @participants = @participants.uniq
 
       elsif params['match_type'] == 'Resident -> Volunteer'
-        # @participants = Resident.all.each do |res| User.find(res.user_id) end
         residents = Resident.where(location_id: @location.id)
         responses = @survey.responses.where.not(resident_id: nil)
 
@@ -51,7 +43,7 @@ class LocationsController < ApplicationController
         @responses.each do |resp|
           @participants << resp.resident.user
         end
-
+        @participants = @participants.uniq
       end
 
 

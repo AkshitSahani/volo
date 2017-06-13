@@ -2,6 +2,8 @@ $(document).ready(function() {
 
   if ( window.location.pathname.search('matches' ) === 1) {
     var survey = $('.match-filters').attr('survey-id');
+    var matchType = $('.match-filters').attr('match-type');
+    var userId = $('.match-filters').attr('user-id');
     var filters = [];
     $('input').change(function() {
       if ( $(this).is(':checked') ) {
@@ -14,17 +16,34 @@ $(document).ready(function() {
         console.log('response=' + response);
         filters.push([questionId, responseId, response])
         console.log(filters);
-        // make an ajax request to match controller to update the list of selected filters and provide back json with all relevant matches
+        console.log(survey);
         $.ajax({
           url: "/matches",
           method: "get",
           data:{
-            filter: filters
+            filter: filters,
+            survey: survey,
+            match_type: matchType,
+            user: userId
           },
           dataType: "json"
         }).done(function(data){
           console.log("AJAX successful");
           console.log(data);
+          $('.match-participants').empty();
+          $('.match-participants').append(data);
+          var participants = data['filteredParticipants'];
+          for (i = 0; i < participants.length; i++ ) {
+              var firstName = participants[i]["first_name"];
+              var lastName =  participants[i]["last_name"];
+              var phoneNumber = participants[i]["phonenumber"];
+              var birthDate = participants[i]["birthday"];
+              var email = participants[i]["email"];
+              var userId = participants[i]["id"];
+              var userType = participants[i]["user_type"];
+              var resultElement = $('<span>').html(firstName + ' ' + lastName);
+              $('.match-participants').append(resultElement);
+          }
         }).fail(function(data){
           console.log("AJAX unsuccessful");
           console.log(data);
@@ -47,18 +66,35 @@ $(document).ready(function() {
           url: "/matches",
           method: "get",
           data:{
-            filter: filters
+            filter: filters,
+            survey: survey,
+            match_type: matchType,
+            user: userId
           },
           dataType: "json"
         }).done(function(data){
           console.log("AJAX successful");
           console.log(data);
+          $('.match-participants').empty();
+          $('.match-participants').append(data);
+          var participants = data['filteredParticipants'];
+          for (i = 0; i < participants.length; i++ ) {
+              var firstName = participants[i]["first_name"];
+              var lastName =  participants[i]["last_name"];
+              var phoneNumber = participants[i]["phonenumber"];
+              var birthDate = participants[i]["birthday"];
+              var email = participants[i]["email"];
+              var userId = participants[i]["id"];
+              var userType = participants[i]["user_type"];
+              var resultElement = $('<span>').html(firstName + ' ' + lastName);
+              $('.match-participants').append(resultElement);
+          }
         }).fail(function(data){
           console.log("AJAX unsuccessful");
           console.log(data);
           console.log(data.responseText);
         })
-      }
+        }
     });
   }
 

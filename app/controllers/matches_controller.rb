@@ -2,10 +2,75 @@ class MatchesController < ApplicationController
 
   def index
     if request.xhr?
-      @filters = params['filter']
-      respond_to do |format|
-        format.json { render json: @filters } #used for testing purposes to show what filters are provided
+
+      surv = Survey.find(params['survey'])
+      match_type = params['match_type']
+      user_id = params['user']
+      if match_type == "Resident"
+        subject = Resident.where(user_id: user_id).take
+        participants = Match.participating_volunteers(surv)
+      elsif match_type == "Volunteer"
+        subject = Volunteer.where(user_id: user_id).take
+        participants = Match.participating_residents(surv)
       end
+
+      @original_scores = Match.scores(participants, surv, subject)
+      @original_match_rankings = Match.match(participants, @original_scores, surv)
+
+      @original_participants = []
+      participants.each do |part|
+        @original_participants << part.user
+      end
+
+      filters = params['filter']
+
+      if filters
+
+        filtered_participants = []
+        filter_counter = 0
+        while filter_counter < filters.length
+          question_id = filters[filter_counter.to_s][0].to_i
+          @original_scores.each do |score| #scores stores the following: [AR participant, AR q, match score, match potential]
+            if score[1].id == question_id
+              filtered_participants << score[0] if score[2] == score[3]
+            end
+          end
+          filter_counter += 1
+        end
+
+        filtered_participants = filtered_participants.uniq
+        @new_scores = Match.scores(filtered_participants, surv, subject)
+        @match_rankings = Match.match(filtered_participants, @new_scores, surv)
+
+        @displayed_participants = []
+        filtered_participants.each do |part|
+          @displayed_participants << part.user
+        end
+
+        respond_to do |format|
+          format.json {
+            render json: {
+              'filteredParticipants': @displayed_participants,
+              'newScores': @new_scores,
+              'matchRankings': @match_rankings
+              }
+            }
+        end
+      else
+        respond_to do |format|
+          format.json {
+            render json: {
+              'filteredParticipants': @original_participants,
+              'newScores': @original_scores,
+              'matchRankings': @original_match_rankings
+              }
+            }
+        end
+      end
+    else
+
+
+
     end
   end
 
@@ -15,13 +80,14 @@ class MatchesController < ApplicationController
 
   def show
     @surv = Survey.find(params["survey"]) #not affected by match_type
-
+    @match_type = params["match_type"]
+    @user_id = params["user"]
     #depending on match type you either need the resident or the volunteer as the subject and the opposite as the participants
-    if params["match_type"] == "Resident -> Volunteer"
-      subject = Resident.where(user_id: params["user"]).take
+    if @match_type == "Resident -> Volunteer"
+      subject = Resident.where(user_id: @user_id).take
       @participants = Match.participating_volunteers(@surv)
-    elsif params["match_type"] == "Volunteer -> Resident"
-      subject = Volunteer.where(user_id: params["user"]).take
+    elsif @match_type == "Volunteer -> Resident"
+      subject = Volunteer.where(user_id: @user_id).take
       @participants = Match.participating_residents(@surv)
     end
     @scores = Match.scores(@participants, @surv, subject)

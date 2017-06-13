@@ -1,9 +1,17 @@
 class VolunteersController < ApplicationController
-  before_action :load_volunteer, only: [:show, :edit, :update, :destroy, :view_org, :add_organizations]
+  before_action :load_volunteer, only: [:show, :edit, :update, :destroy, :view_org, :add_locations, :remove_location, :add_vol_location]
   before_action :volunteer_organizations, only: [:show]
 
   def index
     @volunteers = Volunteer.all
+    if request.xhr?
+      @organization = Organization.where(name: params['org_name'])[0]
+      @locations = @organization.locations
+      respond_to do |format|
+        format.html
+        format.json { render json: @locations }
+      end
+    end
   end
 
   def new
@@ -49,7 +57,9 @@ class VolunteersController < ApplicationController
   def view_org
     @org = Organization.find(params[:org_id])
     @org_locations = @org.locations
+    @volunteer = Volunteer.find(params[:id])
     @v_locations = @volunteer.locations.where(organization_id: @org.id)
+    # byebug
     @org_surveys = []
     @org_locations.each do |loc|
       loc.surveys.each do |surv|
@@ -66,23 +76,47 @@ class VolunteersController < ApplicationController
   end
 
   def add_organizations
+
+  end
+
+  def remove_location
+    @location = Location.find(params[:loc_id])
+    @locations = @volunteer.locations
+    @locations.delete(@location)
+    redirect_to view_org_path(id: @volunteer.id, org_id: params[:org_id])
+  end
+
+  def add_vol_location
+    @location = Location.find(params[:loc_id])
+    @locations = @volunteer.locations
+    @locations << @location
+    redirect_to view_org_path(id: @volunteer.id, org_id: params[:org_id])
+  end
+
+  def add_locations
     volunteer_organizations
     @organization = Organization.new
     @organizations = Organization.all
     @uniq_organizations = (@organizations - @v_organizations).uniq
-  end
-
-  def add_locations
-    @organization = Organization.find(params[:organization][:name])
-    @locations = @organization.locations
+    # @organization = Organization.find(params[:organization][:name])
+    # @locations = @organization.locations
     @new_location = Location.new
   end
 
   def associate_locations
+    byebug
     volunteer = Volunteer.find(params[:id])
-    location = Location.find(params[:location][:branch_name])
-    volunteer.locations << location
-    redirect_to view_org_path(id: params[:id], org_id: params[:location][:organization])
+    location_ids = params[:location][:branch_name]
+    locations = []
+    i = 1
+    while i < location_ids.count
+      locations << Location.find(location_ids[i])
+      i+=1
+    end
+    locations.each do |loc|
+      volunteer.locations << loc
+    end
+    redirect_to view_org_path(id: params[:id], org_id: params[:location][:organization_id])
   end
 
   private

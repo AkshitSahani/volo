@@ -70,6 +70,27 @@ $(document).ready(function() {
         $('select').material_select();
       })
     }
+
+    else if ($(this).attr('name') === 'location[organization_id]'){
+      var orgName = $( "select option:selected" ).first().text();
+      $.ajax({
+        url:'/volunteers',
+        method: 'get',
+        data:{
+          org_name: orgName
+        },
+        dataType: 'JSON'
+      }).done(function(data){
+        $('select#location_branch_name').empty();
+        for(i = 0; i < data.length; i++){
+          $("select#location_branch_name").append(
+              $("<option></option>").attr("value", data[i].id).text(data[i].branch_name)
+          )
+        }
+        $('select').material_select();
+
+      })
+    }
   })
 
   // $(".add-org-location").click(function() {

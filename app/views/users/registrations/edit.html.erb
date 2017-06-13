@@ -1,94 +1,101 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="spacingDiv80"></div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+<div class="formContainer">
 
-  <% if resource.user_type == "Resident" %>
 
-    <div class="field" id="organization">
-      <%= label_tag :organization, "Organization", id: 'organization_label' %>
-      <%= select_tag :organization, options_from_collection_for_select(@organization, "id", "name") %>
-    </div>
+  <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-    <div class="field" id="locations">
-      <%= label_tag :location_id, "Location" %>
-      <%= select_tag :location_id, options_from_collection_for_select(@locations, "id", "branch_name") %>
-    </div>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= devise_error_messages! %>
 
-  <% end %>
+    <% if resource.user_type == "Resident" %>
 
-  <% if resource.user_type != "Organization" %>
-    <div class="field">
-      <%= f.label :First_name %>
-      <%= f.text_field :first_name %>
-    </div>
+      <div class="field" id="organization">
+        <%= label_tag :organization, "Organization", id: 'organization_label' %>
+        <%= select_tag :organization, options_from_collection_for_select(@organization, "id", "name") %>
+      </div>
 
-    <div class="field">
-      <%= f.label :Last_name %>
-      <%= f.text_field :last_name %>
-    </div>
+      <div class="field" id="locations">
+        <%= label_tag :location_id, "Location" %>
+        <%= select_tag :location_id, options_from_collection_for_select(@locations, "id", "branch_name") %>
+      </div>
 
-    <div class="field">
-      <%= f.label :birthdate, "Date Of Birth", id: 'birthdate_label' %><br />
-      <%= f.date_field :birthdate, {class: "datepicker"}  %>
-    </div>
-
-  <% else %>
-
-    <div class="field">
-      <%= f.label :first_name, "Name Of Organization" %>
-      <%= f.text_field :first_name %>
-    </div>
-
-    <div class="field">
-      <%= label_tag :address, "Head Office's Address" %>
-      <%= text_field_tag :address, @organization.address %>
-    </div>
-
-  <% end %>
-
-  <div class="field" id="phonenumber">
-    <%= f.label :phonenumber, "Phone Number" %>
-    <%= f.telephone_field :phonenumber %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
     <% end %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+    <% if resource.user_type != "Organization" %>
+      <div class="field">
+        <%= f.label :First_name %>
+        <%= f.text_field :first_name %>
+      </div>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
+      <div class="field">
+        <%= f.label :Last_name %>
+        <%= f.text_field :last_name %>
+      </div>
 
-  <div class="field">
-    <%= f.label :avatar, "Upload an avatar" %>
-    <%= f.file_field :avatar %>
-  </div>
-<br>
-  <div class="actions button">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
+      <div class="field">
+        <%= f.label :birthdate, "Date Of Birth", id: 'birthdate_label' %><br />
+        <%= f.date_field :birthdate, {class: "datepicker"}  %>
+      </div>
+
+    <% else %>
+
+      <div class="field">
+        <%= f.label :first_name, "Name Of Organization" %>
+        <%= f.text_field :first_name %>
+      </div>
+
+      <div class="field">
+        <%= label_tag :address, "Head Office's Address" %>
+        <%= text_field_tag :address, @organization.address %>
+      </div>
+
+    <% end %>
+
+    <div class="field" id="phonenumber">
+      <%= f.label :phonenumber, "Phone Number" %>
+      <%= f.telephone_field :phonenumber %>
+    </div>
+
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true %>
+    </div>
+
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+      <%= f.password_field :password, autocomplete: "off" %>
+      <% if @minimum_password_length %>
+        <br />
+        <em><%= @minimum_password_length %> characters minimum</em>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+      <%= f.password_field :current_password, autocomplete: "off" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :avatar, "Upload an avatar" %><br />
+      <%= f.file_field :avatar %>
+    </div>
+  <br>
+    <div class="actions">
+      <%= f.submit "Update" %>
+    </div>
+  <% end %>
+  <br />
+  <br />
 
 
 <h5 class="cancel">Unhappy?</h5>
@@ -98,3 +105,8 @@
 <div class="back">
   <%= link_to "Back", :back%>
 </div>
+
+
+</div>
+
+<div class="spacingDiv80"></div>

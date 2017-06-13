@@ -2,7 +2,7 @@
 <h2> <%= User.find(@resident.user_id).first_name %> <%= User.find(@resident.user_id).last_name %></h2>
 
 <div class="res-avatar">
-  <%= image_tag User.find(@resident.user_id).avatar.url(:medium) %>
+  <%= image_tag User.find(@resident.user_id).avatar.url(:medium), :class=>"profilePhoto" %>
 </div>
 
 <div class="res-org-name">

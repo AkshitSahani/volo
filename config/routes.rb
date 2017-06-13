@@ -30,6 +30,8 @@ Rails.application.routes.draw do
     get '/volunteers/:id/add_organizations', to: 'volunteers#add_organizations', as: 'add_organizations'
     get '/volunteers/:id/add_locations', to: 'volunteers#add_locations', as: 'add_locations'
     post '/volunteers/:id/associate_locations', to: 'volunteers#associate_locations', as: 'associate_locations'
+    get '/volunteers/:id/organizations/:org_id/locations/:loc_id/remove_location', to: 'volunteers#remove_location', as: 'remove_vol_location'
+    get '/volunteers/:id/organizations/:org_id/locations/:loc_id/add_location', to: 'volunteers#add_vol_location', as: 'add_vol_location'
   resources :responses
   resources :matches
 end

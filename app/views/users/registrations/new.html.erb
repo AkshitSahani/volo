@@ -1,31 +1,28 @@
-<div class="spacingDiv80"></div>
-
-
 <div class="formContainer">
 
-  <h2>Organization Sign Up</h2>
+  <h2>Sign up</h2>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
   <div class="field">
-    <%= f.label :first_name, 'Name of Organization' %><br />
+    <%= f.label :account_type %><br />
+    <%= f.select(:account_type, @account_types, {:prompt => "Select a Type"}, { :class => 'browser-default dropdown' }) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :first_name %><br />
     <%= f.text_field :first_name %>
   </div>
 
   <div class="field">
-    <%= label_tag :address, "Head Office's Address" %>
-    <%= text_field_tag :address %>
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
   </div>
 
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="field" id="phonenumber">
-    <%= f.label :phonenumber, "Phone Number" %>
-    <%= f.telephone_field :phonenumber %>
   </div>
 
   <div class="field">
@@ -37,22 +34,16 @@
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation, 'Password Confirmation' %><br />
+    <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
   <div class="field">
     <%= f.label :avatar, "Upload an avatar" %><br />
     <%= f.file_field :avatar %>
-  </div><br>
-
-  <div class="field">
-    <%= f.hidden_field :user_type, value: "Organization" %>
   </div>
 
-
   <div class="actions">
-
     <%= f.submit "Sign up" %>
   </div>
   <% end %>
@@ -60,5 +51,3 @@
   <%= render "devise/shared/links" %>
 
 </div>
-
-<div class="spacingDiv80"></div>

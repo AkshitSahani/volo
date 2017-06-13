@@ -27,20 +27,21 @@
   <div class="create-survey">
     <%= link_to "+ Create a Survey", new_survey_path %>
   </div>
-  
+
 </div>
 
 <div class="rightDash">
 
-  <div class="view-survey">
-    <%= link_to "View Surveys", view_surveys_path %>
-  </div>
+  <p class="surveysOverallTitle">Surveys</p>
 
-
-
-  <div class="add-nested-locations">
-    <%= link_to 'Add Locations', nest_locations_path %>
-  </div>
+  <% @surveys.each do |survey| %>
+    <p class="surveyName">
+      <%= survey.name %>
+      <%= link_to "View", preview_path(survey.id) %>
+      <span>|</span>
+      <%= link_to "Edit", edit_survey_path(survey.id) %>
+    </p>
+  <% end %>
 
   <div class="add-edit-locations">
     <% if @organization.locations.empty? %>

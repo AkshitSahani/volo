@@ -1,7 +1,11 @@
-<%= form_for @organization do |f| %>
+<div class="spacingDiv80"></div>
+
+<div class="formContainer">
+
+  <%= form_for @organization do |f| %>
   <div class="add-location-fields">
     <%= f.fields_for :locations do |location| %>
-      <%= render 'location_fields', f: location %>
+    <%= render 'location_fields', f: location %>
     <% end %>
     <div class="add-org-location">
       <%= link_to_add_association "Add location", f, :locations %>
@@ -10,4 +14,10 @@
   <div class="action">
     <%= f.submit "Save Locations" %>
   </div>
-<% end %>
+  <% end %>
+
+</div>
+
+
+
+<div class="spacingDiv80"></div>

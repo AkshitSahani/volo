@@ -1,11 +1,11 @@
 <%= form_tag(match_path(1), method: :get) do %>
   <div class="input-field">
     <%= label_tag :location %><br><br>
-    <%= select_tag :location, options_from_collection_for_select(Location.all, :id, :branch_name) %>
+    <%= select_tag :location, options_from_collection_for_select(Organization.where(user_id: session[:user_id])[0].locations, :id, :branch_name) %>
   </div>
   <div class="input-field">
     <%= label_tag :survey %><br><br>
-    <%= select_tag :survey, options_from_collection_for_select(Survey.first(2), :id, :name) %>
+    <%= select_tag :survey, options_from_collection_for_select(Survey.first(2), :id, :name), {:prompt => "Select a Location"} %>
   </div>
   <div class="input-field">
     <%= label_tag :match_type %><br><br>
@@ -13,11 +13,9 @@
   </div>
   <div class="input-field">
     <%= label_tag :user %><br><br>
-    <%= select_tag :user, options_from_collection_for_select(User.first(2), :id, :first_name) %>
+    <%= select_tag :user, options_from_collection_for_select(User.first(2), :id, :first_name), {:prompt => "Select all the above options first"} %>
   </div>
   <div class="match-submit">
     <%= submit_tag %>
   </div>
 <% end %>
-
-<!-- Organization.where(user_id: session[:user_id])[0].locations -->

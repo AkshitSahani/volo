@@ -14,7 +14,8 @@
  */
 
 
-$roboto-font-path: 'materialize/font/roboto/';
+$roboto-font-path: "roboto/" !default;
+@import "materialize/components/roboto";
 
  @import "colorRules";
  @import "inputRules";

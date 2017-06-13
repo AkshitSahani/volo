@@ -9,7 +9,7 @@
   <% @question_set.each do |q| %>
     <% question_number = @question_set.index(q) + 1 %>
     <h6><%= question_number%> <%=q[0].question %></h6>
-    <% if q[0].question_type == "Multiple Choice" %>
+    <% if q[0].question_type == "Multiple Choice Question" %>
       <div class="row">
         <div class="col s6 field input-field">
           <% answers = [] %>
@@ -23,7 +23,7 @@
         </div>
       </div>
 
-    <% elsif q[0].question_type == "Drop-Down" %>
+    <% elsif q[0].question_type == "Drop-Down Question" %>
       <div class="row">
         <div class="col s6 field input-field">
           <% answers = [] %>
@@ -36,7 +36,7 @@
           <h6> Ranking: <%= q[0].ranking %> </h6>
         </div>
       </div>
-    <% elsif q[0].question_type == "Open Response" %>
+    <% elsif q[0].question_type == "Open Response Question" %>
       <div class="row">
         <div class="col s6 field input-field">
           <%= text_field_tag q[0].question %>

@@ -21,12 +21,12 @@ class Match < ApplicationRecord
   def self.filters(surv, subject)
     filters = []
     surv.questions.each do |q|
-      if q.question_type == "Multiple Choice"
+      if q.question_type == "Multiple Choice Question"
         if !(subject.responses.where(question_id: q.id).empty?)
           subject_answers = subject.responses.where(question_id: q.id).first
         end
       filters << [q, subject_answers]
-      elsif q.question_type == "Drop-Down"
+    elsif q.question_type == "Drop-Down Question"
         subject_answers = subject.responses.where(question_id: q.id)[0] if !(subject.responses.where(question_id: q.id).empty?)
         filters << [q, subject_answers]
       end

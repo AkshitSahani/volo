@@ -1,16 +1,25 @@
-<h3>This page should have a grid of the organizations that the volunteer has signed up for with a link to go to their "org hub"</h3>
-<h3>This should also show the total number of orgs, locations, and surveys associated with that volunteer. </h3>
-
-<h1>Volunteer Show Page</h1>
-
 <h5><%= link_to "Edit Profile", edit_user_registration_path %></h5>
 
-<%= image_tag User.find(@volunteer.user).avatar %>
 
-<%= link_to "Add Organizations", add_organizations_path %>
-<h2>My Organizations</h2>
-<ol>
-<% @v_organizations.each do |org| %>
-  <li><%= org.name %> | <%= link_to "View", view_org_path(:id => params[:id], :org_id => org.id) %></li>
+<div class="profile image"><%= image_tag @volunteer.user.avatar, height: 100, width: 100 %></div>
+<div class="profile name"><%= @volunteer.user.first_name %> <%= @volunteer.user.last_name %></div>
+
+<div class="row">
+
+<div class="col s12 dashboard">
+  <div><%= @volunteer.locations.map { |loc| loc.organization }.uniq.count %> organizations</div>
+  <div><%= @volunteer.locations.count %> locations</div>
+  <div><%= @volunteer.responses.map { |res| resp.survey }.uniq.count %> surveys</div>
+</div>
+
+
+<div class="row">
+  <div class="col s12 center"><h2>My Organizations</h2></div>
+  <% @v_organizations.each do |org| %>
+    <div class="col s3 center">
+      <div><%= link_to (image_tag org.user.avatar, height: 100, width: 100), view_org_path(:id => params[:id], :org_id => org.id)  %></div>
+      <div class="full-width"><%= link_to org.name, view_org_path(:id => params[:id], :org_id => org.id), class: "waves-effect waves-light btn" %></div>
+    </div>
   <% end %>
-</ol>
+  <div class="col s12 center top-spacing"><%= link_to "Add Organizations", add_organizations_path, class: "waves-effect waves-light btn-large" %></div>
+</div>

@@ -18,6 +18,22 @@ class Match < ApplicationRecord
     participants = participants.uniq
   end
 
+  def self.filters(surv, subject)
+    filters = []
+    surv.questions.each do |q|
+      if q.question_type == "Multiple Choice"
+        if !(subject.responses.where(question_id: q.id).empty?)
+          subject_answers = subject.responses.where(question_id: q.id).first
+        end
+      filters << [q, subject_answers]
+      elsif q.question_type == "Drop-Down"
+        subject_answers = subject.responses.where(question_id: q.id)[0] if !(subject.responses.where(question_id: q.id).empty?)
+        filters << [q, subject_answers]
+      end
+    end
+    filters
+  end
+
   def self.scores(participants, surv, subject)
     scores = []
     surv.questions.each do |q|
@@ -47,7 +63,6 @@ class Match < ApplicationRecord
               i+=1
             end
           end
-          # byebug
           scores << [par, q, match_score, match_potential]
         elsif q.question_type == "Drop-Down Question"
           if (!(par.responses.where(question_id: q.id).empty?)) && (!(subject.responses.where(question_id: q.id).empty?))

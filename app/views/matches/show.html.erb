@@ -1,3 +1,23 @@
+<div class="match-filters" survey-id=<%=@surv.id%>>
+  <h3>Filters</h3>
+    <form>
+    <ol>
+      <% @filters.each do |f| %>
+        <li question-id=<%= f[0].id %>><%= f[0].question %></li>
+        <% if f[1].response.split(", ").count > 1 %>
+          <% f[1].response.split(", ").each do |r| %>
+            <input type="checkbox" question-id=<%= f[0].id %> response-id=<%= f[1].id %> id=<%= r %>>
+            <label for=<%= r %> question-id=<%= f[0].id %> response-id=<%= f[1].id %>><%= r %></label><br >
+          <% end %>
+          <% else %>
+          <input type="checkbox" question-id=<%= f[0].id %> response-id=<%= f[1].id %> id=<%= f[1].response %>>
+          <label for=<%= f[1].response %> question-id=<%= f[0].id %> response-id=<%= f[1].id %>><%= f[1].response %></label>
+          <% end %>
+      <% end %>
+    </ol>
+  </form>
+</div>
+
 <div class="match-results">
   <h2>Match Results</h2>
 </div>

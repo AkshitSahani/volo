@@ -12,18 +12,22 @@
   </h1>
   <%= link_to "Edit Profile", edit_user_registration_path, :class=>"profileDashEdit" %>
 
+  <div class="create-match">
+    <%= link_to "Match", new_match_path %>
+  </div>
 </div>
 
 
 
-<div class="formContainer" style="position:relative">
+<div class="organizationSurveys" style="position:relative">
 
 
 <div class="leftDash">
 
   <div class="create-survey">
-    <%= link_to "Create Survey", new_survey_path %>
+    <%= link_to "+ Create a Survey", new_survey_path %>
   </div>
+  
 </div>
 
 <div class="rightDash">
@@ -32,8 +36,22 @@
     <%= link_to "View Surveys", view_surveys_path %>
   </div>
 
-  <div class="create-match">
-    <%= link_to "Match", new_match_path %>
+
+
+  <div class="add-nested-locations">
+    <%= link_to 'Add Locations', nest_locations_path %>
+  </div>
+
+  <div class="add-edit-locations">
+    <% if @organization.locations.empty? %>
+    <%= link_to 'Add Locations', nest_locations_path %>
+    <% else %>
+    <%= link_to 'Add/Edit Locations', nest_locations_path %>
+    <% end %>
+  </div>
+
+  <div class="view-org-locations">
+    <%= link_to 'View Locations', view_locations_path %>
   </div>
 
 </div>
@@ -41,16 +59,6 @@
 
 </div>
 
-<div class="add-edit-locations">
-  <% if @organization.locations.empty? %>
-    <%= link_to 'Add Locations', nest_locations_path %>
-  <% else %>
-    <%= link_to 'Add/Edit Locations', nest_locations_path %>
-  <% end %>
-</div>
-
-<div class="view-org-locations">
-  <%= link_to 'View Locations', view_locations_path %>
 
 <div class=spacingDiv80>
 

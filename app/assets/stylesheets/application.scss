@@ -13,16 +13,19 @@
  *= require_self
  */
 
+
+$roboto-font-path: 'materialize/font/roboto/';
+
  @import "colorRules";
  @import "inputRules";
  @import 'materialize';
  @import 'home';
  @import "users";
 
-// @import "materialize";
 // @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
 /* BASE styles */
+
 *,
 *::before,
 *::after
@@ -143,6 +146,17 @@
   }
 }
 
+.center {
+  text-align: center;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.top-spacing {
+  margin-top: 2rem;
+}
 
 .container-4 {
   background-image: url("residents-back.jpg");

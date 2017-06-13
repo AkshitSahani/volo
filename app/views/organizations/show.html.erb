@@ -38,10 +38,11 @@
     <p class="surveyName">
       <%= survey.name %>
       <%= link_to "View", preview_path(survey.id) %>
+      <span>|</span>
       <%= link_to "Edit", edit_survey_path(survey.id) %>
     </p>
   <% end %>
-  
+
   <div class="add-edit-locations">
     <% if @organization.locations.empty? %>
     <%= link_to 'Add Locations', nest_locations_path %>

@@ -29,6 +29,9 @@ class OrganizationsController < ApplicationController
 
   def show
     #code
+    @current_organization_id = session[:organization_id]
+    @surveys = Survey.where(organization_id: @current_organization_id)
+
   end
 
   def edit

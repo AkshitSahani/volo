@@ -7,16 +7,16 @@ $(document).ready(function() {
     var filters = [];
     $('input').change(function() {
       if ( $(this).is(':checked') ) {
-        console.log("option is checked");
+        // console.log("option is checked");
         var questionId = $(this).attr('question-id');
         var responseId = $(this).attr('response-id');
         var response = $(this).attr('id');
-        console.log('questionid=' + questionId);
-        console.log('responseid=' + responseId);
-        console.log('response=' + response);
-        filters.push([questionId, responseId, response])
+        // console.log('questionid=' + questionId);
+        // console.log('responseid=' + responseId);
+        // console.log('response=' + response);
+        filters.push([questionId, responseId, response]);
         console.log(filters);
-        console.log(survey);
+        // console.log(survey);
         $.ajax({
           url: "/matches",
           method: "get",
@@ -32,6 +32,15 @@ $(document).ready(function() {
           console.log(data);
           $('.match-participants').empty();
           $('.match-participants').append(data);
+          $('.match-rankings').empty();
+
+          var matchScoreKeys = Object.keys(data['matchRankings']);
+          var matchScores = []
+          for (i = 0; i < matchScoreKeys.length; i++ ) {
+            var key = matchScoreKeys[i];
+            var score = data['matchRankings'][key];
+            matchScores.push(score);
+          }
           var participants = data['filteredParticipants'];
           for (i = 0; i < participants.length; i++ ) {
               var firstName = participants[i]["first_name"];
@@ -42,7 +51,12 @@ $(document).ready(function() {
               var userId = participants[i]["id"];
               var userType = participants[i]["user_type"];
               var resultElement = $('<span>').html(firstName + ' ' + lastName);
+              var resultElement1 = $('<span>').html(firstName + ' ' + lastName);
               $('.match-participants').append(resultElement);
+
+              var matchScore = $('<b>').html(matchScores[i]);
+              var rankingDiv = $('<div>').addClass('ranking ' + userId).append(resultElement1).append(' : ').append(matchScore);
+              $('.match-rankings').append(rankingDiv);
           }
         }).fail(function(data){
           console.log("AJAX unsuccessful");
@@ -55,9 +69,9 @@ $(document).ready(function() {
         var questionId = $(this).attr('question-id');
         var responseId = $(this).attr('response-id');
         var response = $(this).attr('id');
-        console.log('questionid =' + questionId);
-        console.log('responseid =' + responseId);
-        console.log('response=' + response);
+        // console.log('questionid =' + questionId);
+        // console.log('responseid =' + responseId);
+        // console.log('response=' + response);
         var index = filters.indexOf([questionId, responseId, response]);
         filters.splice(index, 1);
         console.log(filters);
@@ -77,6 +91,13 @@ $(document).ready(function() {
           console.log(data);
           $('.match-participants').empty();
           $('.match-participants').append(data);
+          var matchScoreKeys = Object.keys(data['matchRankings']);
+          var matchScores = []
+          for (i = 0; i < matchScoreKeys.length; i++ ) {
+            var key = matchScoreKeys[i];
+            var score = data['matchRankings'][key];
+            matchScores.push(score);
+          }
           var participants = data['filteredParticipants'];
           for (i = 0; i < participants.length; i++ ) {
               var firstName = participants[i]["first_name"];
@@ -87,7 +108,13 @@ $(document).ready(function() {
               var userId = participants[i]["id"];
               var userType = participants[i]["user_type"];
               var resultElement = $('<span>').html(firstName + ' ' + lastName);
+              var resultElement1 = $('<span>').html(firstName + ' ' + lastName);
               $('.match-participants').append(resultElement);
+
+              var matchScore = $('<b>').html(matchScores[i]);
+              $('.match-rankings').empty();
+              var rankingDiv = $('<div>').addClass('ranking ' + userId).append(resultElement1).append(' : ').append(matchScore);
+              $('.match-rankings').append(rankingDiv);
           }
         }).fail(function(data){
           console.log("AJAX unsuccessful");

@@ -104,7 +104,7 @@ class VolunteersController < ApplicationController
   end
 
   def associate_locations
-    byebug
+    # byebug
     volunteer = Volunteer.find(params[:id])
     location_ids = params[:location][:branch_name]
     locations = []

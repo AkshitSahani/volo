@@ -52,9 +52,9 @@
   <% if @match_rankings.empty? %>
     <div> Sorry, there are no match rankings due to insufficient completion of surveys. </div>
   <% else %>
-    <% @match_rankings.each do |volunteer, score| %>
-    <div class="ranking <%= volunteer.id %>">
-      <%= User.find(volunteer.user_id).first_name %> <%= User.find(volunteer.user_id).last_name %> : <b><%= score %></b>
+    <% @match_rankings.each do |participant, score| %>
+    <div class="ranking <%= participant.id %>">
+      <span><%= User.find(participant.user_id).first_name %> <%= User.find(participant.user_id).last_name %></span> : <b><%= score %></b>
     </div>
     <% end %>
   <% end %>

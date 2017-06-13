@@ -28,11 +28,11 @@ class MatchesController < ApplicationController
 
         filtered_participants = []
         filter_counter = 0
-        while filter_counter < filters.length
+        while filter_counter < filters.count
           question_id = filters[filter_counter.to_s][0].to_i
           @original_scores.each do |score| #scores stores the following: [AR participant, AR q, match score, match potential]
             if score[1].id == question_id
-              filtered_participants << score[0] if score[2] == score[3]
+              filtered_participants << score[0] if score[0].responses.where(question_id: score[1].id)[0].response.include?(filters[filter_counter.to_s][2])
             end
           end
           filter_counter += 1

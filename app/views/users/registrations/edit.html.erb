@@ -96,9 +96,15 @@
   <% end %>
   <br />
   <br />
-  <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
-  <%= link_to "Back", :back %>
+
+<h5 class="cancel">Unhappy?</h5>
+<h4 class="cancel">Cancel my Account</h4>
+  <%= button_to "Cancel my Account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete,  form_class: "button"  %>
+
+<div class="back">
+  <%= link_to "Back", :back%>
+</div>
 
 
 </div>

@@ -37,7 +37,6 @@ $roboto-font-path: 'materialize/font/roboto/';
   background-color: #00c188;
 }
 
-
 /* HOMEPAGE  */
 
 .title {
@@ -79,13 +78,17 @@ $roboto-font-path: 'materialize/font/roboto/';
 .types {
   text-align: center;
   display: inline-block;
-  margin: 3% 10%;
+  padding: 3% 10%;
 }
 
 .desc {
   width: 20%;
   display: inline-block;
   margin: auto 3%;
+}
+
+.text-justify {
+  text-align: justify;
 }
 
 #contain-left {
@@ -100,7 +103,6 @@ $roboto-font-path: 'materialize/font/roboto/';
 
 .row {
   margin-bottom: 0px;
-
 }
 
 .main {
@@ -111,11 +113,21 @@ $roboto-font-path: 'materialize/font/roboto/';
   color: white;
 }
 
+.image-heart, .image-organization, .image-residents {
+  margin-top: 7rem;
+  margin-left: 7rem;
+}
+
+.container-1 {
+  border-bottom: 2px solid $voloYellow;
+}
+
 .container-2 {
   background-image: url("volunteer-back.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
   height: 30rem;
+  border-bottom: 3px solid $voloYellow;
   h3 {
     display: inline;
     position: relative;
@@ -126,16 +138,13 @@ $roboto-font-path: 'materialize/font/roboto/';
   }
 }
 
-.image-heart, .image-organization, .image-residents {
-  margin-top: 7rem;
-  margin-left: 7rem;
-}
 
 .container-3 {
   background-image: url("organization-back.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
   height: 30rem;
+  border-bottom: 2px solid $voloYellow;
   h3 {
     display: inline;
     position: relative;
@@ -163,6 +172,7 @@ $roboto-font-path: 'materialize/font/roboto/';
   background-size: 100%;
   background-repeat: no-repeat;
   height: 30rem;
+  border-bottom: 2px solid $voloYellow;
   h3 {
     display: inline;
     position: relative;

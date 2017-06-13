@@ -1,9 +1,18 @@
-<h5><%= @survey.name %></h5>
+<div class="spacingDiv80"></div>
 
-<p>Assign Locations</p>
+<div class="formContainer">
 
-<%= form_tag assign_path do%>
+  <h5><%= @survey.name %></h5>
+
+  <p>Assign Locations</p>
+
+  <%= form_tag assign_path do%>
   <%= label_tag :branch_name, "Location" %>
   <%= select_tag :branch_name, options_from_collection_for_select(@organization.locations, "id", "branch_name", @selected), multiple: true %>
   <%= submit_tag %>
-<% end %>
+  <% end %>
+
+</div>
+
+
+<div class="spacingDiv80"></div>

@@ -1,14 +1,13 @@
 <%= link_to "Return To Profile", volunteer_path(@volunteer) %>
 
 <h1><%=@org.name%></h1>
-<h2>Locations</h2>
+<h4>Locations</h4>
 <ol>
-  <h3>My Locations</h3>
 <% @org_locations.each do |loc| %>
-  <h5><li><%= loc.branch_name %> |
+  <h6><li><%= loc.branch_name %> |
   <% if @v_locations.include?(loc) %>
     <%= link_to "Remove Location", remove_vol_location_path(:id => params[:id], :org_id => params[:org_id], :loc_id => loc.id) %>
-      </li></h5>
+  </li></h6>
       <ul>
         <% loc.surveys.each do |surv| %>
           <li>
@@ -22,9 +21,8 @@
           </li>
         <% end %>
   <% else %>
-  <h3>Available locations</h3>
     <%= link_to "Add Location", add_vol_location_path(:id => params[:id], :org_id => params[:org_id], :loc_id => loc.id) %>
-    </li></h5>
+  </li></h6>
   <% end %>
 <% end %>
 </ol>

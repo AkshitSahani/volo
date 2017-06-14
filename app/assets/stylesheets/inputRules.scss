@@ -90,3 +90,15 @@ input[type="submit"]:hover {
   padding: 10px 36px;
   margin-left: 30%;
 }
+
+.match-button:hover, .create-survey-text:hover {
+  background: transparent;
+  color: $voloGreen;
+  transition-duration: .2s;
+}
+
+.add-edit-location-text:hover, .view-org-locations a:hover {
+  background: $voloGreen;
+  color: white;
+  transition-duration: .2s;
+}

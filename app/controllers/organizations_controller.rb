@@ -32,14 +32,20 @@ class OrganizationsController < ApplicationController
     @current_organization_id = session[:organization_id]
     @surveys = Survey.where(organization_id: @current_organization_id)
     @locations = @organization.locations
+
     @residents = []
     @locations.each do |loc|
-      @residents << loc.residents if loc.residents.count > 0
+      loc.residents.each do |res|
+        @residents << res
+      end
     end
     @residents = @residents.uniq
+
     @volunteers = []
     @locations.each do |loc|
-      @volunteers << loc.volunteers if loc.residents.count > 0
+      loc.volunteers.each do |vol|
+        @volunteers << vol
+      end
     end
     @volunteers = @volunteers.uniq
 

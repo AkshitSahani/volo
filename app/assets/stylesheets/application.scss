@@ -263,6 +263,99 @@ $roboto-font-path: "roboto/" !default;
   padding: 2%;
 }
 
+
+.logout {
+  position: absolute;
+  right: -20%;
+}
+
+.res-home {
+  margin: auto;
+  width: 93%;
+  padding-top: 3%;
+  background-color: white;
+  height: 350px;
+}
+
+.res-avatar > img{
+  margin-left: 4%;
+  position: absolute;
+  top: 9%;
+  width: 120px;
+  height: 120px;
+  border-radius: 500px;
+}
+
+.res-info-container {
+  margin-left: 3%;
+}
+
+.edit-res-profile {
+  position: absolute;
+  top: 7%;
+  right: 18%;
+}
+
+.edit-res-profile > a {
+  color: $voloGreen;
+}
+
+.res-show-container {
+  background-color: $bodyGrey;
+  height: 100%;
+}
+
+
+.profile-res {
+  position: relative;
+  min-height: 150px;
+}
+.res-show-name {
+  margin-top: 4%;
+  margin-left: 20%;
+  margin-bottom: 11%;
+  position: absolute;
+  top: 15%;
+}
+
+.res-left {
+  display: inline-block;
+  width: 30%;
+  float: left;
+}
+
+.res-right {
+  display: inline-block;
+  width: 70%;
+  float: right;
+  border-left: 1px solid $bodyGrey;
+  padding-left: 1%;
+  padding-bottom: 1%;
+}
+
+.res-org-name > b, .surveys > b, .res-loc-name > b {
+  font-size: 1.25rem;
+}
+
+.surv{
+  border-bottom: 1px solid $bodyGrey;
+}
+
+.surv-top {
+  text-align: center;
+}
+
+.input-field {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.surv-submit {
+  text-align: center;
+  width: 90%;
+  margin-bottom: 2%;
+  margin-left: 5%;
+
 // Organization Stylesheets
 
 .orgStats {

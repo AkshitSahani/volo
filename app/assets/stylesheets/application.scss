@@ -22,6 +22,7 @@ $roboto-font-path: "roboto/" !default;
  @import 'materialize';
  @import 'home';
  @import "users";
+ @import "volunteers";
 
 // @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
@@ -120,7 +121,6 @@ $roboto-font-path: "roboto/" !default;
 }
 
 .container-1 {
-  border-bottom: 2px solid $voloYellow;
 }
 
 .container-2 {
@@ -128,7 +128,6 @@ $roboto-font-path: "roboto/" !default;
   background-size: 100%;
   background-repeat: no-repeat;
   height: 30rem;
-  border-bottom: 3px solid $voloYellow;
   h3 {
     display: inline;
     position: relative;
@@ -145,7 +144,6 @@ $roboto-font-path: "roboto/" !default;
   background-size: 100%;
   background-repeat: no-repeat;
   height: 30rem;
-  border-bottom: 2px solid $voloYellow;
   h3 {
     display: inline;
     position: relative;
@@ -173,7 +171,6 @@ $roboto-font-path: "roboto/" !default;
   background-size: 100%;
   background-repeat: no-repeat;
   height: 30rem;
-  border-bottom: 2px solid $voloYellow;
   h3 {
     display: inline;
     position: relative;

@@ -138,3 +138,43 @@ input[type="submit"]:hover {
   color: $voloGreen;
   transition-duration: .2s;
 }
+
+.edit-res-link, .res-edit-surv, .res-take-surv, .res-del-surv {
+  padding: 5px 15px;
+  background: transparent;
+  border: 2px solid $voloGreen;
+  color: $voloGreen;
+  column-rule: white;
+  border-radius: 20px;
+  font-weight: 600;
+  transition-duration: .2s;
+}
+
+.res-edit-surv, .res-take-surv, .res-del-surv{
+  float: right;
+  margin: 5px;
+}
+
+.res-edit-surv:hover {
+background: $voloGreen;
+color: white;
+transition-duration: .2s;
+}
+
+.res-del-surv:hover {
+background: $voloGreen;
+color: white;
+transition-duration: .2s;
+}
+
+.res-take-surv:hover {
+background: $voloGreen;
+color: white;
+transition-duration: .2s;
+}
+
+.edit-res-link:hover {
+background: $voloGreen;
+color: white;
+transition-duration: .2s;
+}

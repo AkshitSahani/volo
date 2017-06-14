@@ -1,38 +1,45 @@
-
-<h2> <%= User.find(@resident.user_id).first_name %> <%= User.find(@resident.user_id).last_name %></h2>
-
-<div class="res-avatar">
-  <%= image_tag User.find(@resident.user_id).avatar.url(:medium), :class=>"profilePhoto" %>
-</div>
-
-<div class="res-org-name">
-  Organization: <%= Organization.find(@resident.location.organization_id).name %>
-</div>
-
-<div class="res-loc-name">
-  Location: <%= @resident.location.branch_name %>
-</div>
-
-<div class="surveys-available">
-  Available surveys:<br>
-  <% Organization.find(@resident.location.organization_id).surveys.each do |surv| %>
-    <%= link_to "#{surv.name}", survey_path(surv) if !@completed_surveys.include?(surv.id)%><br>
-  <% end %>
-</div>
-
-<% if !@completed_surveys.empty? %>
-  <div class="comp-survs">
-    Completed surveys:<br>
-    <% @completed_surveys.each do |surv| %>
-      <div class="res-surv">
-        <%= Survey.find(surv).name %><br><%= link_to 'Edit responses', edit_responses_path(surv) %> <%= link_to 'Delete completed survey', delete_responses_path(surv) %>
-      </div><br><br>
-    <% end %>
+<div class="res-show-container">
+  <div class="profile-res">
+  <!-- <div class="name-container"> -->
+    <h4 class="res-show-name"> <%= User.find(@resident.user_id).first_name %> <%= User.find(@resident.user_id).last_name %></h4>
+  <!-- </div> -->
+  <div class="res-avatar">
+    <%= image_tag User.find(@resident.user_id).avatar.url(:medium), :class=>"profilePhoto" %>
   </div>
-<% end %>
+</div>
+  <div class="res-home">
 
-<div class="edit-res-profile">
-<%= link_to "Edit Profile", edit_user_registration_path %>
+    <div class="res-info-container">
+      <div class="res-left">
+        <div class="res-org-name">
+          <b>Organization </b>: <%= Organization.find(@resident.location.organization_id).name %>
+        </div><br>
+
+        <div class="res-loc-name">
+          <b>Location</b>: <%= @resident.location.branch_name %>
+        </div>
+      </div>
+
+      <div class="res-right">
+        <div class="surveys">
+          <b>Surveys</b><br><br>
+          <% Organization.find(@resident.location.organization_id).surveys.each do |surv| %>
+          <div class="surv">
+            <%= surv.name %>
+            <% if @completed_surveys.include?(surv.id) %>
+              <%= link_to 'Edit', edit_responses_path(surv), :class =>'res-edit-surv' %> <%= link_to 'Delete', delete_responses_path(surv), :class =>'res-del-surv' %><br><br><br>
+            <% else %>
+              <%= link_to "Take", survey_path(surv), :class =>'res-take-surv' %><br><br><br>
+            <% end %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+
+    <div class="edit-res-profile">
+    <%= link_to "Edit Profile", edit_user_registration_path, :class => "edit-res-link" %>
+    </div>
+  </div>
 </div>
 
 <!-- <div class="delete-res-profile"> -->

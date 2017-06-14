@@ -1,15 +1,18 @@
+<h3 class="formTitle">Create a new survey</h3>
 <%= form_for @survey do |f| %>
   <div class="field">
-    <%= f.label :name, "What would you like to name your survey?" %>
+    <%= f.label :name, "What would you like to name your survey?", class: "survey-creation-labels" %>
     <%= f.text_field :name %>
   </div>
   <div class="add-question-fields">
     <%= f.fields_for :questions do |question| %>
       <%= render 'question_fields', f: question %>
     <% end %>
-    <%= link_to_add_association "Add Content", f, :questions %>
-  </div>
+    <%= link_to_add_association "Add Content", f, :questions, class: "add-content" %>
+  </div><br><br>
   <div class="action">
-    <%= f.submit "Submit Survey" %>
+    <%= f.submit "Submit Survey", class: "new-survey-submit" %>
   </div>
+  <br>
+  <br>
 <% end %>

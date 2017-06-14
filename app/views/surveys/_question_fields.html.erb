@@ -1,16 +1,16 @@
 <div class="nested-fields">
   <div class="field">
-    <%= f.label :question_type, "What type of content would you like to add?" %>
+    <%= f.label :question_type, "What type of content would you like to add?", class: "survey-creation-labels" %>
     <%= f.select(:question_type, @question_types, {:prompt => "Select A Content Type"}, {:class => 'browser-default dropdown question_type_dropdown'})  %>
   </div>
 
   <div class="field question_description">
-    <%= f.label :question, "What question would you like to ask?" %>
+    <%= f.label :question, "What question would you like to ask?", class: "survey-creation-labels" %>
     <%= f.text_field :question %>
   </div>
 
   <div class="range-field">
-    <%= f.label :ranking, "How important is this for matching?" %>
+    <%= f.label :ranking, "How important is this for matching?", class: "survey-creation-labels" %>
     <%= f.range_field :ranking, min: 0, max: 100 %>
   </div>
 
@@ -18,10 +18,11 @@
     <%= f.fields_for :answer_sets do |answer_set| %>
       <%= render 'answer_set_fields', f: answer_set %>
     <% end %>
-    <%= link_to_add_association "Add answer", f, :answer_sets %>
+    <br>
+    <%= link_to_add_association "Add Answers To Choose From", f, :answer_sets %>
   </div>
 
-  <div style="text-align:right">
+  <div class="remove-content">
     <%= link_to_remove_association "Remove Content", f %>
   </div>
 </div>

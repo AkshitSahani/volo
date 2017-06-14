@@ -23,6 +23,7 @@ $roboto-font-path: "roboto/" !default;
  @import 'home';
  @import "users";
  @import "volunteers";
+ // @import "organizations";
 
 // @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
@@ -470,4 +471,9 @@ a.match-button {
 .field {
   padding-left: 5%;
   padding-right: 5%;
+}
+
+
+.org-name {
+  font-size: 2rem;
 }

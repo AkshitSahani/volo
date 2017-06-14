@@ -23,7 +23,7 @@
     <%= select_tag :user, options_from_collection_for_select(User.first(2), :id, :first_name), {:prompt => "Select all the above options first"} %>
   </div>
   <div class="match-submit">
-    <%= submit_tag %>
+    <%= submit_tag "Match"%>
   </div>
   <% end %>
 

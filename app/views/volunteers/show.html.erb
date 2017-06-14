@@ -21,7 +21,7 @@
       <div><%= link_to (image_tag org.user.avatar, height: 100, width: 100), view_org_path(:id => params[:id], :org_id => org.id)  %></div>
       <div class="full-width"><%= link_to org.name, view_org_path(:id => params[:id], :org_id => org.id), class: "waves-effect waves-light btn" %></div>
     </div>
-
+  <% end %>
   <% end %>
   <div class="col s12 center top-spacing"><%= link_to "Add Organizations", add_organizations_path, class: "waves-effect waves-light btn-large" %></div>
   <% end %>

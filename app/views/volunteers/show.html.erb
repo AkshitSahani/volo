@@ -1,18 +1,25 @@
-<h5><%= link_to "Edit Profile", edit_user_registration_path %></h5>
+<h6 class="edit-profile"><%= link_to "Edit Profile", edit_user_registration_path, class: "edit-profile" %></h6>
 
-<div class="profile image"><%= image_tag @volunteer.user.avatar, height: 100, width: 100 %></div>
-<div class="profile name"><%= @volunteer.user.first_name %> <%= @volunteer.user.last_name %></div>
 
 <div class="row">
 
-<div class="col s12 dashboard">
-  <div><%= @volunteer.locations.map { |loc| loc.organization }.uniq.count %> organizations</div>
-  <div><%= @volunteer.locations.count %> locations</div>
-  <div><%= @volunteer.responses.map { |res| resp.survey }.uniq.count %> surveys</div>
+  <div class="col s4 user-profile">
+    <div class="profile name"><h4><%= @volunteer.user.first_name %> <%= @volunteer.user.last_name %></h4></div>
+    <div class="profile image"><%= image_tag @volunteer.user.avatar, height: 100, width: 100 %></div>
+  </div>
+
+
+  <div class="col s8 dashboard">
+    <div><%= @volunteer.locations.map { |loc| loc.organization }.uniq.count %> organizations</div>
+    <div><%= @volunteer.locations.count %> locations</div>
+    <div><%= @volunteer.responses.map { |res| resp.survey }.uniq.count %> surveys</div>
+  </div>
 </div>
 
 <div class="row">
   <div class="col s12 center"><h2>My Organizations</h2></div>
+
+  <div class="my-org">
   <% if @v_organizations.empty? %>
     <h5>You are not a part of any organizations yet. No better time to join some! </h5>
   <% else %>
@@ -21,6 +28,7 @@
       <div><%= link_to (image_tag org.user.avatar, height: 100, width: 100), view_org_path(:id => params[:id], :org_id => org.id)  %></div>
       <div class="full-width"><%= link_to org.name, view_org_path(:id => params[:id], :org_id => org.id), class: "waves-effect waves-light btn" %></div>
     </div>
+  </div>
 
   <% end %>
   <div class="col s12 center top-spacing"><%= link_to "Add Organizations", add_organizations_path, class: "waves-effect waves-light btn-large" %></div>

@@ -198,11 +198,18 @@ $roboto-font-path: "roboto/" !default;
   float: left;
 }
 
+.match-filters h3 {
+  text-align: center;
+  margin-top: 14%;
+  font-size: 2.5rem;
+}
+
 .results {
   display: inline;
   width: 68%;
   float: right;
   position: relative;
+  border-left: 1px solid $bodyGrey;
 }
 
 .match-avatar img{
@@ -214,7 +221,7 @@ $roboto-font-path: "roboto/" !default;
 
 .ranking {
   position: relative;
-  border: 1px solid grey;
+  border: 1px solid $bodyGrey;
   padding: 5%;
 }
 
@@ -222,25 +229,26 @@ $roboto-font-path: "roboto/" !default;
   position: absolute;
   font-weight: bold;
   font-size: 1.5rem;
-  top: 0%;
-  left: 22%;
+  top: 4%;
+  left: 24.5%;
 }
+
 
 .match-availability {
   position: absolute;
-  top: 40%;
+  top: 35%;
   left: 25%;
 }
 
 .match-score-container {
   position: absolute;
   // top: 10%;
-  left: 75%;
+  left: 70%;
 }
 
 .match-score {
-  border: 1px solid yellow;
-  background-color: yellow;
+  border: 1px solid $voloYellow;
+  background-color: $voloYellow;
   padding: 5px;
 }
 
@@ -252,7 +260,7 @@ $roboto-font-path: "roboto/" !default;
 
 .results-count {
   position: absolute;
-  top: 12%;
+  top: 8%;
   right: 0%;
 }
 
@@ -261,6 +269,10 @@ $roboto-font-path: "roboto/" !default;
   // border-left: 1px solid grey;
   margin-bottom: 0;
   padding: 2%;
+}
+
+.match-results h3 {
+  font-size: 2.5rem;
 }
 
 

@@ -12,8 +12,8 @@
         <% if f[1].response.split(", ").count > 1 %>
         <% f[1].response.split(", ").each do |r| %>
         <input type="checkbox" question-id=<%= f[0].id %> response-id=<%= f[1].id %> id=<%= r %>>
-        <label for=<%= r %> question-id=<%= f[0].id %> response-id=<%= f[1].id %>><%= r %></label><br >
-        <% end %>
+        <label for=<%= r %> question-id=<%= f[0].id %> response-id=<%= f[1].id %>><%= r %></label><br>
+        <% end %><br>
         <% else %>
         <input type="checkbox" question-id=<%= f[0].id %> response-id=<%= f[1].id %> id=<%= f[1].response %>>
         <label for=<%= f[1].response %> question-id=<%= f[0].id %> response-id=<%= f[1].id %>><%= f[1].response %></label>
@@ -25,7 +25,7 @@
 
   <div class="results">
     <div class="match-results">
-      <h5>Match Results</h5>
+      <h3>Match Results</h3>
     </div>
 
     <!-- <div class="match-participants">
@@ -70,7 +70,7 @@
     <span class="match-avatar"><%= image_tag User.find(participant.user_id).avatar.url(:medium) %></span>
     <span class="match-user-name"><%= User.find(participant.user_id).first_name %> <%= User.find(participant.user_id).last_name %></span>
     <span class="match-availability"> Available </span>
-    <b class="match-score-container">Match Score : <span class="match-score"><%= (score * 100).round %>%<span></b>
+    <b class="match-score-container">Match Score  <span class="match-score"><%= (score * 100).round %>%<span></b>
       <span class="match-location">Toronto, Canada</span>
     </div>
     <% end %>

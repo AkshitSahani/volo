@@ -1,15 +1,23 @@
-<%= form_for @survey do |f| %>
+<div class="spacingDiv80"></div>
+
+<div class="formContainer">
+
+  <%= form_for @survey do |f| %>
   <div class="field">
     <%= f.label :name, "What would you like to name your survey?" %>
     <%= f.text_field :name %>
   </div>
   <div class="add-question-fields">
     <%= f.fields_for :questions do |question| %>
-      <%= render 'question_fields', f: question %>
+    <%= render 'question_fields', f: question %>
     <% end %>
     <%= link_to_add_association "Add Content", f, :questions %>
   </div>
-  <div class="action">
+  <br /><div class="action">
     <%= f.submit "Submit Survey" %>
   </div>
-<% end %>
+  <% end %>
+
+</div>
+
+<div class="spacingDiv80"></div>

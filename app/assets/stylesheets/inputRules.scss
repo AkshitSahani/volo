@@ -103,6 +103,42 @@ input[type="submit"]:hover {
   transition-duration: .2s;
 }
 
+.editSurveyPreview{
+  padding: 10px 25px;
+  background: transparent;
+  border: 2px solid $voloGreen;
+  border-radius: 20px;
+  color: $voloGreen;
+  font-weight: 600;
+  transition-duration: .2s;
+  display: inline-block;
+}
+
+.editSurveyPreview:hover {
+  background: $voloGreen;
+  color: white;
+  transition-duration: .2s;
+}
+
+.completeSurveyPreview {
+  padding: 10px 25px;
+  background: $voloGreen;
+  border: 2px solid $voloGreen;
+  border-radius: 20px;
+  color: white;
+  font-weight: 600;
+  transition-duration: .2s;
+  display: inline-block;
+  margin-right: 5px;
+  margin-bottom: 15px;
+}
+
+.completeSurveyPreview:hover {
+  background: transparent;
+  color: $voloGreen;
+  transition-duration: .2s;
+}
+
 .edit-res-link, .res-edit-surv, .res-take-surv, .res-del-surv {
   padding: 5px 15px;
   background: transparent;

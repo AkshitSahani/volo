@@ -1,74 +1,85 @@
-<div class="match-filters" survey-id=<%=@surv.id%> match-type=<%=@match_type%> user-id=<%=@user_id%>>
-  <h3>Filters</h3>
+<div class="spacingDiv80"></div>
+
+
+<div class="formContainer">
+
+  <div class="match-filters" survey-id=<%=@surv.id%> match-type=<%=@match_type%> user-id=<%=@user_id%>>
+    <h3>Filters</h3>
     <form>
-    <ol>
-      <% @filters.each do |f| %>
+      <ol>
+        <% @filters.each do |f| %>
         <li question-id=<%= f[0].id %>><%= f[0].question %></li>
         <% if f[1].response.split(", ").count > 1 %>
-          <% f[1].response.split(", ").each do |r| %>
-            <input type="checkbox" question-id=<%= f[0].id %> response-id=<%= f[1].id %> id=<%= r %>>
-            <label for=<%= r %> question-id=<%= f[0].id %> response-id=<%= f[1].id %>><%= r %></label><br >
-          <% end %>
-          <% else %>
-          <input type="checkbox" question-id=<%= f[0].id %> response-id=<%= f[1].id %> id=<%= f[1].response %>>
-          <label for=<%= f[1].response %> question-id=<%= f[0].id %> response-id=<%= f[1].id %>><%= f[1].response %></label>
-          <% end %>
-      <% end %>
-    </ol>
-  </form>
-</div>
-
-<div class="results">
-  <div class="match-results">
-    <h5>Match Results</h5>
+        <% f[1].response.split(", ").each do |r| %>
+        <input type="checkbox" question-id=<%= f[0].id %> response-id=<%= f[1].id %> id=<%= r %>>
+        <label for=<%= r %> question-id=<%= f[0].id %> response-id=<%= f[1].id %>><%= r %></label><br >
+        <% end %>
+        <% else %>
+        <input type="checkbox" question-id=<%= f[0].id %> response-id=<%= f[1].id %> id=<%= f[1].response %>>
+        <label for=<%= f[1].response %> question-id=<%= f[0].id %> response-id=<%= f[1].id %>><%= f[1].response %></label>
+        <% end %>
+        <% end %>
+      </ol>
+    </form>
   </div>
 
-  <!-- <div class="match-participants">
+  <div class="results">
+    <div class="match-results">
+      <h5>Match Results</h5>
+    </div>
+
+    <!-- <div class="match-participants">
     <h3>Participants</h3>
     <%# if @participants.empty? %>
-      <div> Sorry, there were no participants found. </div>
+    <div> Sorry, there were no participants found. </div>
     <%# else %>
-      <%# @participants.each do |pa| %>
-        <div class="par-full-name">
-          Name: <%# User.find(pa.user_id).first_name%> <%# User.find(pa.user_id).last_name%><br>
-        </div>
-      <%# end %>
-    <%# end %>
-  </div> -->
-
-  <br>
-
-  <!-- <div class="match-scores"> -->
-    <%# if @scores.empty? %>
-      <!-- <div> Sorry, there were no scores calculated due to insufficient completion of surveys. </div> -->
-    <%# else %>
-      <%# @scores.each do |score| %>
-        <!-- <b><h5><%# score %></h5></b> -->
-      <%# end %>
-    <%# end %>
-  <!-- </div> -->
-
-  <div class="results-count">
-    <% if @match_rankings.count > 1 %>
-        <%= @match_rankings.count %> results found
-    <% else %>
-      <%= @match_rankings.count %> result found
-    <% end %>
+    <%# @participants.each do |pa| %>
+    <div class="par-full-name">
+    Name: <%# User.find(pa.user_id).first_name%> <%# User.find(pa.user_id).last_name%><br>
   </div>
-  <div class="match-rankings">
-    <!-- <h3>Match Scores</h3> -->
-    <% if @match_rankings.empty? %>
-      <div> Sorry, there are no match rankings due to insufficient completion of surveys. </div>
-    <% else %>
-      <% @match_rankings.each do |participant, score| %>
-      <div class="ranking <%= participant.id %>">
-        <span class="match-avatar"><%= image_tag User.find(participant.user_id).avatar.url(:medium) %></span>
-        <span class="match-user-name"><%= User.find(participant.user_id).first_name %> <%= User.find(participant.user_id).last_name %></span>
-        <span class="match-availability"> Available </span>
-        <b class="match-score-container">Match Score : <span class="match-score"><%= (score * 100).round %>%<span></b>
-        <span class="match-location">Toronto, Canada</span>
-      </div>
-      <% end %>
+  <%# end %>
+  <%# end %>
+</div> -->
+
+<br>
+
+<!-- <div class="match-scores"> -->
+<%# if @scores.empty? %>
+<!-- <div> Sorry, there were no scores calculated due to insufficient completion of surveys. </div> -->
+<%# else %>
+<%# @scores.each do |score| %>
+<!-- <b><h5><%# score %></h5></b> -->
+<%# end %>
+<%# end %>
+<!-- </div> -->
+
+<div class="results-count">
+  <% if @match_rankings.count > 1 %>
+  <%= @match_rankings.count %> results found
+  <% else %>
+  <%= @match_rankings.count %> result found
+  <% end %>
+</div>
+<div class="match-rankings">
+  <!-- <h3>Match Scores</h3> -->
+  <% if @match_rankings.empty? %>
+  <div> Sorry, there are no match rankings due to insufficient completion of surveys. </div>
+  <% else %>
+  <% @match_rankings.each do |participant, score| %>
+  <div class="ranking <%= participant.id %>">
+    <span class="match-avatar"><%= image_tag User.find(participant.user_id).avatar.url(:medium) %></span>
+    <span class="match-user-name"><%= User.find(participant.user_id).first_name %> <%= User.find(participant.user_id).last_name %></span>
+    <span class="match-availability"> Available </span>
+    <b class="match-score-container">Match Score : <span class="match-score"><%= (score * 100).round %>%<span></b>
+      <span class="match-location">Toronto, Canada</span>
+    </div>
+    <% end %>
     <% end %>
   </div>
 </div>
+
+
+</div>
+
+
+<div class="spacingDiv80"></div>

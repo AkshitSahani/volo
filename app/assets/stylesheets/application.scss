@@ -22,6 +22,7 @@ $roboto-font-path: "roboto/" !default;
  @import 'materialize';
  @import 'home';
  @import "users";
+ @import "volunteers";
 
 // @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
@@ -120,7 +121,6 @@ $roboto-font-path: "roboto/" !default;
 }
 
 .container-1 {
-  border-bottom: 2px solid $voloYellow;
 }
 
 .container-2 {
@@ -128,7 +128,6 @@ $roboto-font-path: "roboto/" !default;
   background-size: 100%;
   background-repeat: no-repeat;
   height: 30rem;
-  border-bottom: 3px solid $voloYellow;
   h3 {
     display: inline;
     position: relative;
@@ -145,7 +144,6 @@ $roboto-font-path: "roboto/" !default;
   background-size: 100%;
   background-repeat: no-repeat;
   height: 30rem;
-  border-bottom: 2px solid $voloYellow;
   h3 {
     display: inline;
     position: relative;
@@ -173,7 +171,6 @@ $roboto-font-path: "roboto/" !default;
   background-size: 100%;
   background-repeat: no-repeat;
   height: 30rem;
-  border-bottom: 2px solid $voloYellow;
   h3 {
     display: inline;
     position: relative;
@@ -266,6 +263,7 @@ $roboto-font-path: "roboto/" !default;
   padding: 2%;
 }
 
+
 .logout {
   position: absolute;
   right: -20%;
@@ -357,4 +355,82 @@ $roboto-font-path: "roboto/" !default;
   width: 90%;
   margin-bottom: 2%;
   margin-left: 5%;
+
+// Organization Stylesheets
+
+.orgStats {
+  display: inline-block;
+  width: 80%;
+  position: relative;
+  top: 100px;
+  left: 155px;
+}
+
+.totalText {
+  font-weight: 500;
+  font-size: 2rem;
+  color: #858585;
+}
+
+.orgTotals {
+  display: inline-block;
+  width: 20%;
+}
+
+.surveyName {
+  border-bottom: 1px solid $bodyGrey;
+}
+
+.surveyTitle {
+  width: 65%;
+  padding-bottom: 1rem;
+  padding-left: 2rem;
+  padding-top: 1rem;
+  display: inline-block;
+}
+
+.surveyEdit {
+  color: $voloGreen;
+  margin-top: 5px;
+  column-rule: white;
+  border-radius: 20px;
+  transition-duration: .2s;
+  text-align: center;
+  display: inline-block;
+}
+
+.greenText {
+  color: $voloGreen;
+}
+
+.surveyView {
+  width: 15%;
+  display: inline-block;
+  text-align: center;
+  line-height: 2rem;
+  height: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.add-edit-locations, .view-org-locations {
+  width: 75%;
+  margin-top: 4rem;
+}
+
+.create-match {
+  position: relative;
+  right: 50px;
+  top: 75px;
+  display: inline-block;
+}
+
+a.match-button {
+  padding-left: 75px;
+  padding-right: 75px;
+}
+
+.create-survey {
+  width: 75%;
+  margin-top: 5rem;
 }

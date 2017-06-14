@@ -28,11 +28,23 @@ class OrganizationsController < ApplicationController
   end
 
   def show
-    #code
+
     @current_organization_id = session[:organization_id]
     @surveys = Survey.where(organization_id: @current_organization_id)
+    @locations = @organization.locations
+    @residents = []
+    @locations.each do |loc|
+      @residents << loc.residents if loc.residents.count > 0
+    end
+    @residents = @residents.uniq
+    @volunteers = []
+    @locations.each do |loc|
+      @volunteers << loc.volunteers if loc.residents.count > 0
+    end
+    @volunteers = @volunteers.uniq
 
   end
+
 
   def edit
     #code

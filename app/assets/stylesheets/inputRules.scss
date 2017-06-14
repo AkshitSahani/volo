@@ -48,7 +48,7 @@ input[type="submit"]:hover {
   transition-duration: .2s;
 }
 
-.create-survey a {
+.add-edit-locations a, .view-org-locations a {
   padding: 10px 25px;
   background: transparent;
   border: 2px solid $voloGreen;
@@ -57,9 +57,47 @@ input[type="submit"]:hover {
   border-radius: 20px;
   font-weight: 600;
   transition-duration: .2s;
+  text-align: center;
 }
 
-.create-survey a:hover {
+.create-survey a, .create-match a, {
+  background: $voloGreen;
+  border: 2px solid $voloGreen;
+  color: white;
+  column-rule: white;
+  border-radius: 20px;
+  font-weight: 600;
+  transition-duration: .2s;
+  text-align: center;
+  width: 50px;
+}
+
+.create-survey a {
+  padding: 10px 34px;
+  margin-left: 30%;
+}
+
+.create-match a {
+  padding: 10px 25px;
+}
+
+.add-edit-locations a {
+  padding: 10px 25px;
+  margin-left: 30%;
+}
+
+.view-org-locations a {
+  padding: 10px 36px;
+  margin-left: 30%;
+}
+
+.match-button:hover, .create-survey-text:hover {
+  background: transparent;
+  color: $voloGreen;
+  transition-duration: .2s;
+}
+
+.add-edit-location-text:hover, .view-org-locations a:hover {
   background: $voloGreen;
   color: white;
   transition-duration: .2s;

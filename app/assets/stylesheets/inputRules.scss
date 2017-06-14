@@ -124,3 +124,91 @@ a.add_fields {
   padding: 10px 36px;
   margin-left: 30%;
 }
+
+.match-button:hover, .create-survey-text:hover {
+  background: transparent;
+  color: $voloGreen;
+  transition-duration: .2s;
+}
+
+.add-edit-location-text:hover, .view-org-locations a:hover {
+  background: $voloGreen;
+  color: white;
+  transition-duration: .2s;
+}
+
+.editSurveyPreview{
+  padding: 10px 25px;
+  background: transparent;
+  border: 2px solid $voloGreen;
+  border-radius: 20px;
+  color: $voloGreen;
+  font-weight: 600;
+  transition-duration: .2s;
+  display: inline-block;
+}
+
+.editSurveyPreview:hover {
+  background: $voloGreen;
+  color: white;
+  transition-duration: .2s;
+}
+
+.completeSurveyPreview {
+  padding: 10px 25px;
+  background: $voloGreen;
+  border: 2px solid $voloGreen;
+  border-radius: 20px;
+  color: white;
+  font-weight: 600;
+  transition-duration: .2s;
+  display: inline-block;
+  margin-right: 5px;
+  margin-bottom: 15px;
+}
+
+.completeSurveyPreview:hover {
+  background: transparent;
+  color: $voloGreen;
+  transition-duration: .2s;
+}
+
+.edit-res-link, .res-edit-surv, .res-take-surv, .res-del-surv {
+  padding: 5px 15px;
+  background: transparent;
+  border: 2px solid $voloGreen;
+  color: $voloGreen;
+  column-rule: white;
+  border-radius: 20px;
+  font-weight: 600;
+  transition-duration: .2s;
+}
+
+.res-edit-surv, .res-take-surv, .res-del-surv{
+  float: right;
+  margin: 5px;
+}
+
+.res-edit-surv:hover {
+background: $voloGreen;
+color: white;
+transition-duration: .2s;
+}
+
+.res-del-surv:hover {
+background: $voloGreen;
+color: white;
+transition-duration: .2s;
+}
+
+.res-take-surv:hover {
+background: $voloGreen;
+color: white;
+transition-duration: .2s;
+}
+
+.edit-res-link:hover {
+background: $voloGreen;
+color: white;
+transition-duration: .2s;
+}

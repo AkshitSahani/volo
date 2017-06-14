@@ -1,5 +1,7 @@
-<h3><%= @survey.organization.name %></h3>
-<h4><%= @survey.name %></h4>
+<div class="surv-top">
+  <h3><%= @survey.organization.name %></h3>
+  <h4><%= @survey.name %></h4>
+</div>
 
 <%= form_tag create_responses_path do %>
   <% @responses.each do |response| %>
@@ -60,8 +62,8 @@
 
   <%= hidden_field_tag :organization_id, @organization.id %>
 
-  <button class="btn" type="submit" name="action">
+  <button class="btn surv-submit" type="submit" name="action">
     Submit
-  </button>
+  </button><br>
 
 <% end %>

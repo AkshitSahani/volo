@@ -1,4 +1,10 @@
-<%= form_tag(match_path(1), method: :get) do %>
+<div class="spacingDiv80"></div>
+
+<div class="formContainer">
+
+  <h3 class="voloGreen">New Match</h3>
+
+  <%= form_tag(match_path(1), method: :get) do %>
   <div class="input-field">
     <%= label_tag :location %><br><br>
     <%# select_tag :location, options_from_collection_for_select(Organization.where(user_id: session[:user_id])[0].locations, :id, :branch_name) %>
@@ -19,4 +25,9 @@
   <div class="match-submit">
     <%= submit_tag "Match"%>
   </div>
-<% end %>
+  <% end %>
+
+</div>
+
+
+<div class="spacingDiv80"></div>

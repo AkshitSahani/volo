@@ -17,6 +17,10 @@ footer .container {
   background: $footerGrey;
 }
 
+nav ul {
+  float: right;
+}
+
 .page-footer {
   position: absolute;
   bottom: -205px;
@@ -25,22 +29,31 @@ footer .container {
 }
 
 .formContainer {
-  width: 60%;
+  width: 85%;
   margin-left: auto;
   margin-right: auto;
-  padding: 50px 0px;
+  padding: 0px;
+  min-height: 700px;
 }
 
 .voloHeaderLogo {
     position: absolute;
     left: 150px;
+    padding: 0 15px;
+    transition: background-color .3s;
+}
+
+.voloHeaderLogo:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .navLinks {
-    position: absolute;
-    right: 115px;
-    width: 230px;
+  min-width: 500px;
+  float: right;
+  text-align: right;
+  margin-right: 150px;
 }
+
 
 .container-4 {
   margin-bottom: -51px !important;
@@ -61,22 +74,20 @@ footer .container {
   top: 40px;
 }
 
-.org-name {
+h1.org-name {
     font-size: 35px;
     position: absolute;
-    top: 43px;
-    left: 155px;
+    top: 50px;
+    left: 165px;
     margin-top: 0;
     color: $voloGrey;
-    display: inline-block;
 }
 
 a.profileDashEdit {
     position: absolute;
-    top: 65px;
-    left: 440px;
+    top: 105px;
+    left: 165px;
     color: $voloGreen;
-
 }
 
 .leftDash {
@@ -85,12 +96,11 @@ a.profileDashEdit {
   width: 35%;
   border-right: 2px $bodyGrey solid;
   position: relative;
-  text-align: center;
 }
 
 .rightDash {
   width: 65%;
-  padding-left: 0%;
+  padding-left: 5%;
   position: absolute;
   right: 0;
   top: 0;
@@ -115,7 +125,20 @@ a.profileDashEdit {
 .surveysOverallTitle {
   font-size: 1.5rem;
   border-bottom: 1px solid $bodyGrey;
-  padding-bottom: 1rem;
-  padding-left: 2rem;
-  padding-top: 1rem;
+  padding-bottom: 8px;
+}
+
+.previewContainer form {
+  margin-left: 11%;
+}
+
+.previewContainer h3 {
+  text-align: center;
+}
+
+.rankingPreview {
+  display: inline-block;
+  width: 100px;
+  padding: 0;
+  margin-left: 65px;
 }

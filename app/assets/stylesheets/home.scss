@@ -33,7 +33,7 @@ nav ul {
   margin-left: auto;
   margin-right: auto;
   padding: 0px;
-  min-height: 700px;
+  min-height: 1500px;
 }
 
 .voloHeaderLogo {
@@ -85,8 +85,8 @@ h1.org-name {
 
 a.profileDashEdit {
     position: absolute;
-    top: 105px;
-    left: 165px;
+    top: 32%;
+    left: 40%;
     color: $voloGreen;
 }
 
@@ -100,7 +100,7 @@ a.profileDashEdit {
 
 .rightDash {
   width: 65%;
-  padding-left: 5%;
+  // padding-left: 5%;
   position: absolute;
   right: 0;
   top: 0;
@@ -117,7 +117,7 @@ a.profileDashEdit {
 }
 
 .organizationSurveys {
-  min-height: 400px;
+  min-height: 880px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -125,11 +125,11 @@ a.profileDashEdit {
 .surveysOverallTitle {
   font-size: 1.5rem;
   border-bottom: 1px solid $bodyGrey;
-  padding-bottom: 8px;
+  padding: 2% 4%;
 }
 
 .previewContainer form {
-  margin-left: 11%;
+  margin: auto 10%;
 }
 
 .previewContainer h3 {
@@ -141,4 +141,12 @@ a.profileDashEdit {
   width: 100px;
   padding: 0;
   margin-left: 65px;
+}
+
+.completeSurveyPreview {
+  float: left;
+}
+
+.editSurveyPreview {
+  float: right;
 }

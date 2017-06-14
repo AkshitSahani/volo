@@ -23,6 +23,7 @@ $roboto-font-path: "roboto/" !default;
  @import 'home';
  @import "users";
  @import "volunteers";
+ // @import "organizations";
 
 // @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
@@ -40,6 +41,10 @@ $roboto-font-path: "roboto/" !default;
 }
 
 /* HOMEPAGE  */
+a.voloHeaderLogo {
+  font-size: 2rem;
+}
+
 
 .title {
   color: white;
@@ -277,7 +282,7 @@ $roboto-font-path: "roboto/" !default;
 
 
 .logout {
-  position: absolute;
+  // position: absolute;
   right: 5%;
 }
 
@@ -286,7 +291,7 @@ $roboto-font-path: "roboto/" !default;
   width: 93%;
   padding-top: 3%;
   background-color: white;
-  height: 350px;
+  height: 800px;
 }
 
 .res-avatar > img{
@@ -324,7 +329,7 @@ $roboto-font-path: "roboto/" !default;
 }
 .res-show-name {
   margin-top: 4%;
-  margin-left: 20%;
+  margin-left: 19%;
   margin-bottom: 11%;
   position: absolute;
   top: 15%;
@@ -332,7 +337,7 @@ $roboto-font-path: "roboto/" !default;
 
 .res-left {
   display: inline-block;
-  width: 30%;
+  width: 26%;
   float: left;
 }
 
@@ -374,7 +379,7 @@ $roboto-font-path: "roboto/" !default;
   display: inline-block;
   width: 80%;
   position: relative;
-  top: 100px;
+  // top: 45px;
   left: 155px;
 }
 
@@ -431,6 +436,7 @@ $roboto-font-path: "roboto/" !default;
 }
 
 .create-match {
+  z-index: 100;
   position: relative;
   right: 50px;
   top: 75px;
@@ -451,7 +457,7 @@ a.match-button {
 
 .formTitle {
   text-align: center;
-  padding-top: 2rem;
+  padding: 2rem;
 }
 
 .range-field {
@@ -470,4 +476,14 @@ a.match-button {
 .field {
   padding-left: 5%;
   padding-right: 5%;
+}
+
+
+// ---------------------------
+// organization page styling
+
+.org-name {
+  font-size: 2rem;
+  padding-top: 5%;
+  padding-left: 15.5%;
 }

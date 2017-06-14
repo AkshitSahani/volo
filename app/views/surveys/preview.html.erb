@@ -5,55 +5,59 @@
 
   <h3 class="voloGreen"><%= @survey.name %></h3><br />
 
+<div class="survey-result">
+
   <%= form_tag %>
   <% @question_set.each do |q| %>
     <% question_number = @question_set.index(q) + 1 %>
     <h6><%= question_number%> <%=q[0].question %></h6>
     <% if q[0].question_type == "Multiple Choice Question" %>
       <div class="row">
-        <div class="col s6 field input-field">
+        <div class="col s7 field input-field">
           <% answers = [] %>
           <% q[1].each do |a| %>
             <% answers << a.answer %>
           <% end %>
           <%= select_tag q[0].question, options_for_select(answers),  multiple: true %>
         </div>
-        <div class="col s6">
+        <div class="col s4">
           <h6 class="voloYellow rankingPreview"> Ranking: <%= q[0].ranking %> </h6>
         </div>
       </div>
 
     <% elsif q[0].question_type == "Drop-Down Question" %>
       <div class="row">
-        <div class="col s6 field input-field">
+        <div class="col s7 field input-field">
           <% answers = [] %>
           <% q[1].each do |a| %>
             <% answers << a.answer %>
           <% end %>
           <%= select_tag q[0].question, options_for_select(answers) %>
         </div>
-        <div class="col s6">
+        <div class="col s4">
           <h6 class="voloYellow rankingPreview"> Ranking: <%= q[0].ranking %> </h6>
         </div>
       </div>
     <% elsif q[0].question_type == "Open Response Question" %>
       <div class="row">
-        <div class="col s6 field input-field">
+        <div class="col s7 field input-field">
           <%= text_field_tag q[0].question %>
         </div>
-        <div class="col s6">
+        <!-- <div class="col s4">
           <h6 class="voloYellow rankingPreview"> Ranking: <%= q[0].ranking %> </h6>
-        </div>
+        </div> -->
       </div>
     <% end %>
     <% end %>
 
     <br />
 
-
+<div class="col s11 result-button">
   <%= link_to "Complete Survey", organization_path(Organization.find(session[:organization_id])), :class=>"completeSurveyPreview" %>
   <%= link_to "Edit Survey", edit_survey_path(@survey), :class=>"editSurveyPreview" %>
+</div>
 
+</div>
 
 </div>
 

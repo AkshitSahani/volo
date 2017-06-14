@@ -2,20 +2,36 @@
 <div class="profileDash">
 
   <%= image_tag User.find(@organization.user_id).avatar.url(:medium), :class=>"profilePhoto" %>
-  <h1 class="org-name">
+  <div class="org-name">
     <% if User.find(@organization.user_id).first_name %>
     <%= User.find(@organization.user_id).first_name %>
     <% end %>
     <% if User.find(@organization.user_id).last_name %>
     <%= User.find(@organization.user_id).last_name %>
     <% end %>
-  </h1>
+  </div>
+    <div class="orgStats">
+      <div class="orgTotals">
+        <span class="totalText"><%=@locations.count%></span><br>
+         Locations
+       </div>
+      <div class="orgTotals">
+        <span class="totalText"><%=@residents.count %></span><br>
+        Residents
+      </div>
+      <div class="orgTotals">
+        <span class="totalText"><%=@volunteers.count %></span><br>
+        Volunteers
+      </div>
+    </div>
+
   <%= link_to "Edit Profile", edit_user_registration_path, :class=>"profileDashEdit" %>
 
-  <div class="create-match">
-    <%= link_to "Match", new_match_path %>
+  <div class="create-match white-text text-darken-2">
+    <%= link_to "Match", new_match_path, class: "match-button" %>
   </div>
 </div>
+
 
 
 
@@ -25,35 +41,45 @@
 <div class="leftDash">
 
   <div class="create-survey">
-    <%= link_to "+ Create a Survey", new_survey_path %>
+    <%= link_to "Create a Survey", new_survey_path, class: "create-survey-text"%>
   </div>
-
-</div>
-
-<div class="rightDash">
-
-  <p class="surveysOverallTitle">Surveys</p>
-
-  <% @surveys.each do |survey| %>
-    <p class="surveyName">
-      <%= survey.name %>
-      <%= link_to "View", preview_path(survey.id) %>
-      <span>|</span>
-      <%= link_to "Edit", edit_survey_path(survey.id) %>
-    </p>
-  <% end %>
 
   <div class="add-edit-locations">
     <% if @organization.locations.empty? %>
-    <%= link_to 'Add Locations', nest_locations_path %>
+    <%= link_to 'Add Locations', nest_locations_path, class: "add-edit-location-text" %>
     <% else %>
-    <%= link_to 'Add/Edit Locations', nest_locations_path %>
+    <%= link_to 'Add/Edit Locations', nest_locations_path, class: "add-edit-location-text" %>
     <% end %>
   </div>
 
   <div class="view-org-locations">
     <%= link_to 'View Locations', view_locations_path %>
   </div>
+
+</div>
+
+<div class="rightDash">
+
+  <div class="surveysOverallTitle">Surveys</div>
+
+  <% @surveys.each do |survey| %>
+    <div class="surveyName">
+      <div class="surveyTitle">
+      <%= survey.name %>
+      </div>
+      <div class="surveyView">
+      <%= link_to "View", preview_path(survey.id), class: "greenText" %>
+      </div>
+      <div class="surveyEdit">
+      <%= link_to 'Edit', edit_survey_path(survey.id), class: "greenText" %>
+      </div>
+
+    </div>
+  <% end %>
+
+
+
+
 
 </div>
 

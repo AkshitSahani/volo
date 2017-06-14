@@ -38,6 +38,12 @@ nav ul {
 .voloHeaderLogo {
     position: absolute;
     left: 150px;
+    padding: 0 15px;
+    transition: background-color .3s;
+}
+
+.voloHeaderLogo:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .navLinks {

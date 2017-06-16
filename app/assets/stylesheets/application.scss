@@ -444,8 +444,10 @@ a.voloHeaderLogo {
 }
 
 a.match-button {
-  padding-left: 75px;
+  padding-left: 38px;
   padding-right: 75px;
+  position: absolute;
+  top: -10rem;
 }
 
 .create-survey {
@@ -485,5 +487,5 @@ a.match-button {
 .org-name {
   font-size: 2rem;
   padding-top: 5%;
-  padding-left: 15.5%;
+  padding-left: 17%;
 }

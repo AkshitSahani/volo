@@ -47,7 +47,8 @@ Paperclip.options[:command_path] = "/usr/local/bin/"
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  config.serve_static_assets = true
+  config.assets.compile = true
   config.assets.enabled = true
   config.assets.paths << "#{Rails.root}/app/assets/fonts/roboto"
 

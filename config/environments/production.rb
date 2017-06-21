@@ -83,7 +83,7 @@ Paperclip.options[:command_path] = "/usr/local/bin/"
   # config.active_job.queue_name_prefix = "volo_#{Rails.env}"
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { host: 'volo-volunteer.herokuapp.com', port: }
+  config.action_mailer.default_url_options = { host: 'volo-volunteer.herokuapp.com' }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

@@ -34,4 +34,5 @@ Rails.application.routes.draw do
     get '/volunteers/:id/organizations/:org_id/locations/:loc_id/add_location', to: 'volunteers#add_vol_location', as: 'add_vol_location'
   resources :responses
   resources :matches
+    get '/matches/match_detail/:match_id/:participant_id', to: 'matches#match_detail', as: 'match_detail'
 end

@@ -68,11 +68,9 @@
   <% @match_rankings.each do |participant, score| %>
   <div class="ranking <%= participant.id %>">
     <span class="match-avatar"><%= image_tag User.find(participant.user_id).avatar.url(:medium) %></span>
-    <span class="match-user-name"><%= User.find(participant.user_id).first_name %> <%= User.find(participant.user_id).last_name %></span>
-    <span class="match-availability"> Available </span>
-    <b class="match-score-container">Match Score  <span class="match-score"><%= (score * 100).round %>%<span></b>
-      <span class="match-location">Toronto, Canada</span>
-    </div>
+    <span class="match-user-name"><%= link_to "#{User.find(participant.user_id).first_name} #{User.find(participant.user_id).last_name}", match_detail_path(participant.user_id, @user_id), class: 'match-user-name-link'%></span>
+    <b class="match-score-container"><span class="match-score"><%= (score * 100).round %>%</span><br>Match</b>
+  </div>
     <% end %>
     <% end %>
   </div>

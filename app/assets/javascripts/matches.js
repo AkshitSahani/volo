@@ -30,9 +30,8 @@ $(document).ready(function() {
         }).done(function(data){
           console.log("AJAX successful");
           console.log(data);
-          $('.match-participants').empty();
-          $('.match-participants').append(data);
           $('.match-rankings').empty();
+          $('.match-rankings').append(data);
 
           var matchScoreKeys = Object.keys(data['matchRankings']);
           var matchScores = []
@@ -43,20 +42,28 @@ $(document).ready(function() {
           }
           var participants = data['filteredParticipants'];
           for (i = 0; i < participants.length; i++ ) {
-              var firstName = participants[i]["first_name"];
-              var lastName =  participants[i]["last_name"];
-              var phoneNumber = participants[i]["phonenumber"];
-              var birthDate = participants[i]["birthday"];
-              var email = participants[i]["email"];
-              var userId = participants[i]["id"];
-              var userType = participants[i]["user_type"];
-              var resultElement = $('<span>').html(firstName + ' ' + lastName);
-              var resultElement1 = $('<span>').html(firstName + ' ' + lastName);
-              $('.match-participants').append(resultElement);
+            var firstName = participants[i]["first_name"];
+            var lastName =  participants[i]["last_name"];
+            // var phoneNumber = participants[i]["phonenumber"];
+            // var birthDate = participants[i]["birthday"];
+            // var email = participants[i]["email"];
+            var participantId = participants[i]["id"];
+            var participantType = participants[i]["user_type"];
 
-              var matchScore = $('<b>').html(matchScores[i]);
-              var rankingDiv = $('<div>').addClass('ranking ' + userId).append(resultElement1).append(' : ').append(matchScore);
-              $('.match-rankings').append(rankingDiv);
+            var matchContainer = $('<div>').addClass('ranking '+ participantId);
+            var matchAvatar = $('<span>').addClass('match-avatar');
+            var matchImg = $('<img>').attr('src', '/images/medium/heart.png').attr('alt','Heart');
+            $(matchAvatar).append(matchImg);
+            var matchUser = $('<span>').addClass('match-user-name');
+            var matchLink = $('<a>').addClass('match-user-name-link').attr('href','/matches/match_detail/' + participantId + '/' + userId)
+            $(matchLink).html(firstName + ' ' + lastName);
+            $(matchUser).append(matchLink);
+            var scoreContainer = $('<b>').addClass('match-score-container');
+            var matchScore = $('<span>').addClass('match-score').html(Math.round((matchScores[i] * 100)) + '%');
+            $(scoreContainer).append(matchScore).append($('<br>')).append('Match');
+
+            $(matchContainer).append(matchAvatar).append(matchUser).append(scoreContainer);
+            $('.match-rankings').append(matchContainer);
           }
         }).fail(function(data){
           console.log("AJAX unsuccessful");
@@ -89,8 +96,9 @@ $(document).ready(function() {
         }).done(function(data){
           console.log("AJAX successful");
           console.log(data);
-          $('.match-participants').empty();
-          $('.match-participants').append(data);
+          $('.match-rankings').empty();
+          $('.match-rankings').append(data);
+
           var matchScoreKeys = Object.keys(data['matchRankings']);
           var matchScores = []
           for (i = 0; i < matchScoreKeys.length; i++ ) {
@@ -102,20 +110,27 @@ $(document).ready(function() {
           for (i = 0; i < participants.length; i++ ) {
               var firstName = participants[i]["first_name"];
               var lastName =  participants[i]["last_name"];
-              var phoneNumber = participants[i]["phonenumber"];
-              var birthDate = participants[i]["birthday"];
-              var email = participants[i]["email"];
-              var userId = participants[i]["id"];
-              var userType = participants[i]["user_type"];
-              var resultElement = $('<span>').html(firstName + ' ' + lastName);
-              var resultElement1 = $('<span>').html(firstName + ' ' + lastName);
-              $('.match-participants').append(resultElement);
+              // var phoneNumber = participants[i]["phonenumber"];
+              // var birthDate = participants[i]["birthday"];
+              // var email = participants[i]["email"];
+              var participantId = participants[i]["id"];
+              var participantType = participants[i]["user_type"];
 
-              var matchScore = $('<b>').html(matchScores[i]);
-              $('.match-rankings').empty();
-              var rankingDiv = $('<div>').addClass('ranking ' + userId).append(resultElement1).append(' : ').append(matchScore);
-              $('.match-rankings').append(rankingDiv);
-          }
+              var matchContainer = $('<div>').addClass('ranking '+ participantId);
+              var matchAvatar = $('<span>').addClass('match-avatar');
+              var matchImg = $('<img>').attr('src', '/images/medium/heart.png').attr('alt','Heart');
+              $(matchAvatar).append(matchImg);
+              var matchUser = $('<span>').addClass('match-user-name');
+              var matchLink = $('<a>').addClass('match-user-name-link').attr('href','/matches/match_detail/' + participantId + '/' + userId)
+              $(matchLink).html(firstName + ' ' + lastName);
+              $(matchUser).append(matchLink);
+              var scoreContainer = $('<b>').addClass('match-score-container');
+              var matchScore = $('<span>').addClass('match-score').html(Math.round((matchScores[i] * 100)) + '%');
+              $(scoreContainer).append(matchScore).append($('<br>')).append('Match');
+
+              $(matchContainer).append(matchAvatar).append(matchUser).append(scoreContainer);
+              $('.match-rankings').append(matchContainer);
+            }
         }).fail(function(data){
           console.log("AJAX unsuccessful");
           console.log(data);

@@ -95,4 +95,14 @@ class MatchesController < ApplicationController
     @filters = Match.filters(@surv, subject)
   end
 
+  def match_detail
+    if User.find(params[:participant_id]).user_type == "Volunteer"
+      @volunteer = User.find(params[:participant_id])
+      @resident = User.find(params[:match_id])
+    else
+      @resident = User.find(params[:participant_id])
+      @volunteer = User.find(params[:match_id])
+    end
+  end
+
 end

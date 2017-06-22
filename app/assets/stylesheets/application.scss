@@ -201,6 +201,8 @@ a.voloHeaderLogo {
   display: inline;
   width: 30%;
   float: left;
+  position: absolute;
+  left: -3%;
 }
 
 .match-filters h3 {
@@ -265,7 +267,7 @@ a.voloHeaderLogo {
 
 .results-count {
   position: absolute;
-  top: 8%;
+  top: 3%;
   right: 0%;
 }
 
@@ -488,4 +490,8 @@ a.match-button {
   font-size: 2rem;
   padding-top: 5%;
   padding-left: 17%;
+}
+
+.match-container {
+  position: relative;
 }

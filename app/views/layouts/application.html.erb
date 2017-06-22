@@ -16,11 +16,11 @@
         <%= link_to 'Volo', root_path , class: "voloHeaderLogo"%>
       </div>
         <div class="navLinks">
-          <ul role="menu">
-            <li class="logout"><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
-          </ul>
           <ul>
             <% if user_signed_in? %>
+            <ul role="menu">
+              <li class="logout"><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+            </ul>
               <li>
                 <!-- <a data-toggle="dropdown" href="#"> -->
                   <% if session[:volunteer_id] %>

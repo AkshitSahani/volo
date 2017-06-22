@@ -1,6 +1,6 @@
-<%= link_to "Return To Profile", volunteer_path(@volunteer) %>
+<br><%= link_to "Back To Profile", volunteer_path(@volunteer), class: "back-to-profile" %>
 
-<h1><%=@org.name%></h1>
+<h2 class="formTitle"><%=@org.name%></h2>
 <h4>Locations</h4>
 <ol>
 <% @org_locations.each do |loc| %>

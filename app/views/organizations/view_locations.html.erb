@@ -3,7 +3,7 @@
 <div class="formContainer">
 
   <div>
-    <h2><%= User.find(@organization.user_id).first_name %> <%= User.find(@organization.user_id).last_name %> Locations</h2>
+    <h2 class="formTitle"><%= User.find(@organization.user_id).first_name %> <%= User.find(@organization.user_id).last_name %>' Locations</h2>
   </div>
 
   <% @organization.locations.each do |loc| %>

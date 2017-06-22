@@ -462,6 +462,7 @@ a.match-button {
 .formTitle {
   text-align: center;
   padding: 2rem;
+  color: $voloGreen;
 }
 
 .range-field {
@@ -480,6 +481,7 @@ a.match-button {
 .field {
   padding-left: 5%;
   padding-right: 5%;
+  margin-top: 4%;
 }
 
 
@@ -504,4 +506,12 @@ a.match-button {
 .edit-resp {
   margin-left: 43%;
   margin-bottom: 2.5%;
+}
+
+.surv-top h3 {
+  color: $voloGreen;
+}
+
+.surv-top h4 {
+  color: $voloGreen;
 }

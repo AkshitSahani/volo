@@ -1,4 +1,4 @@
-<h1> Edit Responses </h1>
+<h2 class="formTitle"> Edit Responses </h2>
 
 <%= form_tag update_responses_path do %>
   <% @responses.each do |response| %>
@@ -55,7 +55,7 @@
 
   <%= hidden_field_tag :organization_id, @organization.id %>
 
-  <button class="btn" type="submit" name="action">
+  <button class="btn edit-resp" type="submit" name="action">
     Submit
   </button>
 

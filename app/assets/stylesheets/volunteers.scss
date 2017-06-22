@@ -2,8 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.edit-profile {
-  padding-top: 1rem;
+a.edit-profile {
+  margin-top: 1rem;
+  float: right;
+  padding: 10px 25px;
+  background: transparent;
+  border: 2px solid $voloGreen;
+  color: $voloGreen;
+  column-rule: white;
+  border-radius: 20px;
+  font-weight: 600;
+  transition-duration: .2s;
+  text-align: center;
 }
 
 .my-org {

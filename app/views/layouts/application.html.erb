@@ -16,8 +16,8 @@
         <%= link_to 'Volo', root_path , class: "voloHeaderLogo"%>
       </div>
         <div class="navLinks">
-          <ul>
-            <li><%= link_to 'Home', root_path %></li>
+          <ul role="menu">
+            <li class="logout"><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
           </ul>
           <ul>
             <% if user_signed_in? %>
@@ -33,14 +33,14 @@
                 <!-- </a> -->
               </li>
           </ul>
-          <ul role="menu">
-            <li class="logout"><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
-          </ul>
           <ul>
             <% else %>
               <li><%= link_to 'Log In', new_user_session_path %></li>
               <li><%= link_to 'Sign Up', register_type_path %></li>
             <% end %>
+          </ul>
+          <ul>
+            <li><%= link_to 'Home', root_path %></li>
           </ul>
         </div>
       </div>

@@ -13,7 +13,7 @@
     <%= f.label :branch_name, "Location" %><br><br>
     <%= f.collection_select(:branch_name, Match.all, :id, :branch_name, { :prompt => "Select an organization" } , {:multiple => true}) %>
   </div>
-  <div class="action">
+  <div class="action form-submit">
     <%= f.submit "Add Location" %>
   </div>
 <% end %>

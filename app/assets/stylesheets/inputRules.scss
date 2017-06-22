@@ -48,7 +48,7 @@ input[type="submit"]:hover {
   transition-duration: .2s;
 }
 
-.add-edit-locations a, .view-org-locations a, a.add-content.add_fields, a.remove_fields.dynamic  {
+.add-edit-locations a, .view-org-locations a, a.add-content.add_fields, a.remove_fields.dynamic, a.remove_fields.existing, a.add_fields  {
   padding: 10px 25px;
   background: transparent;
   border: 2px solid $voloGreen;
@@ -58,6 +58,10 @@ input[type="submit"]:hover {
   font-weight: 600;
   transition-duration: .2s;
   text-align: center;
+}
+
+a.remove_fields.dynamic, a.remove_fields.existing {
+  margin-right: 5%;
 }
 
 .remove-content {
@@ -89,7 +93,7 @@ a.add-content.add_fields:hover {
   text-align: center;
 }
 
-.create-survey a, .create-match a, a.add_fields {
+.create-survey a, .create-match a {
   background: $voloGreen;
   border: 2px solid $voloGreen;
   color: white;
@@ -108,7 +112,7 @@ a.add-content.add_fields:hover {
 
 a.add_fields {
   padding: 10px 26px;
-  margin-left: 37%;
+  // margin-left: 37%;
 }
 
 .create-match a {

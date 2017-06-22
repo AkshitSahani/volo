@@ -2,7 +2,7 @@
 
 <div class="formContainer">
 
-  <h3 class="voloGreen">New Match</h3>
+  <h3 class="voloGreen formTitle">New Match</h3>
 
   <%= form_tag(match_path(1), method: :get) do %>
   <div class="input-field">
@@ -22,7 +22,7 @@
     <%= label_tag :user %><br><br>
     <%= select_tag :user, options_from_collection_for_select(User.first(2), :id, :first_name), {:prompt => "Select all the above options first"} %>
   </div>
-  <div class="match-submit">
+  <div class="form-submit">
     <%= submit_tag "Match"%>
   </div>
   <% end %>

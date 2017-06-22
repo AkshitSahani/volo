@@ -1,4 +1,19 @@
-show match details
+<div class="match-dets">
+<h3 class="formTitle">Match details</h3>
 
-<%= @volunteer %>
-<%= @resident %>
+<div class="match-detail-left">
+  <h5><b><%= @resident.first_name %> <%= @resident.last_name %> (<%= @resident.user_type %>)</b></h5>
+  <% Survey.find(@survey).questions.each do |q| %>
+  Q) <%= q.question %> | Ranking: <%= q.ranking %><br><br>
+  Ans) <%= q.responses.where(resident_id: Resident.where(user_id: @resident.id).first).first.response %><br><br>
+  <% end %>
+</div>
+
+<div class="match-detail-right">
+  <h5><b><%= @volunteer.first_name %> <%=@volunteer.last_name%> (<%= @volunteer.user_type %>)</b></h5>
+  <% Survey.find(@survey).questions.each do |q| %>
+    Q) <%= q.question %> | Ranking: <%= q.ranking %><br><br>
+    Ans) <%= q.responses.where(volunteer_id: Volunteer.where(user_id: @resident.id).first).first.response %><br><br>
+  <% end %>
+</div>
+</div>

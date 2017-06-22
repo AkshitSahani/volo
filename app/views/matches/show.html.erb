@@ -26,6 +26,7 @@
   <div class="results">
     <div class="match-results">
       <h3>Match Results</h3>
+      <h6>For <%= User.find(@subject.user_id).first_name %> <%= User.find(@subject.user_id).last_name %> (<%= User.find(@subject.user_id).user_type %>)</h6>
     </div>
 
     <!-- <div class="match-participants">
@@ -68,7 +69,7 @@
   <% @match_rankings.each do |participant, score| %>
   <div class="ranking <%= participant.id %>">
     <span class="match-avatar"><%= image_tag User.find(participant.user_id).avatar.url(:medium) %></span>
-    <span class="match-user-name"><%= link_to "#{User.find(participant.user_id).first_name} #{User.find(participant.user_id).last_name}", match_detail_path(participant.user_id, @user_id), class: 'match-user-name-link'%></span>
+    <span class="match-user-name"><%= link_to "#{User.find(participant.user_id).first_name} #{User.find(participant.user_id).last_name}", match_detail_path(participant.user_id, @user_id, :survey_id => @surv), class: 'match-user-name-link'%></span>
     <b class="match-score-container"><span class="match-score"><%= (score * 100).round %>%</span><br>Match</b>
   </div>
     <% end %>

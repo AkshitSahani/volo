@@ -245,6 +245,9 @@ a.voloHeaderLogo {
   color: black;
 }
 
+.match-user-name-link:hover {
+  text-decoration: underline;
+}
 .match-availability {
   position: absolute;
   top: 35%;
@@ -521,4 +524,34 @@ a.match-button {
 
 .surv-top h4 {
   color: $voloGreen;
+}
+
+.match-results h6 {
+  margin-left: 1%;
+}
+
+.match-detail-left {
+  float: left;
+  width: 48%;
+  background-color: white;
+  min-height: 400px;
+}
+
+.match-detail-left h6{
+  // text-align: center;
+}
+
+.match-detail-right {
+  float: right;
+  width: 48%;
+  background-color: white;
+  min-height: 400px;
+}
+
+.match-detail-right h6{
+  // text-align: center;
+}
+
+.match-dets {
+  height: 500px;
 }

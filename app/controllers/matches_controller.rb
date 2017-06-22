@@ -84,18 +84,20 @@ class MatchesController < ApplicationController
     @user_id = params["user"]
     #depending on match type you either need the resident or the volunteer as the subject and the opposite as the participants
     if @match_type == "Resident -> Volunteer"
-      subject = Resident.where(user_id: @user_id).take
+      @subject = Resident.where(user_id: @user_id).take
       @participants = Match.participating_volunteers(@surv)
     elsif @match_type == "Volunteer -> Resident"
-      subject = Volunteer.where(user_id: @user_id).take
+      @subject = Volunteer.where(user_id: @user_id).take
       @participants = Match.participating_residents(@surv)
     end
-    @scores = Match.scores(@participants, @surv, subject)
+    @scores = Match.scores(@participants, @surv, @subject)
     @match_rankings = ((Match.match(@participants, @scores, @surv)).sort_by { |name, score| score }).reverse
-    @filters = Match.filters(@surv, subject)
+    @filters = Match.filters(@surv, @subject)
   end
 
   def match_detail
+    @survey = params["survey_id"]
+
     if User.find(params[:participant_id]).user_type == "Volunteer"
       @volunteer = User.find(params[:participant_id])
       @resident = User.find(params[:match_id])
@@ -103,6 +105,7 @@ class MatchesController < ApplicationController
       @resident = User.find(params[:participant_id])
       @volunteer = User.find(params[:match_id])
     end
+
   end
 
 end

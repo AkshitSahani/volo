@@ -91,7 +91,7 @@ class MatchesController < ApplicationController
       @participants = Match.participating_residents(@surv)
     end
     @scores = Match.scores(@participants, @surv, subject)
-    @match_rankings = Match.match(@participants, @scores, @surv)
+    @match_rankings = ((Match.match(@participants, @scores, @surv)).sort_by { |name, score| score }).reverse
     @filters = Match.filters(@surv, subject)
   end
 

@@ -104,7 +104,11 @@ class Match < ApplicationRecord
       end
       par_score[key] = par_points
     end
-    par_score
+    final_scores = {}
+    par_score.each do |key, value|
+      final_scores[key] = value if value > 0.0
+    end
+    final_scores
   end
 
 end
